@@ -43,6 +43,23 @@ class TestaPix(unittest.TestCase):
         self.assertEqual(pix.chave, '10987654321')
         self.assertEqual(pix.tipo, 'cnpj')
 
+    def testa_limitacao_tipo(self):
+        """Testa se o atributo tipo só aceita valores válidos"""
+        pix = Pix('12345678910', 'cpf')
+        self.assertEqual(pix.tipo, 'cpf')
+        pix.tipo = 'cnpj'
+        self.assertEqual(pix.tipo, 'cnpj')
+        pix.tipo = 'email'
+        self.assertEqual(pix.tipo, 'email')
+        pix.tipo = 'celular'
+        self.assertEqual(pix.tipo, 'celular')
+        # verifica se o valor 'inválido' vai gerar uma exceção
+        with self.assertRaises(ValueError):
+            pix.tipo = 'invalido'
+        # verifica se o valor anterior foi mantido
+        self.assertEqual(pix.tipo, 'celular')
+        
+
 
 if __name__ == '__main__':
     unittest.main()

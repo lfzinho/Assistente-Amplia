@@ -8,10 +8,19 @@ from model.MetodoPagamento import MetodoPagamento
 
 
 # testa_heranca_metodo_pagamento
+#class Pix(MetodoPagamento):
+    # def __init__(self, chave:str, tipo:str) -> None:
+    #     self.chave = chave
+    #     self.tipo = tipo
+
+    # def visualizar_informacoes(self):
+    #    pass
+
+# testa_tipo_retorno_metodo_pagamento
 class Pix(MetodoPagamento):
     def __init__(self, chave:str, tipo:str) -> None:
         self.chave = chave
         self.tipo = tipo
 
     def visualizar_informacoes(self):
-        pass
+        return str()

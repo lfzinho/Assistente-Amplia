@@ -8,6 +8,7 @@ from model.MetodoPagamento import MetodoPagamento
 from model.Pix import Pix
 
 class TestaPix(unittest.TestCase):
+    """Classe que testa a classe Pix"""
 
     def testa_informacoes_construtor(self):
         """Testa o construtor da classe Pix conferindo se os atributos foram setados corretamente"""
@@ -58,7 +59,6 @@ class TestaPix(unittest.TestCase):
             pix.tipo = 'invalido'
         # verifica se o valor anterior foi mantido
         self.assertEqual(pix.tipo, 'celular')
-        
 
 
 if __name__ == '__main__':

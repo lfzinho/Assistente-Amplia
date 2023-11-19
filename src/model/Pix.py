@@ -17,10 +17,35 @@ from model.MetodoPagamento import MetodoPagamento
     #    pass
 
 # testa_tipo_retorno_metodo_pagamento
+# class Pix(MetodoPagamento):
+#     def __init__(self, chave:str, tipo:str) -> None:
+#         self.chave = chave
+#         self.tipo = tipo
+
+#     def visualizar_informacoes(self):
+#         return f"Chave: {self.chave}\nTipo: {self.tipo}"
+    
+# testa_getters
 class Pix(MetodoPagamento):
     def __init__(self, chave:str, tipo:str) -> None:
-        self.chave = chave
-        self.tipo = tipo
+        self._chave = chave
+        self._tipo = tipo
 
     def visualizar_informacoes(self):
         return f"Chave: {self.chave}\nTipo: {self.tipo}"
+    
+    @property
+    def chave(self):
+        return self._chave
+
+    @chave.setter
+    def chave(self, chave):
+        self._chave = chave
+
+    @property
+    def tipo(self):
+        return self._tipo
+
+    @tipo.setter
+    def tipo(self, tipo):
+        self._tipo = tipo

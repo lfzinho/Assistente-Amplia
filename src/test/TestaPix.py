@@ -29,5 +29,20 @@ class TestaPix(unittest.TestCase):
         pix = Pix('12345678910', 'cpf')
         self.assertEqual(pix.visualizar_informacoes(), "Chave: 12345678910\nTipo: cpf")
 
+    def testa_getters(self):
+        """Testa se os getters funcionam corretamente"""
+        pix = Pix('12345678910', 'cpf')
+        self.assertEqual(pix.chave, '12345678910')
+        self.assertEqual(pix.tipo, 'cpf')
+
+    def testa_setters(self):
+        """Testa se os setters funcionam corretamente"""
+        pix = Pix('12345678910', 'cpf')
+        pix.chave = '10987654321'
+        pix.tipo = 'cnpj'
+        self.assertEqual(pix.chave, '10987654321')
+        self.assertEqual(pix.tipo, 'cnpj')
+
+
 if __name__ == '__main__':
     unittest.main()

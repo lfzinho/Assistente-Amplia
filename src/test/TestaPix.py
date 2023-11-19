@@ -19,10 +19,15 @@ class TestaPix(unittest.TestCase):
         """Testa se a classe Pix herda de MetodoPagamento"""
         self.assertTrue(issubclass(Pix, MetodoPagamento))
 
-    def testa_retorno_metodo_pagamento(self):
+    def testa_tipo_retorno_visualizar_informacoes(self):
         """Testa se o método visualizar_informacoes retorna uma string"""
         pix = Pix('12345678910', 'cpf')
         self.assertIsInstance(pix.visualizar_informacoes(), str)
+
+    def testa_retorno_vizualizar_informacoes(self):
+        """Testa se o método visualizar_informacoes retorna as informações corretas"""
+        pix = Pix('12345678910', 'cpf')
+        self.assertEqual(pix.visualizar_informacoes(), "Chave: 12345678910\nTipo: cpf")
 
 if __name__ == '__main__':
     unittest.main()

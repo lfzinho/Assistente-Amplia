@@ -23,4 +23,4 @@ class Pix(MetodoPagamento):
         self.tipo = tipo
 
     def visualizar_informacoes(self):
-        return str()
+        return f"Chave: {self.chave}\nTipo: {self.tipo}"

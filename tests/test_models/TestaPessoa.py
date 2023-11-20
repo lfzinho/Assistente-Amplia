@@ -1,15 +1,10 @@
-import sys
-import os
-
-sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
-
 import unittest
-from model import Pessoa
+from src.models import Pessoa
 
 
 class TestaPessoa(unittest.TestCase):
 
-    def testa_construtor_pessoa():
+    def testa_construtor_pessoa(self):
         """Testa o construtor da classe Pessoa conferindo se os atributos foram setados corretamente"""
         pessoa = Pessoa(
             nome='João',

@@ -1,10 +1,5 @@
-import sys
-import os
-
-sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
-
 import unittest
-from model import MetodoPagamento
+from src.models import MetodoPagamento
 
 class TestaMetodoPagamento(unittest.TestCase):
     def test_init_is_abstract(self):

@@ -1,11 +1,6 @@
-import sys
-import os
-
-sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
-
 import unittest
-from model.MetodoPagamento import MetodoPagamento
-from model.ContaBancaria import ContaBancaria
+from src.models.MetodoPagamento import MetodoPagamento
+from src.models.ContaBancaria import ContaBancaria
 
 class TestaContaBancaria(unittest.TestCase):
     """Classe que testa a classe ContaBancaria"""

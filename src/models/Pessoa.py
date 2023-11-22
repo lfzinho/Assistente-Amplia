@@ -1,5 +1,7 @@
-from datetime import date
+from abc import ABC, abstractmethod
 from typing import Type
+
+from datetime import date
 from src.models.MetodoPagamento import MetodoPagamento
 
 # testa_informacoes_construtor
@@ -57,7 +59,7 @@ from src.models.MetodoPagamento import MetodoPagamento
 #         return self._metodo_pagamento
     
 # testa_setters
-class Pessoa:
+class Pessoa(ABC):
     """Classe que representa uma pessoa"""
     def __init__(
             self, 

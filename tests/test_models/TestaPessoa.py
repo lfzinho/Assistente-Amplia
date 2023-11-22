@@ -3,10 +3,11 @@ import os
 sys.path.append(os.path.join(os.path.dirname(__file__), '../..'))
 
 import unittest
+
 from src.models.Pessoa import Pessoa
 from src.models.Pix import Pix
 from src.models.ContaBancaria import ContaBancaria
-
+from abc import ABC
 
 class TestaPessoa(unittest.TestCase):
 
@@ -58,6 +59,11 @@ class TestaPessoa(unittest.TestCase):
         self.assertEqual(pessoa._cpf, '987.654.321-00')
         self.assertEqual(pessoa._endereco, 'Rua 2, 321')
         self.assertEqual(pessoa._metodo_pagamento.visualizar_informacoes(), 'Banco: Banco 1\nAgência: 123\nNúmero da conta: 123456')
+
+    def testa_eh_abstract(self):
+        """Testa se a classe Pessoa é abstrata"""
+        self.assertTrue(issubclass(Pessoa, ABC))
+
 
 if __name__ == '__main__':
     unittest.main()

@@ -3,7 +3,8 @@ import os
 sys.path.append(os.path.join(os.path.dirname(__file__), '../..'))
 
 import unittest
-from src.models import Pessoa
+from src.models.Pessoa import Pessoa
+from src.models.Pix import Pix
 
 
 class TestaPessoa(unittest.TestCase):
@@ -14,7 +15,8 @@ class TestaPessoa(unittest.TestCase):
             nome='João',
             data_nascimento='1990-01-01',
             cpf='123.456.789-00',
-            endereco='Rua 1, 123'
+            endereco='Rua 1, 123',
+            metodo_pagamento=Pix(chave='12345678900', tipo='cpf')
         )
         self.assertEqual(pessoa.nome, 'João')
         self.assertEqual(pessoa.data_nascimento, '1990-01-01')

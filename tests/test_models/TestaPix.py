@@ -3,8 +3,11 @@ import os
 sys.path.append(os.path.join(os.path.dirname(__file__), '../..'))
 
 import unittest
+
 from src.models.Pix import Pix
+
 from src.models.MetodoPagamento import MetodoPagamento
+
 
 class TestaPix(unittest.TestCase):
     """Classe que testa a classe Pix"""

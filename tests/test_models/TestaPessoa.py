@@ -5,9 +5,11 @@ sys.path.append(os.path.join(os.path.dirname(__file__), '../..'))
 import unittest
 
 from src.models.Pessoa import Pessoa
+
 from src.models.Pix import Pix
 from src.models.ContaBancaria import ContaBancaria
 from abc import ABC
+
 
 class TestaPessoa(unittest.TestCase):
 

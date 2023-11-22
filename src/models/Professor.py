@@ -45,6 +45,7 @@ class Professor(Pessoa):
     
     @salario.setter
     def salario(self, novo_salario: float) -> None:
-        
+        if novo_salario < 0:
+            raise ValueError('O salário não pode ser negativo')
         self._salario = novo_salario
     

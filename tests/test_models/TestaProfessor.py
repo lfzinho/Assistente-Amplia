@@ -73,7 +73,21 @@ class TestaProfessor(unittest.TestCase):
         professor.salario = 2000.0
         self.assertEqual(professor.salario, 2000.0)
 
-
+    def testa_setter_salario_negativo(self):
+        """Testa se o setter do atributo salario funciona"""
+        professor = Professor(
+            nome='João',
+            data_nascimento='1999-01-01',
+            cpf='12345678901',
+            endereco='Rua 1',
+            metodo_pagamento=Pix(
+                chave='12345678901',
+                tipo='cpf'
+            ),
+            salario=1000.0
+        )
+        with self.assertRaises(ValueError):
+            professor.salario = -2000.0
 
 
 if __name__ == '__main__':

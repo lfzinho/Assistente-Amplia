@@ -11,4 +11,13 @@ from src.models.MetodoPagamento import MetodoPagamento
 #     pass
 
 class Aluno(Pessoa):
-    pass
+    
+    def __init__(
+            self, 
+            nome: str,
+            data_nascimento: date,
+            cpf: str,
+            endereco: str, 
+            metodo_pagamento: type[MetodoPagamento]
+        ) -> None:
+        super().__init__(nome, data_nascimento, cpf, endereco, metodo_pagamento)

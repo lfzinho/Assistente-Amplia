@@ -10,6 +10,7 @@ from src.models.MetodoPagamento import MetodoPagamento
 # class Aluno(Pessoa):
 #     pass
 
+# testa_construtor
 class Aluno(Pessoa):
     
     def __init__(

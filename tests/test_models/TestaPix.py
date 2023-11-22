@@ -12,9 +12,10 @@ from src.models.MetodoPagamento import MetodoPagamento
 class TestaPix(unittest.TestCase):
     """Classe que testa a classe Pix"""
 
-    def testa_informacoes_construtor(self):
+    def testa_construtor(self):
         """Testa o construtor da classe Pix conferindo se os atributos foram setados corretamente"""
         pix = Pix('12345678910', 'cpf')
+        self.assertIsInstance(pix, Pix)
         self.assertEqual(pix.chave, '12345678910')
         self.assertEqual(pix.tipo, 'cpf')
 

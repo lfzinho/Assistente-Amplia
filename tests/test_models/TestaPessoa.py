@@ -13,7 +13,7 @@ from abc import ABC
 
 class TestaPessoa(unittest.TestCase):
 
-    def testa_construtor_pessoa(self):
+    def testa_pessoa(self):
         """Testa o construtor da classe Pessoa conferindo se os atributos foram setados corretamente"""
         pessoa = Pessoa(
             nome='João',
@@ -22,6 +22,7 @@ class TestaPessoa(unittest.TestCase):
             endereco='Rua 1, 123',
             metodo_pagamento=Pix(chave='12345678900', tipo='cpf')
         )
+        self.assertIsInstance(pessoa, Pessoa)
         self.assertEqual(pessoa._nome, 'João')
         self.assertEqual(pessoa._data_nascimento, '1990-01-01')
         self.assertEqual(pessoa._cpf, '123.456.789-00')

@@ -8,8 +8,8 @@ from src.models.MetodoPagamento import MetodoPagamento
 # class Pessoa:
 #     """Classe que representa uma pessoa"""
 #     def __init__(
-#             self, 
-#             nome:str, 
+#             self,
+#             nome:str,
 #             data_nascimento:date,
 #             cpf:str,
 #             endereco:str,
@@ -25,8 +25,8 @@ from src.models.MetodoPagamento import MetodoPagamento
 # class Pessoa:
 #     """Classe que representa uma pessoa"""
 #     def __init__(
-#             self, 
-#             nome:str, 
+#             self,
+#             nome:str,
 #             data_nascimento:date,
 #             cpf:str,
 #             endereco:str,
@@ -41,33 +41,33 @@ from src.models.MetodoPagamento import MetodoPagamento
 #     @property
 #     def nome(self) -> str:
 #         return self._nome
-    
+
 #     @property
 #     def data_nascimento(self) -> date:
 #         return self._data_nascimento
-    
+
 #     @property
 #     def cpf(self) -> str:
 #         return self._cpf
-    
+
 #     @property
 #     def endereco(self) -> str:
 #         return self._endereco
-    
+
 #     @property
 #     def metodo_pagamento(self) -> Type[MetodoPagamento]:
 #         return self._metodo_pagamento
-    
+
 # testa_setters
 class Pessoa(ABC):
-    """Classe que representa uma pessoa"""
+    """Classe que representa uma pessoa."""
     def __init__(
-            self, 
-            nome:str, 
-            data_nascimento:date,
-            cpf:str,
-            endereco:str,
-            metodo_pagamento:Type[MetodoPagamento]
+        self,
+        nome:str,
+        data_nascimento:date,
+        cpf:str,
+        endereco:str,
+        metodo_pagamento:Type[MetodoPagamento]
     ) -> None:
         self._nome = nome
         self._data_nascimento = data_nascimento
@@ -78,15 +78,15 @@ class Pessoa(ABC):
     @property
     def nome(self) -> str:
         return self._nome
-    
+
     @nome.setter
     def nome(self, nome: str):
         self._nome = nome
-    
+
     @property
     def data_nascimento(self) -> date:
         return self._data_nascimento
-    
+
     @data_nascimento.setter
     def data_nascimento(self, data_nascimento: date):
         self._data_nascimento = data_nascimento
@@ -94,15 +94,15 @@ class Pessoa(ABC):
     @property
     def cpf(self) -> str:
         return self._cpf
-    
+
     @cpf.setter
     def cpf(self, cpf: str):
         self._cpf = cpf
-    
+
     @property
     def endereco(self) -> str:
         return self._endereco
-    
+
     @endereco.setter
     def endereco(self, endereco: str):
         self._endereco = endereco
@@ -110,7 +110,7 @@ class Pessoa(ABC):
     @property
     def metodo_pagamento(self) -> Type[MetodoPagamento]:
         return self._metodo_pagamento
-    
+
     @metodo_pagamento.setter
     def metodo_pagamento(self, metodo_pagamento: Type[MetodoPagamento]):
         self._metodo_pagamento = metodo_pagamento

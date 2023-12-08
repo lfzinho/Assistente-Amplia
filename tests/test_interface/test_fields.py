@@ -60,7 +60,7 @@ class TestaDateField(unittest.TestCase):
         """Testa o construtor da classe DateField conferindo se os 
         atributos foram setados corretamente
         """
-        value = datetime.date(2002, 16, 9)
+        value = datetime.date(2002, 9, 16)
         date_field = DateField('Label', value)
         self.assertEqual(date_field.label, 'Label')
         self.assertEqual(date_field.value, value)
@@ -68,13 +68,13 @@ class TestaDateField(unittest.TestCase):
 
     def testa_tipo_retorno_get_type(self):
         """Testa se o método get_type retorna uma string"""
-        value = datetime.date(2002, 16, 9)
+        value = datetime.date(2002, 9, 16)
         date_field = DateField('Label', value)
         self.assertIsInstance(date_field.get_type(), str)
 
     def testa_retorno_get_type(self):
         """Testa se o método get_type retorna o tipo correto"""
-        value = datetime.date(2002, 16, 9)
+        value = datetime.date(2002, 9, 16)
         date_field = DateField('Label', value)
         self.assertEqual(date_field.get_type(), 'date')
 
@@ -85,7 +85,7 @@ class TestaDateField(unittest.TestCase):
 
     def testa_getters(self):
         """Testa se os getters funcionam corretamente"""
-        value = datetime.date(2002, 16, 9)
+        value = datetime.date(2002, 9, 16)
         date_field = DateField('Label', value)
         self.assertEqual(date_field.label, 'Label')
         self.assertEqual(date_field.value, value)
@@ -93,8 +93,8 @@ class TestaDateField(unittest.TestCase):
 
     def testa_setters(self):
         """Testa se os setters funcionam corretamente"""
-        value1 = datetime.date(2002, 16, 9)
-        value2 = datetime.date(2003, 2, 4)
+        value1 = datetime.date(2002, 9, 16)
+        value2 = datetime.date(2003, 4, 2)
         date_field = DateField('Label', value1)
         date_field.label = 'Label2'
         date_field.value = value2
@@ -106,4 +106,3 @@ class TestaDateField(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
-    

@@ -80,7 +80,8 @@ class TestaDateField(unittest.TestCase):
 
     def testa_retorno_render(self):
         """Testa se o método render retorna None"""
-        date_field = DateField('Label', 'Value')
+        value = datetime.date(2002, 9, 16)
+        date_field = DateField('Label', value)
         self.assertIsNone(date_field.render())
 
     def testa_getters(self):

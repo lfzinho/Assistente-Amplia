@@ -1,4 +1,4 @@
-from model.MetodoPagamento import MetodoPagamento
+from src.models.MetodoPagamento import MetodoPagamento
 
 TIPOS_PIX = ['cpf', 'cnpj', 'email', 'celular']
 

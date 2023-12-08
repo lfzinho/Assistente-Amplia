@@ -1,18 +1,22 @@
 import sys
 import os
-
-sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+sys.path.append(os.path.join(os.path.dirname(__file__), '../..'))
 
 import unittest
-from model.MetodoPagamento import MetodoPagamento
-from model.ContaBancaria import ContaBancaria
+
+from src.models.ContaBancaria import ContaBancaria
+
+from src.models.MetodoPagamento import MetodoPagamento
+
 
 class TestaContaBancaria(unittest.TestCase):
     """Classe que testa a classe ContaBancaria"""
 
-    def testa_informacoes_construtor(self):
+    def testa_construtor(self):
         """Testa o construtor da classe ContaBancaria conferindo se os atributos foram setados corretamente"""
         conta_bancaria = ContaBancaria('Itaú', '123456', '12345678')
+        self.assertIsInstance(conta_bancaria, ContaBancaria)
+        
         self.assertEqual(conta_bancaria._agencia, '123456')
         self.assertEqual(conta_bancaria._nro_conta, '12345678')
         self.assertEqual(conta_bancaria._banco, 'Itaú')

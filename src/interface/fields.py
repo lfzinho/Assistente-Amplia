@@ -14,9 +14,8 @@ import streamlit as st
 #         pass
 
 class Field(ABC):
-    def __init__(self, label, value, type):
+    def __init__(self, label, type):
         self.label: str = label
-        self.value: str = value
         self.type: str = type
     
     def get_type(self):

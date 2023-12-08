@@ -3,10 +3,25 @@ import datetime
 import streamlit as st
 
 
+# class Field(ABC):
+#     def __init__(self, label, type):
+#         self.label: str = label
+#         self.type: str = type
+
+#     @abstractmethod
+#     def render(self):
+#         """Renders the field on the page."""
+#         pass
+
 class Field(ABC):
-    def __init__(self, label, type):
+    def __init__(self, label, value, type):
         self.label: str = label
+        self.value: str = value
         self.type: str = type
+    
+    def get_type(self):
+        """Returns the type of the field."""
+        return self.type
 
     @abstractmethod
     def render(self):

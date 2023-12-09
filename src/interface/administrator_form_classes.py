@@ -1,16 +1,12 @@
-import sys
-import os
-sys.path.append(os.path.join(os.path.dirname(__file__), '../..'))
-
-import datetime
-from abc import ABC, abstractmethod
 import streamlit as st
+
+from . import _init_path
 from src.interface.form_classes import (CreationForm, UpdateForm, DeletionForm)
 from src.interface.fields import *
 
 
 class AdmnistratorCreationForm(CreationForm):
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__(
             title="Formulário de Criação de Administrador",
             description="Preencha os campos abaixo para criar um novo administrador.",
@@ -26,7 +22,7 @@ class AdmnistratorCreationForm(CreationForm):
 
 
 class AdmnistratorUpdateForm(UpdateForm):
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__(
             title="Formulário de Atualização de Administrador",
             description="Preencha os campos abaixo para atualizar um administrador.",
@@ -41,7 +37,7 @@ class AdmnistratorUpdateForm(UpdateForm):
 
 
 class AdmnistratorDeletionForm(DeletionForm):
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__(
             title="Formulário de Remoção de Administrador",
             description="Selecione o ID do administrador que deseja remover.",

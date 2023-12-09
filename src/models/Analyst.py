@@ -15,7 +15,8 @@ from src.models.PaymentMethod import PaymentMethod
 #         payment_method: Type[PaymentMethod],
 #         birth_date: date,
 #         admission_date: date,
-#         occupation_area: Literal[occupations_areas],
+#         occupation_area: Literal['Administrativo Financeiro',
+#         'Recursos Humanos', 'Pedagógico', 'Marketing'],
 #         exit_date: Optional[date] = None,
 #     ) -> None:
 #         """
@@ -58,12 +59,12 @@ from src.models.PaymentMethod import PaymentMethod
 class Analyst(Person):
     """Classe que representa um analista do Amplia"""
 
-    occupations_areas: list[str] = [
+    occupation_areas: tuple[str] = (
         'Administrativo Financeiro',
         'Recursos Humanos',
         'Pedagógico',
         'Marketing',
-    ]
+    )
 
     def __init__(
         self,
@@ -74,12 +75,8 @@ class Analyst(Person):
         payment_method: Type[PaymentMethod],
         birth_date: date,
         admission_date: date,
-        occupation_area: Literal[
-            'Administrativo Financeiro',
-            'Recursos Humanos',
-            'Pedagógico',
-            'Marketing'
-        ],
+        occupation_area: Literal['Administrativo Financeiro',
+        'Recursos Humanos', 'Pedagógico', 'Marketing'],
         exit_date: Optional[date] = None,
     ) -> None:
         """
@@ -120,15 +117,15 @@ class Analyst(Person):
 
     @property
     def occupation_area(self) -> str:
-        """Getter da área de atuação do analista."""
+        """Getter da área de atuação do analista"""
         return self._occupation_area
 
     @occupation_area.setter
     def occupation_area(self, occupation_area: str) -> None:
         """Setter da área de atuação do analista."""
-        if occupation_area not in self.occupations_areas:
+        if occupation_area not in self.occupation_areas:
             raise ValueError(
                 f"'{occupation_area}' não é uma área de atuação válida. "
-                f"Áreas de atuação válidas: {self.occupations_areas}"
+                f"Áreas de atuação válidas: {self.occupation_areas}"
             )
         self._occupation_area = occupation_area

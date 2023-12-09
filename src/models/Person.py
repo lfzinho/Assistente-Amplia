@@ -28,8 +28,9 @@ from src.models.PaymentMethod import PaymentMethod
 #         self.exit_date = exit_date
 
 
-class Person:
+class Person(ABC):
     """Classe que representa uma pessoa"""
+    @abstractmethod
     def __init__(
         self,
         name: str,

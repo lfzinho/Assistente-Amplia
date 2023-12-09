@@ -50,7 +50,7 @@ class DatabaseManager():
         if DatabaseManager._instance is not None:
             raise Exception("This class is a singleton!")
         else:
-            cred = credentials.Certificate("src/database/serviceAccountKey.json")
+            cred = credentials.Certificate("serviceAccountKey.json")
             firebase_admin.initialize_app(cred)
             self.db = firestore.client()
             DatabaseManager._instance = self

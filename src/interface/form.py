@@ -51,30 +51,23 @@ class Form(ABC):
             self.id_field.render()
             if st.form_submit_button(label='Buscar'):
                 result = self.search_action()
-                if not result:
-                    st.error("ID não encontrado.")
+                if result:
+                    st.success('ID encontrado')
+                    st.subheader('Informações:')
+                    st.write(result)
+                else:
+                    st.error('ID não encontrado.')
         return result
 
     def render(self) -> None:
         """Renders the form on the page."""
         st.subheader(self.title)
         st.markdown(self.description)
-        # Se o formulário tiver um campo de ID, cria o formulário de busca
-        field_values: list = None
         if self.id_field:
             field_values = self.render_search_field()
         with st.form(key=self.title):
-            # Se o formulário tiver um campo de ID, preenche os campos com os
-            # valores do banco de dados
-            if field_values:
-                for field in self.fields:
-                    field.render()
-                    field.value = field_values[field.label]
-            # Se o formulário não tiver um campo de ID, renderiza os campos
-            # normalmente
-            else:
-                for field in self.fields:
-                    field.render()
+            for field in self.fields:
+                field.render()
             if st.form_submit_button(label='Enviar'):
                 self.submit_action()
 

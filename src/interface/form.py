@@ -50,7 +50,7 @@ class Form(ABC):
 
     def render(self) -> None:
         """Renders the form on the page."""
-        st.title(self.title)
+        st.subheader(self.title)
         st.markdown(self.description)
         # Se o formulário tiver um campo de ID, cria o formulário de busca
         field_values: list = None

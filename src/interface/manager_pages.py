@@ -8,6 +8,7 @@ import streamlit as st
 from src.interface.form import Form
 from src.interface.fields import TextField, DateField
 from src.interface.form_classes import CreationForm, UpdateForm, DeletionForm
+from src.database.database import DatabaseManager
 from src.interface.beneficiary_form_classes import *
 from src.interface.person_form_classes import *
 from src.interface.student_form_classes import *
@@ -19,18 +20,31 @@ from src.interface.administrator_form_classes import *
 
 class ManagerPage(ABC):
     def __init__(
-        self, title, description, creation_form, update_form, deletion_form
+        self,
+        title: str,
+        description: str,
+        creation_form: CreationForm,
+        update_form: UpdateForm,
+        deletion_form: DeletionForm,
+        db_collection: str = None
     ):
-        self.title: str = title
-        self.description: str = description
-        self.creation_form: CreationForm = creation_form
-        self.update_form: UpdateForm = update_form
-        self.deletion_form: DeletionForm = deletion_form
+        self.title = title
+        self.description = description
+        self.creation_form = creation_form
+        self.update_form = update_form
+        self.deletion_form = deletion_form
+        self.db_collection = db_collection
+        self.db_manager = DatabaseManager.instance()
 
-    @abstractmethod
     def show_table(self):
         """Shows the table of the managed elements on the page."""
-        pass
+        st.subheader("Tabela de Elementos")
+        query = self.db_manager.get_all(self.db_collection)
+        if query == []:
+            st.write("Ainda não há nenhum elemento cadastrado.")
+        else:
+            df = pd.DataFrame(query)
+            st.dataframe(df)
 
     def show_creation_form(self):
         """Shows the creation form on the page."""
@@ -71,12 +85,9 @@ class PersonPage(ManagerPage):
             description="Gerencie os beneficiários do sistema.",
             creation_form=PersonCreationForm(),
             update_form=PersonUpdateForm(),
-            deletion_form=PersonDeletionForm()
+            deletion_form=PersonDeletionForm(),
+            db_collection="person"
         )
-
-    def show_table(self):
-        """Shows the table of the managed elements on the page."""
-        pass  # TODO mostra a tabela de beneficiários
 
 
 class BeneficiaryPage(ManagerPage):
@@ -86,12 +97,9 @@ class BeneficiaryPage(ManagerPage):
             description="Gerencie os beneficiários do sistema.",
             creation_form=BeneficiaryCreationForm(),
             update_form=BeneficiaryUpdateForm(),
-            deletion_form=BeneficiaryDeletionForm()
+            deletion_form=BeneficiaryDeletionForm(),
+            db_collection="beneficiary"
         )
-
-    def show_table(self):
-        """Shows the table of the managed elements on the page."""
-        pass  # TODO mostra a tabela de beneficiários
 
 
 class StudentPage(ManagerPage):
@@ -101,12 +109,9 @@ class StudentPage(ManagerPage):
             description="Gerencie os estudantes do sistema.",
             creation_form=StudentCreationForm(),
             update_form=StudentUpdateForm(),
-            deletion_form=StudentDeletionForm()
+            deletion_form=StudentDeletionForm(),
+            db_collection="student"
         )
-
-    def show_table(self):
-        """Shows the table of the managed elements on the page."""
-        pass
 
 
 class TeacherPage(ManagerPage):
@@ -116,12 +121,9 @@ class TeacherPage(ManagerPage):
             description="Gerencie os professores do sistema.",
             creation_form=TeacherCreationForm(),
             update_form=TeacherUpdateForm(),
-            deletion_form=TeacherDeletionForm()
+            deletion_form=TeacherDeletionForm(),
+            db_collection="teacher"
         )
-
-    def show_table(self):
-        """Shows the table of the managed elements on the page."""
-        pass
 
 
 class AnalystPage(ManagerPage):
@@ -131,12 +133,9 @@ class AnalystPage(ManagerPage):
             description="Gerencie os analistas do sistema.",
             creation_form=AnalystCreationForm(),
             update_form=AnalystUpdateForm(),
-            deletion_form=AnalystDeletionForm()
+            deletion_form=AnalystDeletionForm(),
+            db_collection="analyst"
         )
-
-    def show_table(self):
-        """Shows the table of the managed elements on the page."""
-        pass
 
 
 class DirectorPage(ManagerPage):
@@ -146,12 +145,9 @@ class DirectorPage(ManagerPage):
             description="Gerencie os diretores do sistema.",
             creation_form=DirectorCreationForm(),
             update_form=DirectorUpdateForm(),
-            deletion_form=DirectorDeletionForm()
+            deletion_form=DirectorDeletionForm(),
+            db_collection="director"
         )
-
-    def show_table(self):
-        """Shows the table of the managed elements on the page."""
-        pass
 
 
 class AdministratorPage(ManagerPage):
@@ -161,9 +157,6 @@ class AdministratorPage(ManagerPage):
             description="Gerencie os administradores do sistema.",
             creation_form=AdmnistratorCreationForm(),
             update_form=AdmnistratorUpdateForm(),
-            deletion_form=AdmnistratorDeletionForm()
+            deletion_form=AdmnistratorDeletionForm(),
+            db_collection="administrator"
         )
-
-    def show_table(self):
-        """Shows the table of the managed elements on the page."""
-        pass

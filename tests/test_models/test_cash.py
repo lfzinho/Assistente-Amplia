@@ -40,6 +40,21 @@ class TestCash(unittest.TestCase):
         cash.make_payment(amount=3.0)
         self.assertEqual(cash.saved_amount, 1.0)
 
+    def test_make_payment_dont_allow_negative_values(self) -> None:
+        """
+        Testa o método make_payment da classe Cash conferindo se
+        ele não permite valores negativos.
+        """
+        cash = Cash(
+            saved_amount=10.0
+        )
+        with self.assertRaises(ValueError):
+            cash.make_payment(amount=-6.0)
+        with self.assertRaises(ValueError):
+            cash.make_payment(amount=0.0)
+        self.assertEqual(cash.saved_amount, 10.0)
+
+
 
 if __name__ == '__main__':
     unittest.main()

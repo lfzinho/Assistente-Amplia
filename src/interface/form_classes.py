@@ -1,4 +1,5 @@
 from . import _init_path
+import streamlit as st
 from src.interface.form import Form
 from src.interface.fields import SelectBoxField
 from src.database.database import DatabaseManager
@@ -18,7 +19,10 @@ class CreationForm(Form):
     def submit_action(self) -> None:
         """Action to be performed when the form is submitted."""
         form_values = self.get_form_values()
-        dbm.add(self.db_collection, form_values)
+        if dbm.add(self.db_collection, form_values):
+            st.success("Adicionado com sucesso.")
+        else:
+            st.error("Falha ao adicionar.")
 
 
 class UpdateForm(Form):
@@ -36,7 +40,10 @@ class UpdateForm(Form):
         """Action to be performed when the form is submitted."""
         form_values = self.get_form_values()
         id_value = self.get_id_field_value()
-        dbm.update(self.db_collection, id_value, form_values)
+        if dbm.update(self.db_collection, id_value, form_values):
+            st.success("Atualizado com sucesso.")
+        else:
+            st.error("Falha ao atualizar.")
 
 
 class DeletionForm(Form):
@@ -52,5 +59,8 @@ class DeletionForm(Form):
     def submit_action(self) -> None:
         """Action to be performed when the form is submitted."""
         id_value = self.get_id_field_value()
-        dbm.delete(self.db_collection, id_value)
+        if dbm.delete(self.db_collection, id_value):
+            st.success("Deletado com sucesso.")
+        else:
+            st.error("Falha ao deletar.")
 

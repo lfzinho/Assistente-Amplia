@@ -173,4 +173,8 @@ class Payment:
         --------
         None
         """
+        if payment_date < self.reference_date:
+            raise ValueError(
+                "A data do pagamento não pode ser anterior à data da aula"
+            )
         self._payment_date = payment_date

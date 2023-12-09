@@ -52,6 +52,21 @@ class TestPayment(unittest.TestCase):
         self.assertEqual(payment.payment_date, date(2021, 1, 2))
         self.assertEqual(payment.reference_date, date(2021, 1, 3))
 
+    def test_payment_date_setter_limitation(self) -> None:
+        """
+        Testa o setter da classe Payment conferindo se
+        ele não permite que o atributo payment_date seja
+        menor que o atributo reference_date.
+        """
+        payment = Payment(
+            value=10.0,
+            payment_date=date(2021, 1, 2),
+            reference_date=date(2021, 1, 2),
+        )
+        with self.assertRaises(ValueError):
+            payment.payment_date = date(2021, 1, 1)
+        self.assertEqual(payment.payment_date, date(2021, 1, 2))
+
 
 if __name__ == "__main__":
     unittest.main()

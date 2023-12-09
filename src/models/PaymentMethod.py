@@ -15,5 +15,5 @@ class PaymentMethod(ABC):
         pass
 
     @abstractmethod
-    def view_information(self) -> None:
+    def get_information(self) -> None:
         pass

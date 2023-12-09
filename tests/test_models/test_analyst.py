@@ -110,3 +110,41 @@ class TestAnalyst(unittest.TestCase):
         self.assertEqual(analyst.admission_date, '2021-02-01')
         self.assertEqual(analyst.occupation_area, 'Recursos Humanos')
         self.assertEqual(analyst.exit_date, '2021-03-01')
+
+    def test_occupation_area_literal_init(self) -> None:
+        """
+        Testa se o Analyst.__init__(...) levanta ValueError ao receber
+        um valor inválido para o atributo 'occupation_area'
+        """
+        with self.assertRaises(ValueError):
+            analyst = Analyst(
+                name='João',
+                email='joaosilva@gmail.com',
+                cpf='123.456.789-00',
+                address='Rua 1, 123',
+                payment_method=Pix(key='12345678900', type_='cpf'),
+                birth_date='1990-01-01',
+                admission_date='2021-01-01',
+                occupation_area='invalid_value',
+                exit_date='2021-02-01'
+            )
+
+    def test_occupation_area_literal_setter(self) -> None:
+        """
+        Testa se o Analyst.occupation_area.setter levanta ValueError ao
+        receber um valor inválido
+        """
+        analyst = Analyst(
+            name='João',
+            email='joaosilva@gmail.com',
+            cpf='123.456.789-00',
+            address='Rua 1, 123',
+            payment_method=Pix(key='12345678900', type_='cpf'),
+            birth_date='1990-01-01',
+            admission_date='2021-01-01',
+            occupation_area='Administrativo Financeiro',
+            exit_date='2021-02-01'
+        )
+
+        with self.assertRaises(ValueError):
+            analyst.occupation_area = 'invalid_value'

@@ -13,8 +13,9 @@ from src.models.Person import Person
 #         self.transport_description = transport_description
 
 
-class Beneficiary(Person):
+class Beneficiary(Person, ABC):
     """Classe que representa um beneficiário."""
+    @abstractmethod
     def __init__(
         self,
         name: str,

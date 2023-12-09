@@ -1,121 +1,153 @@
-from model.MetodoPagamento import MetodoPagamento
+from typing import Literal
 
-TIPOS_PIX = ['cpf', 'cnpj', 'email', 'celular']
+from src.models.PaymentMethod import PaymentMethod
 
-# testa_informacoes_construtor
+PIX_TYPES = ['cpf', 'cnpj', 'email', 'celular', 'aleatorio']
+
+
 # class Pix:
-#     def __init__(self, chave:str, tipo:str) -> None:
-#         self.chave = chave
-#         self.tipo = tipo
+#     def __init__(self, key: str, type_: str) -> None:
+#         self.key = key
+#         self.type_ = type_
 
 
-# testa_heranca_metodo_pagamento
-#class Pix(MetodoPagamento):
-    # def __init__(self, chave:str, tipo:str) -> None:
-    #     self.chave = chave
-    #     self.tipo = tipo
+# class Pix(PaymentMethod):
+#     def __init__(self, key: str, type_: str) -> None:
+#         self.key = key
+#         self.type_ = type_
 
-    # def visualizar_informacoes(self):
-    #    pass
+#     def get_information(self):
+#         pass
 
-# testa_tipo_retorno_metodo_pagamento
-# class Pix(MetodoPagamento):
-#     def __init__(self, chave:str, tipo:str) -> None:
-#         self.chave = chave
-#         self.tipo = tipo
 
-#     def visualizar_informacoes(self):
-#         return f"Chave: {self.chave}\nTipo: {self.tipo}"
-    
-# testa_getters
-# class Pix(MetodoPagamento):
-#     def __init__(self, chave:str, tipo:str) -> None:
-#         self._chave = chave
-#         self._tipo = tipo
+# class Pix(PaymentMethod):
+#     def __init__(self, key: str, type_: str) -> None:
+#         self.key = key
+#         self.type_ = type_
 
-#     def visualizar_informacoes(self):
-#         return f"Chave: {self.chave}\nTipo: {self.tipo}"
-    
+#     def get_information(self):
+#         return f'key: {self.key}\ntype_: {self.type_}'
+
+
+# class Pix(PaymentMethod):
+#     def __init__(self, key: str, type_: str) -> None:
+#         self.key = key
+#         self.type_ = type_
+
+#     def get_information(self):
+#         return f'Chave: {self.key}\nTipo: {self.type_}'
+
+
+# class Pix(PaymentMethod):
+#     def __init__(self, key: str, type_: str) -> None:
+#         self._key = key
+#         self._type_ = type_
+
+#     def get_information(self):
+#         return f'Chave: {self.key}\nTipo: {self.type_}'
+
 #     @property
-#     def chave(self):
-#         return self._chave
+#     def key(self):
+#         return self._key
 
-#     @chave.setter
-#     def chave(self, chave):
-#         self._chave = chave
+#     @key.setter
+#     def key(self, key):
+#         self._key = key
 
 #     @property
-#     def tipo(self):
-#         return self._tipo
+#     def type_(self):
+#         return self._type_
 
-#     @tipo.setter
-#     def tipo(self, tipo):
-#         self._tipo = tipo
+#     @type_.setter
+#     def type_(self, type_):
+#         self._type_ = type_
 
-# testa_limitacao_tipo
-class Pix(MetodoPagamento):
-    """Classe que representa um método de pagamento Pix"""
-    def __init__(self, chave:str, tipo:str) -> None:
-        """Construtor da classe Pix
-        
-        Args:
-            chave (str): Chave Pix
-            tipo (str): Tipo da chave Pix
-            
-        Raises:
-            ValueError: Se o tipo não for  ['cpf', 'cnpj', 'email', 'celular']
+
+
+class Pix(PaymentMethod):
+    """Classe que representa um método de pagamento Pix."""
+    def __init__(self, key: str, type_: Literal['cpf', 'cnpj', 'email', 'celular']) -> None:
         """
-        self._tipo = tipo
-        self._chave = chave
+        Construtor da classe Pix.
 
-    def visualizar_informacoes(self):
-        """
-        Retorna uma string com as informações do Pix
-        
-        Returns:
-            str: Informações do Pix
-        """
-        return f"Chave: {self.chave}\nTipo: {self.tipo}"
-    
-    @property
-    def tipo(self)-> str:
-        """getter do Tipo da chave Pix
-            
-        Returns:
-            str: Tipo da chave Pix
-        """
-        return self._tipo
+        Parâmetros
+        ----------
+        key : str
+            Chave Pix.
+        type_ : {'cpf', 'cnpj', 'email', 'celular', 'aleatorio'}
+            Tipo da chave Pix.
 
-    @tipo.setter
-    def tipo(self, tipo:str)-> None:
-        """setter do Tipo da chave Pix
-
-        Args:
-            tipo (str): Tipo da chave Pix
-
-        Raises:
-            ValueError: Se o tipo não for  ['cpf', 'cnpj', 'email', 'celular']
+        Levanta
+        -------
+        ValueError
+            Se o tipo não for um de {'cpf', 'cnpj', 'email', 'celular'}.
         """
-        if tipo not in TIPOS_PIX:
-            raise ValueError('Tipo inválido, escolha entre: cpf, cnpj, email, celular')
-        self._tipo = tipo
+        self._key = key
+        self._type_ = type_
+
+    def get_information(self):
+        """
+        Retorna uma string com as informações do Pix.
+
+        Retorna
+        -------
+        str
+            Informações do Pix.
+        """
+        return f'Chave: {self.key}\nTipo: {self.type_}'
 
     @property
-    def chave(self)-> str:
-        """getter da Chave Pix
-        
-        Returns:
-            str: Chave Pix
+    def key(self):
         """
-        return self._chave
+        Getter do tipo da chave Pix.
 
-    @chave.setter
-    def chave(self, chave)-> None:
-        """setter da sChave Pix
-        
-        Args:
-            chave (str): Chave Pix
+        Retorna
+        -------
+        str
+            Tipo da chave Pix.
         """
-        self._chave = chave
+        return self._key
 
-    
+    @key.setter
+    def key(self, key):
+        """
+        Parâmetros
+        ----------
+        tipo : str
+            Tipo da chave Pix.
+
+        Levanta
+        -------
+        ValueError
+            Se o tipo não for um de {'cpf', 'cnpj', 'email', 'celular'}.
+        """
+        self._key = key
+
+    @property
+    def type_(self):
+        """
+        Getter da Chave Pix.
+
+        Retorna
+        -------
+        str
+            Chave Pix.
+        """
+        return self._type_
+
+    @type_.setter
+    def type_(self, type_):
+        """
+        Setter da Chave Pix.
+
+        Parâmetros
+        ----------
+        chave : str
+            Chave Pix.
+        """
+        if type_ not in PIX_TYPES:
+            raise ValueError(
+                f'Tipo inválido. Escolha entre: {PIX_TYPES}'
+            )
+        self._type_ = type_
+

@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 from datetime import date
-from typing import Type
+from typing import Optional, Type
 
 from src.models.PaymentMethod import PaymentMethod
 
@@ -40,7 +40,7 @@ class Person(ABC):
         payment_method: Type[PaymentMethod],
         birth_date: date,
         admission_date: date,
-        exit_date: date = None,
+        exit_date: Optional[date] = None,
     ) -> None:
         """
         Construtor da classe Pessoa.

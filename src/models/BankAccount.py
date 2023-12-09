@@ -50,7 +50,7 @@ class BankAccount(PaymentMethod):
         self._agency = agency
         self._account_number = account_number
 
-    def view_information(self) -> str:
+    def get_information(self) -> str:
         """
         Retorna uma string com as informações da Conta Bancária.
 

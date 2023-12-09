@@ -8,9 +8,9 @@ class TestPaymentMethod(unittest.TestCase):
     def test_init_is_abstract(self) -> None:
         self.assertIn('__init__', PaymentMethod.__abstractmethods__)
 
-    def test_view_information_is_abstract(self) -> None:
+    def test_get_information_is_abstract(self) -> None:
         self.assertIn(
-            'view_information',
+            'get_information',
             PaymentMethod.__abstractmethods__
         )
 

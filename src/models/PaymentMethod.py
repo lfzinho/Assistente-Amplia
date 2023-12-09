@@ -1,19 +1,19 @@
 from abc import ABC, abstractmethod
 
 
-# class MetodoPagamento(ABC):
+# class PaymentMethod:
 #     def __init__(self):
 #         pass
-#
-#     def visualizar_informacoes(self):
+
+#     def view_information(self):
 #         pass
 
 
-class MetodoPagamento(ABC):
+class PaymentMethod(ABC):
     @abstractmethod
     def __init__(self) -> None:
         pass
 
     @abstractmethod
-    def visualizar_informacoes(self) -> None:
+    def view_information(self) -> None:
         pass

@@ -20,3 +20,19 @@ class TestPayment(unittest.TestCase):
         self.assertEqual(payment.value, 10.0)
         self.assertEqual(payment.payment_date, date(2021, 1, 1))
         self.assertEqual(payment.reference_date, date(2021, 1, 1))
+
+    def test_getters(self) -> None:
+        """
+        Testa os getters da classe Payment conferindo se
+        eles retornam os valores corretos.
+        """
+        payment = Payment(
+            value=10.0,
+            payment_date=date(2021, 1, 1),
+            reference_date=date(2021, 1, 1),
+        )
+        self.assertEqual(payment.value, 10.0)
+        self.assertEqual(payment.payment_date, date(2021, 1, 1))
+        self.assertEqual(payment.reference_date, date(2021, 1, 1))
+
+

@@ -18,6 +18,60 @@ from src.interface.director_form_classes import *
 from src.interface.administrator_form_classes import *
 
 
+# class ManagerPage(ABC):
+#     def __init__(
+#         self,
+#         title: str,
+#         description: str,
+#         creation_form: CreationForm,
+#         update_form: UpdateForm,
+#         deletion_form: DeletionForm,
+#         db_collection: str = None
+#     ):
+#         self.title = title
+#         self.description = description
+#         self.creation_form = creation_form
+#         self.update_form = update_form
+#         self.deletion_form = deletion_form
+#         self.db_collection = db_collection
+
+#     @abstractmethod
+#     def show_table(self):
+#         """Shows the table of the managed elements on the page."""
+#         pass
+
+#     def show_creation_form(self):
+#         """Shows the creation form on the page."""
+#         self.creation_form.render()
+
+#     def show_update_form(self):
+#         """Shows the update form on the page."""
+#         self.update_form.render()
+
+#     def show_deletion_form(self):
+#         """Shows the deletion form on the page."""
+#         self.deletion_form.render()
+
+#     def show_form_tabs(self):
+#         """Shows all forms in a tab organization."""
+#         creation_tab, update_tab, deletion_tab = st.tabs(
+#             ['Criação', 'Atualização', 'Deleção']
+#         )
+#         with creation_tab:
+#             self.show_creation_form()
+#         with update_tab:
+#             self.show_update_form()
+#         with deletion_tab:
+#             self.show_deletion_form()
+    
+#     def render(self):
+#         """Renders the page in the usual organization."""
+#         st.title(self.title)
+#         st.write(self.description)
+#         self.show_table()
+#         self.show_form_tabs()
+
+
 class ManagerPage(ABC):
     def __init__(
         self,

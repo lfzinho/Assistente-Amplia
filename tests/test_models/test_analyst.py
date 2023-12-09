@@ -2,6 +2,7 @@
 """
 import unittest
 from abc import ABC
+from datetime import date
 
 from . import init_path
 from src.models.BankAccount import BankAccount
@@ -23,10 +24,10 @@ class TestAnalyst(unittest.TestCase):
             cpf='123.456.789-00',
             address='Rua 1, 123',
             payment_method=Pix(key='12345678900', type_='cpf'),
-            birth_date='1990-01-01',
-            admission_date='2021-01-01',
+            birth_date=date(year=1990, month=1, day=1),
+            admission_date=date(year=2021, month=1, day=1),
             occupation_area='Administrativo Financeiro',
-            exit_date='2021-02-01'
+            exit_date=date(year=2022, month=1, day=1),
         )
         self.assertIsInstance(analyst, Analyst)
 
@@ -41,8 +42,8 @@ class TestAnalyst(unittest.TestCase):
             cpf='123.456.789-00',
             address='Rua 1, 123',
             payment_method=Pix(key='12345678900', type_='cpf'),
-            birth_date='1990-01-01',
-            admission_date='2021-01-01',
+            birth_date=date(year=1990, month=1, day=1),
+            admission_date=date(year=2021, month=1, day=1),
             occupation_area='Administrativo Financeiro',
         )
         self.assertIsInstance(analyst, Analyst)
@@ -56,20 +57,20 @@ class TestAnalyst(unittest.TestCase):
             cpf='123.456.789-00',
             address='Rua 1, 123',
             payment_method=Pix(key='12345678900', type_='cpf'),
-            birth_date='1990-01-01',
-            admission_date='2021-01-01',
+            birth_date=date(year=1990, month=1, day=1),
+            admission_date=date(year=2021, month=1, day=1),
             occupation_area='Administrativo Financeiro',
-            exit_date='2021-02-01',
+            exit_date=date(year=2022, month=1, day=1),
         )
         self.assertEqual(analyst.name, 'João')
         self.assertEqual(analyst.email, 'joaosilva@gmail.com')
         self.assertEqual(analyst.cpf, '123.456.789-00')
         self.assertEqual(analyst.address, 'Rua 1, 123')
         self.assertIsInstance(analyst.payment_method, PaymentMethod)
-        self.assertEqual(analyst.birth_date, '1990-01-01')
-        self.assertEqual(analyst.admission_date, '2021-01-01')
+        self.assertEqual(analyst.birth_date, date(year=1990, month=1, day=1))
+        self.assertEqual(analyst.admission_date, date(year=2021, month=1, day=1))
         self.assertEqual(analyst.occupation_area, 'Administrativo Financeiro')
-        self.assertEqual(analyst.exit_date, '2021-02-01')
+        self.assertEqual(analyst.exit_date, date(year=2022, month=1, day=1))
 
     def test_setters(self) -> None:
         """Testa os setters da classe Analyst"""
@@ -80,10 +81,10 @@ class TestAnalyst(unittest.TestCase):
             cpf='123.456.789-00',
             address='Rua 1, 123',
             payment_method=Pix(key='12345678900', type_='cpf'),
-            birth_date='1990-01-01',
-            admission_date='2021-01-01',
+            birth_date=date(year=1990, month=1, day=1),
+            admission_date=date(year=2021, month=1, day=1),
             occupation_area='Administrativo Financeiro',
-            exit_date='2021-02-01'
+            exit_date=date(year=2022, month=1, day=1),
         )
         # Seta os atributos da classe para um conjunto B de parâmetros
         analyst.name = 'Maria'
@@ -95,10 +96,10 @@ class TestAnalyst(unittest.TestCase):
             agency=123,
             account_number=12345
         )
-        analyst.birth_date = '1990-02-02'
-        analyst.admission_date = '2021-02-01'
+        analyst.birth_date = date(year=1990, month=1, day=1)
+        analyst.admission_date = date(year=2021, month=1, day=1)
         analyst.occupation_area = 'Recursos Humanos'
-        analyst.exit_date = '2021-03-01'
+        analyst.exit_date = date(year=2022, month=1, day=1)
         # Testa se os atributos da classe correspondem ao conjunto B de
         # parâmetros
         self.assertEqual(analyst.name, 'Maria')
@@ -106,10 +107,10 @@ class TestAnalyst(unittest.TestCase):
         self.assertEqual(analyst.cpf, '987.654.321-00')
         self.assertEqual(analyst.address, 'Rua 2, 321')
         self.assertIsInstance(analyst.payment_method, BankAccount)
-        self.assertEqual(analyst.birth_date, '1990-02-02')
-        self.assertEqual(analyst.admission_date, '2021-02-01')
+        self.assertEqual(analyst.birth_date, date(year=1990, month=1, day=1))
+        self.assertEqual(analyst.admission_date, date(year=2021, month=1, day=1))
         self.assertEqual(analyst.occupation_area, 'Recursos Humanos')
-        self.assertEqual(analyst.exit_date, '2021-03-01')
+        self.assertEqual(analyst.exit_date, date(year=2022, month=1, day=1))
 
     def test_occupation_area_literal_init(self) -> None:
         """
@@ -123,10 +124,10 @@ class TestAnalyst(unittest.TestCase):
                 cpf='123.456.789-00',
                 address='Rua 1, 123',
                 payment_method=Pix(key='12345678900', type_='cpf'),
-                birth_date='1990-01-01',
-                admission_date='2021-01-01',
+                birth_date=date(year=1990, month=1, day=1),
+                admission_date=date(year=2021, month=1, day=1),
                 occupation_area='invalid_value',
-                exit_date='2021-02-01'
+                exit_date=date(year=2022, month=1, day=1),
             )
 
     def test_occupation_area_literal_setter(self) -> None:
@@ -140,11 +141,14 @@ class TestAnalyst(unittest.TestCase):
             cpf='123.456.789-00',
             address='Rua 1, 123',
             payment_method=Pix(key='12345678900', type_='cpf'),
-            birth_date='1990-01-01',
-            admission_date='2021-01-01',
+            birth_date=date(year=1990, month=1, day=1),
+            admission_date=date(year=2021, month=1, day=1),
             occupation_area='Administrativo Financeiro',
-            exit_date='2021-02-01'
+            exit_date=date(year=2022, month=1, day=1),
         )
 
         with self.assertRaises(ValueError):
             analyst.occupation_area = 'invalid_value'
+
+if __name__ == '__main__':
+    unittest.main()

@@ -1,6 +1,6 @@
 from abc import ABC, abstractmethod
 
-# código incial
+
 # class MetodoPagamento(ABC):
 #     def __init__(self):
 #         pass
@@ -8,12 +8,12 @@ from abc import ABC, abstractmethod
 #     def visualizar_informacoes(self):
 #         pass
 
-# testa os métodos abstratos
+
 class MetodoPagamento(ABC):
     @abstractmethod
-    def __init__(self):
+    def __init__(self) -> None:
         pass
 
     @abstractmethod
-    def visualizar_informacoes(self):
+    def visualizar_informacoes(self) -> None:
         pass

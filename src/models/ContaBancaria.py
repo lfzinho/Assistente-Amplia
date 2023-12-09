@@ -1,6 +1,6 @@
 from src.models.MetodoPagamento import MetodoPagamento
 
-# testa_informacoes_construtor
+
 # class ContaBancaria:
 
 #     def __init__(self, banco:str, agencia:int, nro_conta:int) -> None:
@@ -8,7 +8,6 @@ from src.models.MetodoPagamento import MetodoPagamento
 #         self._agencia = agencia
 #         self._nro_conta = nro_conta
 
-# testa_heranca_metodo_pagamento
 # class ContaBancaria(MetodoPagamento):
 
 #     def __init__(self, banco:str, agencia:int, nro_conta:int) -> None:
@@ -19,7 +18,6 @@ from src.models.MetodoPagamento import MetodoPagamento
 #     def visualizar_informacoes(self):
 #         pass
 
-# testa_retorno_metodo_pagamento
 # class ContaBancaria(MetodoPagamento):
 
 #     def __init__(self, banco:str, agencia:int, nro_conta:int) -> None:
@@ -28,39 +26,41 @@ from src.models.MetodoPagamento import MetodoPagamento
 #         self._nro_conta = nro_conta
 
 #     def visualizar_informacoes(self):
-#         return f"Banco: {self._banco}\nAgência: {self._agencia}\nNúmero da conta: {self._nro_conta}"
-    
-# testa_getters e setters
-class ContaBancaria(MetodoPagamento):
+#         return f'Banco: {self._banco}\nAgência: {self._agencia}\nNúmero da conta: {self._nro_conta}'
 
-    def __init__(self, banco:str, agencia:int, nro_conta:int) -> None:
+
+class ContaBancaria(MetodoPagamento):
+    def __init__(self, banco: str, agencia: int, nro_conta: int) -> None:
         self._banco = banco
         self._agencia = agencia
         self._nro_conta = nro_conta
 
-    def visualizar_informacoes(self):
-        return f"Banco: {self._banco}\nAgência: {self._agencia}\nNúmero da conta: {self._nro_conta}"
-    
+    def visualizar_informacoes(self) -> str:
+        return (
+            f'Banco: {self._banco}\nAgência: {self._agencia}\n'
+            f'Número da conta: {self._nro_conta}'
+        )
+
     @property
-    def banco(self):
+    def banco(self) -> str:
         return self._banco
-    
+
     @banco.setter
-    def banco(self, banco):
+    def banco(self, banco: str) -> None:
         self._banco = banco
 
     @property
-    def agencia(self):
+    def agencia(self) -> int:
         return self._agencia
-    
+
     @agencia.setter
-    def agencia(self, agencia):
+    def agencia(self, agencia: int) -> None:
         self._agencia = agencia
 
     @property
-    def nro_conta(self):
+    def nro_conta(self) -> int:
         return self._nro_conta
-    
+
     @nro_conta.setter
-    def nro_conta(self, nro_conta):
+    def nro_conta(self, nro_conta: int) -> None:
         self._nro_conta = nro_conta

@@ -1,25 +1,19 @@
-import sys
-import os
-sys.path.append(os.path.join(os.path.dirname(__file__), '../..'))
-
 import unittest
 
-from src.models.Professor import Professor
-
-from src.models.Pessoa import Pessoa
-
-from src.models.Pix import Pix
+from . import init_path
 from src.models.ContaBancaria import ContaBancaria
+from src.models.Pessoa import Pessoa
+from src.models.Pix import Pix
+from src.models.Professor import Professor
 
 
 class TestaProfessor(unittest.TestCase):
-
-    def testa_heranca_pessoa(self):
-        """Testa se a classe Aluno herda de Pessoa"""
+    def testa_heranca_pessoa(self) -> None:
+        """Testa se a classe Aluno herda de Pessoa."""
         self.assertTrue(issubclass(Professor, Pessoa))
 
-    def testa_construtor(self):
-        """Testa se o construtor da classe Professor funciona"""
+    def testa_construtor(self) -> None:
+        """Testa se o construtor da classe Professor funciona."""
         professor = Professor(
             nome='João',
             data_nascimento='1999-01-01',
@@ -42,8 +36,8 @@ class TestaProfessor(unittest.TestCase):
         self.assertIsInstance(professor.metodo_pagamento, Pix)
         self.assertEqual(professor._salario, 1000.0)
 
-    def testa_getter_salario(self):
-        """Testa se o getter do atributo salario funciona"""
+    def testa_getter_salario(self) -> None:
+        """Testa se o getter do atributo salario funciona."""
         professor = Professor(
             nome='João',
             data_nascimento='1999-01-01',
@@ -57,7 +51,7 @@ class TestaProfessor(unittest.TestCase):
         )
         self.assertEqual(professor.salario, 1000.0)
 
-    def testa_setter_salario(self):
+    def testa_setter_salario(self) -> None:
         """Testa se o setter do atributo salario funciona"""
         professor = Professor(
             nome='João',
@@ -73,7 +67,7 @@ class TestaProfessor(unittest.TestCase):
         professor.salario = 2000.0
         self.assertEqual(professor.salario, 2000.0)
 
-    def testa_setter_salario_negativo(self):
+    def testa_setter_salario_negativo(self) -> None:
         """Testa se o setter do atributo salario funciona"""
         professor = Professor(
             nome='João',

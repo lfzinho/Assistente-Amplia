@@ -15,3 +15,18 @@ class TestCash(unittest.TestCase):
         )
         self.assertIsInstance(cash, Cash)
         self.assertEqual(cash.saved_amount, 10.0)
+
+    def test_make_payment_return_4(self) -> None:
+        """
+        Testa o método make_payment da classe Cash conferindo se
+        a subtração do atributo saved_amount foi feita corretamente.
+        """
+        cash = Cash(
+            saved_amount=10.0
+        )
+        cash.make_payment(amount=6.0)
+        self.assertEqual(cash.saved_amount, 4.0)
+
+
+if __name__ == '__main__':
+    unittest.main()

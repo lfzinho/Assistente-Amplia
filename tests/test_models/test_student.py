@@ -1,8 +1,8 @@
 import unittest
 
 from . import init_path
-from src.models.Student import Student
 from src.models.Pix import Pix
+from src.models.Student import Student
 
 
 class TestStudent(unittest.TestCase):
@@ -22,7 +22,7 @@ class TestStudent(unittest.TestCase):
             exit_date='2021-02-01',
             transport_cost=10.0,
             transport_description='Uber',
-            financial_manager='Maria'
+            financial_manager='Maria',
         )
         self.assertIsInstance(student, Student)
         self.assertEqual(student.transport_cost, 10.0)
@@ -47,7 +47,7 @@ class TestStudent(unittest.TestCase):
             exit_date='2021-02-01',
             transport_cost=10.0,
             transport_description='Uber',
-            financial_manager='Maria'
+            financial_manager='Maria',
         )
         self.assertEqual(student.name, 'João')
         self.assertEqual(student.email, 'joaosilva@gmail.com')
@@ -74,7 +74,7 @@ class TestStudent(unittest.TestCase):
             exit_date='2021-02-01',
             transport_cost=10.0,
             transport_description='Uber',
-            financial_manager='Maria'
+            financial_manager='Maria',
         )
         student.name = 'Maria'
         student.email = 'mariasouza@hotmail.com'

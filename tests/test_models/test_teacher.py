@@ -1,8 +1,8 @@
 import unittest
 
 from . import init_path
-from src.models.Teacher import Teacher
 from src.models.Pix import Pix
+from src.models.Teacher import Teacher
 
 
 class TestTeacher(unittest.TestCase):

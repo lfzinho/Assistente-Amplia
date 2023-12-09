@@ -1,8 +1,8 @@
 from datetime import date
 from typing import Optional, Type
 
-from src.models.PaymentMethod import PaymentMethod
 from src.models.Beneficiary import Beneficiary
+from src.models.PaymentMethod import PaymentMethod
 
 
 class Teacher(Beneficiary):

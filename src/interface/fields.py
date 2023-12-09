@@ -41,11 +41,15 @@ class TextField(Field):
 class DateField(Field):
     def __init__(self, label, value):
         super().__init__(label, 'date')
-        self.value: datetime.date = value
+        self.value: datetime.datetime = value
 
     def render(self):
         """Renders the date field on the page."""
-        self.value = st.date_input(label=self.label, value=self.value)
+        self.value = st.date_input(
+            label=self.label,
+            value=self.value,
+            format='DD/MM/YYYY'
+        )
 
 
 class SelectBoxField(Field):

@@ -17,12 +17,13 @@ class PersonCreationForm(CreationForm):
             fields=[
                 TextField(label="Nome", value=""),
                 TextField(label="Email", value=""),
-                DateField(label="Data de Cadastro", value=datetime.date.today()),
+                DateField(label="Data de Cadastro", value=datetime.datetime.now()),
                 DateField(label="Data de Saída", value=None),
                 DateField(label="Data de Nascimento", value=None),
                 TextField(label="CPF", value=""),
                 TextField(label="Endereço", value=""),
-            ]
+            ],
+            db_collection='person'
         )
 
 
@@ -39,13 +40,13 @@ class PersonUpdateForm(UpdateForm):
             fields=[
                 TextField(label="Nome", value=""),
                 TextField(label="Email", value=""),
-                DateField(label="Data de Cadastro", value=datetime.date.today()),
+                DateField(label="Data de Cadastro", value=datetime.datetime.now()),
                 DateField(label="Data de Saída", value=None),
                 DateField(label="Data de Nascimento", value=None),
                 TextField(label="CPF", value=""),
                 TextField(label="Endereço", value=""),
             ],
-            db_search_doc='person'
+            db_collection='person'
         )
 
 
@@ -59,5 +60,5 @@ class PersonDeletionForm(DeletionForm):
                 value="1",
                 options=["1", "2", "3"]
             ),
-            db_search_doc='person'
+            db_collection='person'
         )

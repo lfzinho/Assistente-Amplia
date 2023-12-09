@@ -6,7 +6,6 @@ import firebase_admin
 from firebase_admin import credentials, firestore
 
 cred = credentials.Certificate("src/database/serviceAccountKey.json")
-firebase_admin.initialize_app(cred)
 
 app = firebase_admin.initialize_app(cred)
 db = firestore.client()
@@ -15,6 +14,10 @@ db = firestore.client()
 class DatabaseManager():
     def __init__(self, db: firestore.client):
         self.db = db
+
+    @staticmethod
+    def instance():
+        return DatabaseManager(db)
 
     def get_all(self, collection):
         docs = self.db.collection(collection).get()
@@ -29,7 +32,11 @@ class DatabaseManager():
         return doc.to_dict()
 
     def add(self, collection, data):
+        print(collection, data)
         self.db.collection(collection).add(data)
 
     def update(self, collection, id, data):
         self.db.collection(collection).document(id).set(data)
+
+    def delete(self, collection, id):
+        self.db.collection(collection).document(id).delete()

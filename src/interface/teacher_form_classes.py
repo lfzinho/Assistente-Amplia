@@ -21,7 +21,8 @@ class TeacherCreationForm(CreationForm):
                     options=["1", "2", "3"]
                 ),
                 TextField(label="Matéria", value=""),
-            ]
+            ],
+            db_collection='teacher'
         )
 
 
@@ -38,7 +39,7 @@ class TeacherUpdateForm(UpdateForm):
             fields=[
                 TextField(label="Matéria", value=""),
             ],
-            db_search_doc='teacher'
+            db_collection='teacher'
         )
 
 
@@ -52,5 +53,5 @@ class TeacherDeletionForm(DeletionForm):
                 value="1",
                 options=["1", "2", "3"]
             ),
-            db_search_doc='teacher'
+            db_collection='teacher'
         )

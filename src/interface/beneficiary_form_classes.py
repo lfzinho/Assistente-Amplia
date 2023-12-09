@@ -22,7 +22,8 @@ class BeneficiaryCreationForm(CreationForm):
                 ),
                 NumberField(label="Custo do Transporte", value=0.0),
                 TextField(label="Descrição do Transporte", value=""),
-            ]
+            ],
+            db_collection="beneficiary"
         )
 
 
@@ -40,7 +41,7 @@ class BeneficiaryUpdateForm(UpdateForm):
                 NumberField(label="Custo do Transporte", value=0.0),
                 TextField(label="Descrição do Transporte", value=""),
             ],
-            db_search_doc="beneficiary"
+            db_collection="beneficiary"
         )
 
 
@@ -54,5 +55,5 @@ class BeneficiaryDeletionForm(DeletionForm):
                 value="1",
                 options=["1", "2", "3"]
             ),
-            db_search_doc="beneficiary"
+            db_collection="beneficiary"
         )

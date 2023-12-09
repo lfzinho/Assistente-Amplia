@@ -21,7 +21,8 @@ class StudentCreationForm(CreationForm):
                     options=["1", "2", "3"]
                 ),
                 TextField(label="Responsável Financeiro", value=""),
-            ]
+            ],
+            db_collection='student'
         )
 
 
@@ -38,7 +39,7 @@ class StudentUpdateForm(UpdateForm):
             fields=[
                 TextField(label="Responsável Financeiro", value=""),
             ],
-            db_search_doc='student'
+            db_collection='student'
         )
 
 
@@ -52,5 +53,5 @@ class StudentDeletionForm(DeletionForm):
                 value="1",
                 options=["1", "2", "3"]
             ),
-            db_search_doc='student'
+            db_collection='student'
         )

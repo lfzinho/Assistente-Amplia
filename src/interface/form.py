@@ -2,6 +2,7 @@ import sys
 import os
 sys.path.append(os.path.join(os.path.dirname(__file__), '../..'))
 
+import datetime
 from abc import ABC, abstractmethod
 import streamlit as st
 
@@ -15,13 +16,13 @@ class Form(ABC):
             description: str,
             fields: list[Field],
             id_field: SelectBoxField = None,
-            db_search_doc: str = None
+            db_collection: str = None
         ):
         self.title: str = title
         self.description: str = description
         self.fields: list[Field] = fields
         self.id_field: SelectBoxField = id_field
-        self.db_search_doc: str = db_search_doc
+        self.db_collection: str = db_collection
 
     @abstractmethod
     def submit_action(self):
@@ -70,3 +71,27 @@ class Form(ABC):
                     field.render()
             if st.form_submit_button(label='Enviar'):
                 self.submit_action()
+
+    def get_form_values(self):
+        """Returns the values of the form in a dictionary."""
+        form_values = {}
+        for field in self.fields:
+            # Se o campo for do tipo data, converte o valor para
+            # datetime.datetime, para que o banco de dados possa
+            # armazenar corretamente
+            if field.type == 'date':
+                form_values[field.label] = datetime.datetime.combine(
+                    field.value,
+                    datetime.datetime.min.time()
+                )
+            else:
+                form_values[field.label] = field.value
+        return form_values
+
+    def get_id_field_value(self):
+        """Returns the value of the ID field."""
+        # TODO implementar erro customizado
+        if self.id_field:
+            return self.id_field.value
+        else:
+            return None

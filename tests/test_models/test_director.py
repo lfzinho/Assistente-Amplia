@@ -1,10 +1,6 @@
 import unittest
-from abc import ABC
 from datetime import date
 
-from . import init_path
-from src.models.BankAccount import BankAccount
-from src.models.PaymentMethod import PaymentMethod
 from src.models.Pix import Pix
 from src.models.Director import Director
 
@@ -55,7 +51,7 @@ class TestDirector(unittest.TestCase):
         erro ao passar datas inconsistentes
         """
         with self.assertRaises(ValueError):
-            director = Director(
+            Director(
                 name='João',
                 email='joaosilva@gmail.com',
                 cpf='123.456.789-00',
@@ -73,7 +69,7 @@ class TestDirector(unittest.TestCase):
         erro ao passar datas inconsistentes
         """
         with self.assertRaises(ValueError):
-            director = Director(
+            Director(
                 name='João',
                 email='joaosilva@gmail.com',
                 cpf='123.456.789-00',

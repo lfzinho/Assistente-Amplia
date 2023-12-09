@@ -74,7 +74,12 @@ class Analyst(Person):
         payment_method: Type[PaymentMethod],
         birth_date: date,
         admission_date: date,
-        occupation_area: Literal[occupations_areas],
+        occupation_area: Literal[
+            'Administrativo Financeiro',
+            'Recursos Humanos',
+            'Pedagógico',
+            'Marketing'
+        ],
         exit_date: Optional[date] = None,
     ) -> None:
         """

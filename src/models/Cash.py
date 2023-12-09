@@ -8,4 +8,4 @@ class Cash:
         self.saved_amount = saved_amount
 
     def make_payment(self, amount: float) -> None:
-        self.saved_amount = 4.0
+        self.saved_amount -= amount

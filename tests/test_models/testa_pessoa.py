@@ -9,7 +9,7 @@ from src.models.Pessoa import Pessoa
 
 class TestaPessoa(unittest.TestCase):
 
-    def testa_pessoa(self):
+    def testa_pessoa(self) -> None:
         """
         Testa o construtor da classe Pessoa conferindo se os
         atributos foram setados corretamente.
@@ -27,7 +27,7 @@ class TestaPessoa(unittest.TestCase):
         self.assertEqual(pessoa._cpf, '123.456.789-00')
         self.assertEqual(pessoa._endereco, 'Rua 1, 123')
 
-    def testa_getters(self):
+    def testa_getters(self) -> None:
         """Testa os getters da classe Pessoa."""
         pessoa = Pessoa(
             nome='João',
@@ -45,7 +45,7 @@ class TestaPessoa(unittest.TestCase):
             'Chave: 12345678900\nTipo: cpf'
         )
 
-    def testa_setters(self):
+    def testa_setters(self) -> None:
         """Testa os setters da classe Pessoa."""
         pessoa = Pessoa(
             nome='João',
@@ -70,7 +70,7 @@ class TestaPessoa(unittest.TestCase):
             'Banco: Banco 1\nAgência: 123\nNúmero da conta: 123456'
         )
 
-    def testa_eh_abstract(self):
+    def testa_eh_abstract(self) -> None:
         """Testa se a classe Pessoa é abstrata."""
         self.assertTrue(issubclass(Pessoa, ABC))
 

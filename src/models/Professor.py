@@ -32,7 +32,7 @@ class Professor(Pessoa):
             data_nascimento: date,
             cpf: str,
             endereco: str,
-            metodo_pagamento: type[MetodoPagamento],
+            metodo_pagamento: Type[MetodoPagamento],
             salario: float
         ) -> None:
 
@@ -42,10 +42,10 @@ class Professor(Pessoa):
     @property
     def salario(self) -> float:
         return self._salario
-    
+
     @salario.setter
     def salario(self, novo_salario: float) -> None:
         if novo_salario < 0:
             raise ValueError('O salário não pode ser negativo')
         self._salario = novo_salario
-    
+

@@ -4,10 +4,6 @@ from datetime import date
 from src.models.MetodoPagamento import MetodoPagamento
 
 
-# class Aluno(Pessoa):
-#     pass
-
-
 class Aluno(Pessoa):
 
     def __init__(

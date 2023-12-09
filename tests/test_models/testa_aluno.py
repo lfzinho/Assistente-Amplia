@@ -7,11 +7,11 @@ from src.models.Pix import Pix
 
 
 class TestaAluno(unittest.TestCase):
-    def testa_heranca_pessoa(self):
+    def testa_heranca_pessoa(self) -> None:
         """Testa se a classe Aluno herda de Pessoa."""
         self.assertTrue(issubclass(Aluno, Pessoa))
 
-    def testa_construtor(self):
+    def testa_construtor(self) -> None:
         """Testa se o construtor da classe Aluno funciona."""
         aluno = Aluno(
             nome='João',

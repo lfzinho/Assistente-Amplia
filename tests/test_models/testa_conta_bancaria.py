@@ -1,14 +1,14 @@
-import unittest
 
 from . import init_path
 from src.models.ContaBancaria import ContaBancaria
 from src.models.MetodoPagamento import MetodoPagamento
 
+import unittest
+
 
 class TestaContaBancaria(unittest.TestCase):
     """Classe que testa a classe ContaBancaria."""
-
-    def testa_construtor(self):
+    def testa_construtor(self) -> None:
         """
         Testa o construtor da classe ContaBancaria conferindo se os
         atributos foram setados corretamente.
@@ -20,20 +20,20 @@ class TestaContaBancaria(unittest.TestCase):
         self.assertEqual(conta_bancaria._nro_conta, '12345678')
         self.assertEqual(conta_bancaria._banco, 'Itaú')
 
-    def testa_heranca_metodo_pagamento(self):
+    def testa_heranca_metodo_pagamento(self) -> None:
         """
         Testa se a classe ContaBancaria herda de MetodoPagamento.
         """
         self.assertTrue(issubclass(ContaBancaria, MetodoPagamento))
 
-    def testa_tipo_retorno_visualizar_informacoes(self):
+    def testa_tipo_retorno_visualizar_informacoes(self) -> None:
         """
         Testa se o método visualizar_informacoes retorna uma string.
         """
         conta_bancaria = ContaBancaria('Itaú', '123456', '12345678')
         self.assertIsInstance(conta_bancaria.visualizar_informacoes(), str)
 
-    def testa_retorno_vizualizar_informacoes(self):
+    def testa_retorno_vizualizar_informacoes(self) -> None:
         """
         Testa se o método `visualizar_informacoes`
         retorna as informações corretas.

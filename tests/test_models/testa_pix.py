@@ -7,7 +7,7 @@ from src.models.Pix import Pix
 
 class TestaPix(unittest.TestCase):
     """Classe que testa a classe Pix."""
-    def testa_construtor(self):
+    def testa_construtor(self) -> None:
         """
         Testa o construtor da classe Pix conferindo se os atributos
         foram setados corretamente.
@@ -17,18 +17,18 @@ class TestaPix(unittest.TestCase):
         self.assertEqual(pix.chave, '12345678910')
         self.assertEqual(pix.tipo, 'cpf')
 
-    def testa_heranca_metodo_pagamento(self):
+    def testa_heranca_metodo_pagamento(self) -> None:
         """Testa se a classe Pix herda de MetodoPagamento."""
         self.assertTrue(issubclass(Pix, MetodoPagamento))
 
-    def testa_tipo_retorno_visualizar_informacoes(self):
+    def testa_tipo_retorno_visualizar_informacoes(self) -> None:
         """
         Testa se o método visualizar_informacoes retorna uma string.
         """
         pix = Pix('12345678910', 'cpf')
         self.assertIsInstance(pix.visualizar_informacoes(), str)
 
-    def testa_retorno_vizualizar_informacoes(self):
+    def testa_retorno_vizualizar_informacoes(self) -> None:
         """
         Testa se o método visualizar_informacoes retorna as
         informações corretas.
@@ -39,7 +39,7 @@ class TestaPix(unittest.TestCase):
             'Chave: 12345678910\nTipo: cpf'
         )
 
-    def testa_getters(self):
+    def testa_getters(self) -> None:
         """
         Testa se os getters funcionam corretamente.
         """
@@ -47,7 +47,7 @@ class TestaPix(unittest.TestCase):
         self.assertEqual(pix.chave, '12345678910')
         self.assertEqual(pix.tipo, 'cpf')
 
-    def testa_setters(self):
+    def testa_setters(self) -> None:
         """Testa se os setters funcionam corretamente."""
         pix = Pix('12345678910', 'cpf')
         pix.chave = '10987654321'
@@ -55,7 +55,7 @@ class TestaPix(unittest.TestCase):
         self.assertEqual(pix.chave, '10987654321')
         self.assertEqual(pix.tipo, 'cnpj')
 
-    def testa_limitacao_tipo(self):
+    def testa_limitacao_tipo(self) -> None:
         """Testa se o atributo tipo só aceita valores válidos."""
         pix = Pix('12345678910', 'cpf')
         self.assertEqual(pix.tipo, 'cpf')

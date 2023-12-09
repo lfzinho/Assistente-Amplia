@@ -12,6 +12,9 @@ from src.interface.beneficiary_form_classes import *
 from src.interface.person_form_classes import *
 from src.interface.student_form_classes import *
 from src.interface.teacher_form_classes import *
+from src.interface.analyst_form_classes import *
+from src.interface.director_form_classes import *
+from src.interface.administrator_form_classes import *
 
 
 class ManagerPage(ABC):
@@ -114,6 +117,51 @@ class TeacherPage(ManagerPage):
             creation_form=TeacherCreationForm(),
             update_form=TeacherUpdateForm(),
             deletion_form=TeacherDeletionForm()
+        )
+
+    def show_table(self):
+        """Shows the table of the managed elements on the page."""
+        pass
+
+
+class AnalystPage(ManagerPage):
+    def __init__(self):
+        super().__init__(
+            title="Página de Analista",
+            description="Gerencie os analistas do sistema.",
+            creation_form=AnalystCreationForm(),
+            update_form=AnalystUpdateForm(),
+            deletion_form=AnalystDeletionForm()
+        )
+
+    def show_table(self):
+        """Shows the table of the managed elements on the page."""
+        pass
+
+
+class DirectorPage(ManagerPage):
+    def __init__(self):
+        super().__init__(
+            title="Página de Diretor",
+            description="Gerencie os diretores do sistema.",
+            creation_form=DirectorCreationForm(),
+            update_form=DirectorUpdateForm(),
+            deletion_form=DirectorDeletionForm()
+        )
+
+    def show_table(self):
+        """Shows the table of the managed elements on the page."""
+        pass
+
+
+class AdministratorPage(ManagerPage):
+    def __init__(self):
+        super().__init__(
+            title="Página de Administrador",
+            description="Gerencie os administradores do sistema.",
+            creation_form=AdmnistratorCreationForm(),
+            update_form=AdmnistratorUpdateForm(),
+            deletion_form=AdmnistratorDeletionForm()
         )
 
     def show_table(self):

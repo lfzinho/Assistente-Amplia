@@ -1,23 +1,22 @@
-import sys
-import os
-sys.path.append(os.path.join(os.path.dirname(__file__), '../..'))
-
 import datetime
 from abc import ABC, abstractmethod
+from typing import Any
+
 import streamlit as st
 
+from . import _init_path
 from src.interface.fields import Field, SelectBoxField
 
 
 class Form(ABC):
     def __init__(
-            self,
-            title: str,
-            description: str,
-            fields: list[Field],
-            id_field: SelectBoxField = None,
-            db_collection: str = None
-        ):
+        self,
+        title: str,
+        description: str,
+        fields: list[Field],
+        id_field: SelectBoxField = None,
+        db_collection: str = None
+    ) -> None:
         self.title: str = title
         self.description: str = description
         self.fields: list[Field] = fields
@@ -25,11 +24,11 @@ class Form(ABC):
         self.db_collection: str = db_collection
 
     @abstractmethod
-    def submit_action(self):
+    def submit_action(self) -> None:
         """Action to be performed when the form is submitted."""
         pass
 
-    def append_field(self, field: Field):
+    def append_field(self, field: Field) -> None:
         """Appends a field to the form."""
         self.fields.append(field)
 
@@ -37,7 +36,7 @@ class Form(ABC):
         """Action to be performed when the search form is submitted."""
         # TODO implementar a busca no banco de dados
         return None
-    
+
     def render_search_field(self):
         """Renders the search field on the page."""
         result = None
@@ -49,7 +48,7 @@ class Form(ABC):
                     st.error("ID não encontrado.")
         return result
 
-    def render(self):
+    def render(self) -> None:
         """Renders the form on the page."""
         st.title(self.title)
         st.markdown(self.description)
@@ -72,7 +71,7 @@ class Form(ABC):
             if st.form_submit_button(label='Enviar'):
                 self.submit_action()
 
-    def get_form_values(self):
+    def get_form_values(self) -> dict[str, Any]:
         """Returns the values of the form in a dictionary."""
         form_values = {}
         for field in self.fields:
@@ -88,7 +87,7 @@ class Form(ABC):
                 form_values[field.label] = field.value
         return form_values
 
-    def get_id_field_value(self):
+    def get_id_field_value(self) -> None:
         """Returns the value of the ID field."""
         # TODO implementar erro customizado
         if self.id_field:

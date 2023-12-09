@@ -1,10 +1,4 @@
-import sys
-import os
-sys.path.append(os.path.join(os.path.dirname(__file__), '../..'))
-
-import datetime
-from abc import ABC, abstractmethod
-import streamlit as st
+from . import _init_path
 from src.interface.form_classes import (CreationForm, UpdateForm, DeletionForm)
 from src.interface.fields import *
 
@@ -18,7 +12,7 @@ AREAS = [
 
 
 class AnalystCreationForm(CreationForm):
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__(
             title="Formulário de Criação de Analista",
             description="Preencha os campos abaixo para criar um novo analista.",
@@ -39,7 +33,7 @@ class AnalystCreationForm(CreationForm):
 
 
 class AnalystUpdateForm(UpdateForm):
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__(
             title="Formulário de Atualização de Analista",
             description="Preencha os campos abaixo para atualizar um analista.",
@@ -60,7 +54,7 @@ class AnalystUpdateForm(UpdateForm):
 
 
 class AnalystDeletionForm(DeletionForm):
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__(
             title="Formulário de Remoção de Analista",
             description="Selecione o ID do analista que deseja remover.",

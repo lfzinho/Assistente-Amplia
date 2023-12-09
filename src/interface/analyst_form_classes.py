@@ -1,6 +1,7 @@
 from . import _init_path
 from src.interface.form_classes import (CreationForm, UpdateForm, DeletionForm)
 from src.interface.fields import *
+from src.database.database import DatabaseManager
 
 AREAS = [
     "Administrativo-Financeiro",
@@ -13,14 +14,14 @@ AREAS = [
 
 class AnalystCreationForm(CreationForm):
     def __init__(self) -> None:
+        self.db_manager = DatabaseManager.instance()
         super().__init__(
             title="Formulário de Criação de Analista",
             description="Preencha os campos abaixo para criar um novo analista.",
             fields=[
                 SelectBoxField(
                     label="ID da Pessoa",
-                    value="1",
-                    options=["1", "2", "3"]
+                    options=self.db_manager.get_all_keys("person")
                 ),
                 SelectBoxField(
                     label="Área do Analista",
@@ -34,13 +35,13 @@ class AnalystCreationForm(CreationForm):
 
 class AnalystUpdateForm(UpdateForm):
     def __init__(self) -> None:
+        self.db_manager = DatabaseManager.instance()
         super().__init__(
             title="Formulário de Atualização de Analista",
             description="Preencha os campos abaixo para atualizar um analista.",
             id_field=SelectBoxField(
                 label="ID do Analista",
-                value="1",
-                options=["1", "2", "3"]
+                options=self.db_manager.get_all_keys("analyst")
             ),
             fields=[
                 SelectBoxField(
@@ -55,13 +56,13 @@ class AnalystUpdateForm(UpdateForm):
 
 class AnalystDeletionForm(DeletionForm):
     def __init__(self) -> None:
+        self.db_manager = DatabaseManager.instance()
         super().__init__(
             title="Formulário de Remoção de Analista",
             description="Selecione o ID do analista que deseja remover.",
             id_field=SelectBoxField(
                 label="ID do Analista",
-                value="1",
-                options=["1", "2", "3"]
+                options=self.db_manager.get_all_keys("analyst")
             ),
             db_collection="analyst"
         )

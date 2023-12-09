@@ -62,17 +62,17 @@ class DateField(Field):
 
 
 class SelectBoxField(Field):
-    def __init__(self, label, value: str, options: list[str]) -> None:
+    def __init__(self, label, options: list[str], value: str = None) -> None:
         super().__init__(label, 'selectbox')
-        self.value = value
         self.options = options
+        self.value = value
 
     def render(self) -> None:
         """Renders the select box field on the page."""
         self.value = st.selectbox(
             label=self.label,
             options=self.options,
-            index=self.options.index(self.value)
+            index=None if self.value is None else self.options.index(self.value)
         )
 
 

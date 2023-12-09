@@ -94,11 +94,11 @@ class ManagerPage(ABC):
         """Shows the table of the managed elements on the page."""
         st.subheader("Tabela de Elementos")
         query = self.db_manager.get_all(self.db_collection)
-        if query == []:
+        if query == {}:
             st.write("Ainda não há nenhum elemento cadastrado.")
         else:
             df = pd.DataFrame(query)
-            st.dataframe(df)
+            st.dataframe(df.T)
 
     def show_creation_form(self):
         """Shows the creation form on the page."""
@@ -209,8 +209,8 @@ class AdministratorPage(ManagerPage):
         super().__init__(
             title="Página de Administrador",
             description="Gerencie os administradores do sistema.",
-            creation_form=AdmnistratorCreationForm(),
-            update_form=AdmnistratorUpdateForm(),
-            deletion_form=AdmnistratorDeletionForm(),
+            creation_form=administratorCreationForm(),
+            update_form=administratorUpdateForm(),
+            deletion_form=administratorDeletionForm(),
             db_collection="administrator"
         )

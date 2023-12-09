@@ -7,6 +7,7 @@ from abc import ABC, abstractmethod
 import streamlit as st
 from src.interface.form_classes import CreationForm, UpdateForm, DeletionForm
 from src.interface.fields import *
+from src.database.database import DatabaseManager
 
 
 class PersonCreationForm(CreationForm):
@@ -29,13 +30,13 @@ class PersonCreationForm(CreationForm):
 
 class PersonUpdateForm(UpdateForm):
     def __init__(self):
+        self.db_manager = DatabaseManager.instance()
         super().__init__(
             title="Formulário de Atualização de Pessoa",
             description="Preencha os campos abaixo para atualizar uma pessoa.",
             id_field=SelectBoxField(
                 label="ID da Pessoa",
-                value="1",
-                options=["1", "2", "3"]
+                options=self.db_manager.get_all_keys("person")
             ),
             fields=[
                 TextField(label="Nome", value=""),
@@ -52,13 +53,13 @@ class PersonUpdateForm(UpdateForm):
 
 class PersonDeletionForm(DeletionForm):
     def __init__(self):
+        self.db_manager = DatabaseManager.instance()
         super().__init__(
             title="Formulário de Remoção de Pessoa",
             description="Selecione o ID da pessoa que deseja remover.",
             id_field=SelectBoxField(
                 label="ID da Pessoa",
-                value="1",
-                options=["1", "2", "3"]
+                options=self.db_manager.get_all_keys("person")
             ),
             db_collection='person'
         )

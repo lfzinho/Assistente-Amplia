@@ -6,6 +6,7 @@ import streamlit as st
 
 from . import _init_path
 from src.interface.fields import Field, SelectBoxField
+from src.database.database import DatabaseManager
 
 
 class Form(ABC):
@@ -22,6 +23,8 @@ class Form(ABC):
         self.fields: list[Field] = fields
         self.id_field: SelectBoxField = id_field
         self.db_collection: str = db_collection
+        
+        self.db_manager: DatabaseManager = DatabaseManager.instance()
 
     @abstractmethod
     def submit_action(self) -> None:
@@ -34,8 +37,12 @@ class Form(ABC):
 
     def search_action(self):
         """Action to be performed when the search form is submitted."""
-        # TODO implementar a busca no banco de dados
-        return None
+        db_result = self.db_manager.get_by_id(self.db_collection, self.id_field.value)
+        if db_result:
+            return db_result
+        else:
+            st.error("ID não encontrado.")
+            return None
 
     def render_search_field(self):
         """Renders the search field on the page."""
@@ -43,7 +50,7 @@ class Form(ABC):
         with st.form(key=self.title + " ID"):
             self.id_field.render()
             if st.form_submit_button(label='Buscar'):
-                result = self.id_field.search_action()
+                result = self.search_action()
                 if not result:
                     st.error("ID não encontrado.")
         return result
@@ -60,9 +67,9 @@ class Form(ABC):
             # Se o formulário tiver um campo de ID, preenche os campos com os
             # valores do banco de dados
             if field_values:
-                for field, field_value in zip(self.fields, field_values):
-                    field.value = field_value
+                for field in self.fields:
                     field.render()
+                    field.value = field_values[field.label]
             # Se o formulário não tiver um campo de ID, renderiza os campos
             # normalmente
             else:

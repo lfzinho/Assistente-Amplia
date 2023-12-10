@@ -13,7 +13,7 @@ class TestAnalyst(unittest.TestCase):
     def test_constructor(self) -> None:
         """
         Testa o construtor da classe Analyst conferindo se os
-        atributos foram setados corretamente.
+        atributos foram definidos corretamente.
         """
         analyst = Analyst(
             name='João',
@@ -31,7 +31,7 @@ class TestAnalyst(unittest.TestCase):
     def test_constructor_nones(self) -> None:
         """
         Testa o construtor da classe Analyst conferindo se os
-        atributos foram setados corretamente.
+        atributos foram definidos corretamente.
         """
         analyst = Analyst(
             name='João',
@@ -83,7 +83,7 @@ class TestAnalyst(unittest.TestCase):
             occupation_area='Administrativo Financeiro',
             exit_date=date(year=2022, month=1, day=1),
         )
-        # Seta os atributos da classe para um conjunto B de parâmetros
+        # Define os atributos da classe para um conjunto B de parâmetros
         analyst.name = 'Maria'
         analyst.email = 'mariasouza@hotmail.com'
         analyst.cpf = '987.654.321-00'

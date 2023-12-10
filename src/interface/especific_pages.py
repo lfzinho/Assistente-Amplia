@@ -154,8 +154,27 @@ class PaymentControlPage(Page):
                 st.success("Pagamento marcado como pago! ✅🫡."
                            "Pressione R para atualizar.")
 
+    def show_csv_uploader(self) -> None:
+        """Shows the csv uploader of the managed elements on the page."""
+        with st.expander("Carregar CSV", expanded=True):
+            st.header("Carregar CSV")
+            st.write("Alternativamente, você pode carregar um CSV com os "
+                     "pagamentos a serem realizados.")
+            uploaded_file = st.file_uploader(
+                "Escolha um arquivo CSV",
+                type="csv"
+            )
+            if uploaded_file is not None:
+                df = pd.read_csv(uploaded_file)
+                df = df.to_dict(orient='records')
+                for row in df:
+                    self.db_manager.insert('payment', row)
+                st.success("CSV carregado com sucesso! ✅🫡."
+                           "Pressione R para atualizar.")
+
     def render(self) -> None:
         super().render()
         self.show_table()
         self.show_metrics()
         self.show_next_payment()
+        self.show_csv_uploader()

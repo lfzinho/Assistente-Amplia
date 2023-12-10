@@ -1,6 +1,6 @@
 import streamlit as st
 
-from pages.manager_pages import BeneficiaryPage
+from src.interface.manager_pages import BeneficiaryPage
 
 st.set_page_config(
     page_title="Beneficiário",

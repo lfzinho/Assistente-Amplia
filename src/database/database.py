@@ -315,7 +315,7 @@ from google.cloud.firestore import Client
 
 
 class DatabaseManager():
-    """Singleton para gerenciar o banco de dados"""
+    """Singleton para gerenciar o banco de dados."""
     _instance = None
 
     def __init__(self) -> None:
@@ -329,7 +329,7 @@ class DatabaseManager():
 
     @staticmethod
     def instance() -> "DatabaseManager":
-        """Retorna a instância do singleton"""
+        """Retorna a instância do singleton."""
         if not DatabaseManager._instance:
             DatabaseManager._instance = DatabaseManager()
         return DatabaseManager._instance

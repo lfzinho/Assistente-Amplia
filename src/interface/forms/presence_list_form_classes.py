@@ -1,4 +1,5 @@
 import pandas as pd
+
 from src.database.database import DatabaseManager
 from .base_forms import (CreationForm, UpdateForm, DeletionForm)
 from .fields import CheckboxSeriesField, DateField, SelectBoxField

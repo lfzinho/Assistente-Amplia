@@ -1,10 +1,6 @@
 import unittest
-from abc import ABC
 from datetime import date
 
-from src.models.BankAccount import BankAccount
-from src.models.PaymentMethod import PaymentMethod
-from src.models.Pix import Pix
 from src.models.PresenceList import PresenceList
 
 class TestPresenceList(unittest.TestCase):
@@ -54,5 +50,3 @@ class TestPresenceList(unittest.TestCase):
             presence_ids=[1, 2, 3],
         )
         self.assertEqual(presence_list.class_date, date(2021, 9, 1))
-
-

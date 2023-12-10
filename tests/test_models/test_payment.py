@@ -68,9 +68,8 @@ class TestPayment(unittest.TestCase):
 
     def test_value_setter_limitation(self) -> None:
         """
-        Testa o setter da classe Payment conferindo se
-        ele não permite que o atributo value seja
-        menor que zero.
+        Testa o setter da classe Payment conferindo se ele não
+        permite que o atributo value seja menor que zero.
         """
         payment = Payment(
             value=10.0,

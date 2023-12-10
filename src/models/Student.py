@@ -37,7 +37,34 @@ from src.models.PaymentMethod import PaymentMethod
 
 
 class Student(Beneficiary):
-    """Classe que representa um aluno."""
+    """
+    Classe que representa um aluno.
+
+    Parâmetros
+    ----------
+    name : str
+        Nome do aluno.
+    email : str
+        Email do aluno.
+    cpf : str
+        CPF do aluno.
+    address : str
+        Endereço do aluno.
+    payment_method : Type[PaymentMethod]
+        Método de pagamento do aluno.
+    birth_date : date
+        Data de nascimento do aluno.
+    admission_date : date
+        Data de admissão do aluno.
+    transport_cost : float
+        Custo do transporte do aluno.
+    transport_description : str
+        Descrição do transporte do aluno.
+    financial_manager : str
+        Responsável financeiro do aluno.
+    exit_date : Optional[date], optional
+        Data de saída do aluno.
+    """
     def __init__(
         self,
         name: str,

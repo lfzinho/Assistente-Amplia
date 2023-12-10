@@ -14,7 +14,11 @@ from src.models.Person import Person
 
 
 class Beneficiary(Person, ABC):
-    """Classe que representa um beneficiário."""
+    """
+    Classe que representa um beneficiário da entidade, que é uma
+    pessoa com vínculos de recebimento de reembolsos por participação
+    nas atividades da entidade.
+    """
     @abstractmethod
     def __init__(
         self,

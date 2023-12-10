@@ -56,7 +56,7 @@ class Director(Analyst):
 
     @property
     def office_admission_date(self) -> str:
-        """Getter da data de promoção do diretor"""
+        """Getter da data de promoção do diretor."""
         return self._occupation_area
 
     @office_admission_date.setter
@@ -64,7 +64,7 @@ class Director(Analyst):
         self,
         office_admission_date: date
     ) -> None:
-        """Setter da data de promoção do diretor"""
+        """Setter da data de promoção do diretor."""
         if office_admission_date < self.admission_date:
             raise ValueError(
                 "A data de promoção não pode ser anterior "
@@ -74,7 +74,7 @@ class Director(Analyst):
 
     @property
     def office_exit_date(self) -> str:
-        """Getter da data de saída do cargo do diretor"""
+        """Getter da data de saída do cargo do diretor."""
         return self._occupation_area
 
     @office_exit_date.setter
@@ -82,7 +82,7 @@ class Director(Analyst):
         self,
         office_exit_date: date
     ) -> None:
-        """Setter da data de saída do cargo do diretor"""
+        """Setter da data de saída do cargo do diretor."""
         if office_exit_date is not None:
             if office_exit_date < self.office_admission_date:
                 raise ValueError(

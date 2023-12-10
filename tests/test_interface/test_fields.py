@@ -65,13 +65,13 @@ class TestaDateField(unittest.TestCase):
         self.assertEqual(date_field.type, 'date')
 
     def testa_tipo_retorno_get_type(self) -> None:
-        """Testa se o método get_type retorna uma string.."""
+        """Testa se o método get_type retorna uma string."""
         value = datetime.date(2002, 9, 16)
         date_field = DateField('Label', value)
         self.assertIsInstance(date_field.get_type(), str)
 
     def testa_retorno_get_type(self) -> None:
-        """Testa se o método get_type retorna o tipo correto.."""
+        """Testa se o método get_type retorna o tipo correto."""
         value = datetime.date(2002, 9, 16)
         date_field = DateField('Label', value)
         self.assertEqual(date_field.get_type(), 'date')

@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime
 from abc import ABC, abstractmethod
 
 import streamlit as st
@@ -48,7 +48,7 @@ class TextField(Field):
 
 
 class DateField(Field):
-    def __init__(self, label: str, value: datetime.datetime) -> None:
+    def __init__(self, label: str, value: datetime) -> None:
         super().__init__(label, 'date')
         self.value = value
 
@@ -62,7 +62,9 @@ class DateField(Field):
 
 
 class SelectBoxField(Field):
-    def __init__(self, label, options: list[str], value: str = None) -> None:
+    def __init__(
+        self, label: str, options: list[str], value: str | None = None
+    ) -> None:
         super().__init__(label, 'selectbox')
         self.options = options
         self.value = value
@@ -72,7 +74,9 @@ class SelectBoxField(Field):
         self.value = st.selectbox(
             label=self.label,
             options=self.options,
-            index=None if self.value is None else self.options.index(self.value)
+            index=(
+                None if self.value is None else self.options.index(self.value)
+            )
         )
 
 

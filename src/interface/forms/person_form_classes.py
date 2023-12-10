@@ -1,24 +1,21 @@
-import sys
-import os
-sys.path.append(os.path.join(os.path.dirname(__file__), '../..'))
+from datetime import datetime
 
-import datetime
-from abc import ABC, abstractmethod
-import streamlit as st
-from src.interface.form_classes import CreationForm, UpdateForm, DeletionForm
-from src.interface.fields import *
 from src.database.database import DatabaseManager
+from .base_forms import (CreationForm, UpdateForm, DeletionForm)
+from .fields import DateField, SelectBoxField, TextField
 
 
 class PersonCreationForm(CreationForm):
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__(
             title="Formulário de Criação de Pessoa",
-            description="Preencha os campos abaixo para criar uma nova pessoa.",
+            description=(
+                "Preencha os campos abaixo para criar uma nova pessoa."
+            ),
             fields=[
                 TextField(label="Nome", value=""),
                 TextField(label="Email", value=""),
-                DateField(label="Data de Cadastro", value=datetime.datetime.now()),
+                DateField(label="Data de Cadastro", value=datetime.now()),
                 DateField(label="Data de Saída", value=None),
                 DateField(label="Data de Nascimento", value=None),
                 TextField(label="CPF", value=""),
@@ -29,7 +26,7 @@ class PersonCreationForm(CreationForm):
 
 
 class PersonUpdateForm(UpdateForm):
-    def __init__(self):
+    def __init__(self) -> None:
         self.db_manager = DatabaseManager.instance()
         super().__init__(
             title="Formulário de Atualização de Pessoa",
@@ -41,7 +38,7 @@ class PersonUpdateForm(UpdateForm):
             fields=[
                 TextField(label="Nome", value=""),
                 TextField(label="Email", value=""),
-                DateField(label="Data de Cadastro", value=datetime.datetime.now()),
+                DateField(label="Data de Cadastro", value=datetime.now()),
                 DateField(label="Data de Saída", value=None),
                 DateField(label="Data de Nascimento", value=None),
                 TextField(label="CPF", value=""),
@@ -52,7 +49,7 @@ class PersonUpdateForm(UpdateForm):
 
 
 class PersonDeletionForm(DeletionForm):
-    def __init__(self):
+    def __init__(self) -> None:
         self.db_manager = DatabaseManager.instance()
         super().__init__(
             title="Formulário de Remoção de Pessoa",

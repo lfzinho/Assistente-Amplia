@@ -94,6 +94,10 @@ class Authentication():
         self.uid = self.auth.create_user(email=email, password=password).uid
         return self.uid
 
+    def get_user_by_uid(self, uid: str) -> str:
+        """Retorna um usuário do banco de dados"""
+        return self.auth.get_user(uid)
+
     def get_user_by_email(self, email: str) -> str:
         """Retorna um usuário do banco de dados"""
         return self.auth.get_user_by_email(email)

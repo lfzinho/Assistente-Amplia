@@ -34,5 +34,12 @@ class TestAuthentication(unittest.TestCase):
         self.assertEqual(user.uid, auth.uid)
         auth.delete_user(auth.uid)
 
+    def test_delete_user(self):
+        """Testa o método delete_user."""
+        auth = Authentication()
+        auth.create_user(self.email, self.password)
+        auth.delete_user(auth.uid)
+        self.assertIsNone(auth.uid)
+
 if __name__ == '__main__':
     unittest.main()

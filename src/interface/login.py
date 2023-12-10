@@ -1,7 +1,6 @@
 import streamlit as st
 import streamlit_toggle as tog
 
-path = str(os.path.join(os.path.dirname(__file__), '../..'))
 from src.authentication.authentication import Authentication
 
 auth_instance = Authentication()

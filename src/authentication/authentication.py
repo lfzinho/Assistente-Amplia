@@ -1,12 +1,12 @@
-from src.database.database import DatabaseManager
+
 
 from typing import Any
-
-import firebase_admin
-from firebase_admin import credentials, auth
-
 import requests
 import json
+
+from firebase_admin import auth
+
+from src.database.database import DatabaseManager
 
 # RED
 # from typing import Any

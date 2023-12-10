@@ -4,7 +4,6 @@ import pandas as pd
 import streamlit as st
 
 from forms import *
-
 from src.authentication.authentication import Authentication
 
 # class ManagerPage(ABC):

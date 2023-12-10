@@ -6,6 +6,7 @@ import datetime
 import unittest
 
 from src.authentication.authentication import Authentication
+from src.database.database import DatabaseManager
 
 class TestAuthentication(unittest.TestCase):
     """Classe que testa a classe Authentication."""
@@ -75,6 +76,10 @@ class TestAuthentication(unittest.TestCase):
         users = auth.get_all_users()
         self.assertTrue(len(users.users) > 0)
         auth.delete_user(auth.uid)
+
+    def test_authentication_and_database(self):
+        auth = Authentication()
+        db = DatabaseManager.instance()
 
 if __name__ == '__main__':
     unittest.main()

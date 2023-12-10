@@ -78,6 +78,10 @@ class TestAuthentication(unittest.TestCase):
         auth.delete_user(auth.uid)
 
     def test_authentication_and_database(self):
+        """
+        Testa a integração entre a classe Authentication e a
+        classe DatabaseManager.
+        """
         auth = Authentication()
         db = DatabaseManager.instance()
 

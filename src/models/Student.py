@@ -52,6 +52,21 @@ class Student(Beneficiary):
         financial_manager: str,
         exit_date: Optional[date] = None,
     ) -> None:
+        """Construtor da classe Student.
+
+        Args:
+            name (str): Nome do aluno.
+            email (str): Email do aluno.
+            cpf (str): CPF do aluno.
+            address (str): Endereço do aluno.
+            payment_method (Type[PaymentMethod]): Método de pagamento do aluno.
+            birth_date (date): Data de nascimento do aluno.
+            admission_date (date): Data de admissão do aluno.
+            transport_cost (float): Custo do transporte do aluno.
+            transport_description (str): Descrição do transporte do aluno.
+            financial_manager (str): Responsável financeiro do aluno.
+            exit_date (Optional[date], optional): Data de saída do aluno. Defaults to None.
+        """
         super().__init__(
             name=name,
             email=email,

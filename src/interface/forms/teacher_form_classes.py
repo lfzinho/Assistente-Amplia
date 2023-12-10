@@ -1,17 +1,10 @@
-import sys
-import os
-sys.path.append(os.path.join(os.path.dirname(__file__), '../..'))
-
-import datetime
-from abc import ABC, abstractmethod
-import streamlit as st
-from src.interface.form_classes import (CreationForm, UpdateForm, DeletionForm)
-from src.interface.fields import *
 from src.database.database import DatabaseManager
+from .base_forms import (CreationForm, UpdateForm, DeletionForm)
+from .fields import SelectBoxField, TextField
 
 
 class TeacherCreationForm(CreationForm):
-    def __init__(self):
+    def __init__(self) -> None:
         self.db_manager = DatabaseManager.instance()
         super().__init__(
             title="Formulário de Criação de Professor",
@@ -28,11 +21,13 @@ class TeacherCreationForm(CreationForm):
 
 
 class TeacherUpdateForm(UpdateForm):
-    def __init__(self):
+    def __init__(self) -> None:
         self.db_manager = DatabaseManager.instance()
         super().__init__(
             title="Formulário de Atualização de Professor",
-            description="Preencha os campos abaixo para atualizar um professor.",
+            description=(
+                "Preencha os campos abaixo para atualizar um professor."
+            ),
             id_field=SelectBoxField(
                 label="ID do Beneficiário",
                 options=self.db_manager.get_all_keys("beneficiary")
@@ -45,7 +40,7 @@ class TeacherUpdateForm(UpdateForm):
 
 
 class TeacherDeletionForm(DeletionForm):
-    def __init__(self):
+    def __init__(self) -> None:
         self.db_manager = DatabaseManager.instance()
         super().__init__(
             title="Formulário de Remoção de Professor",

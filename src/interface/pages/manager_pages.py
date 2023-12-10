@@ -1,21 +1,9 @@
-import sys
-import os
-sys.path.append(os.path.join(os.path.dirname(__file__), '../..'))
+from abc import ABC
 
-from abc import ABC, abstractmethod
 import pandas as pd
 import streamlit as st
-from src.interface.form import Form
-from src.interface.fields import TextField, DateField
-from src.interface.form_classes import CreationForm, UpdateForm, DeletionForm
-from src.database.database import DatabaseManager
-from src.interface.beneficiary_form_classes import *
-from src.interface.person_form_classes import *
-from src.interface.student_form_classes import *
-from src.interface.teacher_form_classes import *
-from src.interface.analyst_form_classes import *
-from src.interface.director_form_classes import *
-from src.interface.administrator_form_classes import *
+
+from forms import *
 
 
 # class ManagerPage(ABC):
@@ -63,7 +51,7 @@ from src.interface.administrator_form_classes import *
 #             self.show_update_form()
 #         with deletion_tab:
 #             self.show_deletion_form()
-    
+
 #     def render(self):
 #         """Renders the page in the usual organization."""
 #         st.title(self.title)
@@ -81,7 +69,7 @@ class ManagerPage(ABC):
         update_form: UpdateForm,
         deletion_form: DeletionForm,
         db_collection: str = None
-    ):
+    ) -> None:
         self.title = title
         self.description = description
         self.creation_form = creation_form
@@ -90,7 +78,7 @@ class ManagerPage(ABC):
         self.db_collection = db_collection
         self.db_manager = DatabaseManager.instance()
 
-    def show_table(self):
+    def show_table(self) -> None:
         """Shows the table of the managed elements on the page."""
         st.subheader("Tabela de Elementos")
         query = self.db_manager.get_all(self.db_collection)
@@ -100,19 +88,19 @@ class ManagerPage(ABC):
             df = pd.DataFrame(query)
             st.dataframe(df.T)
 
-    def show_creation_form(self):
+    def show_creation_form(self) -> None:
         """Shows the creation form on the page."""
         self.creation_form.render()
 
-    def show_update_form(self):
+    def show_update_form(self) -> None:
         """Shows the update form on the page."""
         self.update_form.render()
 
-    def show_deletion_form(self):
+    def show_deletion_form(self) -> None:
         """Shows the deletion form on the page."""
         self.deletion_form.render()
 
-    def show_form_tabs(self):
+    def show_form_tabs(self) -> None:
         """Shows all forms in a tab organization."""
         creation_tab, update_tab, deletion_tab = st.tabs(
             ['Criação', 'Atualização', 'Deleção']
@@ -123,8 +111,8 @@ class ManagerPage(ABC):
             self.show_update_form()
         with deletion_tab:
             self.show_deletion_form()
-    
-    def render(self):
+
+    def render(self) -> None:
         """Renders the page in the usual organization."""
         st.title(self.title)
         st.write(self.description)
@@ -133,7 +121,7 @@ class ManagerPage(ABC):
 
 
 class PersonPage(ManagerPage):
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__(
             title="Página de Beneficiário",
             description="Gerencie os beneficiários do sistema.",
@@ -145,7 +133,7 @@ class PersonPage(ManagerPage):
 
 
 class BeneficiaryPage(ManagerPage):
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__(
             title="Página de Beneficiário",
             description="Gerencie os beneficiários do sistema.",
@@ -157,7 +145,7 @@ class BeneficiaryPage(ManagerPage):
 
 
 class StudentPage(ManagerPage):
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__(
             title="Página de Estudante",
             description="Gerencie os estudantes do sistema.",
@@ -169,7 +157,7 @@ class StudentPage(ManagerPage):
 
 
 class TeacherPage(ManagerPage):
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__(
             title="Página de Professor",
             description="Gerencie os professores do sistema.",
@@ -181,7 +169,7 @@ class TeacherPage(ManagerPage):
 
 
 class AnalystPage(ManagerPage):
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__(
             title="Página de Analista",
             description="Gerencie os analistas do sistema.",
@@ -193,7 +181,7 @@ class AnalystPage(ManagerPage):
 
 
 class DirectorPage(ManagerPage):
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__(
             title="Página de Diretor",
             description="Gerencie os diretores do sistema.",
@@ -205,12 +193,12 @@ class DirectorPage(ManagerPage):
 
 
 class AdministratorPage(ManagerPage):
-    def __init__(self):
+    def __init__(self) -> None:
         super().__init__(
             title="Página de Administrador",
             description="Gerencie os administradores do sistema.",
-            creation_form=administratorCreationForm(),
-            update_form=administratorUpdateForm(),
-            deletion_form=administratorDeletionForm(),
+            creation_form=AdministratorCreationForm(),
+            update_form=AdministratorUpdateForm(),
+            deletion_form=AdministratorDeletionForm(),
             db_collection="administrator"
         )

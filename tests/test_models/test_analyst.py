@@ -1,10 +1,7 @@
-"""Módulo de testes do módulo src.models.Analyst
-"""
+"""Módulo de testes do módulo src.models.Analyst."""
 import unittest
-from abc import ABC
 from datetime import date
 
-from . import init_path
 from src.models.BankAccount import BankAccount
 from src.models.PaymentMethod import PaymentMethod
 from src.models.Pix import Pix
@@ -12,7 +9,7 @@ from src.models.Analyst import Analyst
 
 
 class TestAnalyst(unittest.TestCase):
-    """Classe que testa a classe Analyst"""
+    """Classe que testa a classe Analyst."""
     def test_constructor(self) -> None:
         """
         Testa o construtor da classe Analyst conferindo se os
@@ -50,7 +47,7 @@ class TestAnalyst(unittest.TestCase):
         self.assertEqual(analyst.exit_date, None)
 
     def test_getters(self) -> None:
-        """Testa os getters da classe Analyst"""
+        """Testa os getters da classe Analyst."""
         analyst = Analyst(
             name='João',
             email='joaosilva@gmail.com',
@@ -73,7 +70,7 @@ class TestAnalyst(unittest.TestCase):
         self.assertEqual(analyst.exit_date, date(year=2022, month=1, day=1))
 
     def test_setters(self) -> None:
-        """Testa os setters da classe Analyst"""
+        """Testa os setters da classe Analyst."""
         # Instancia a classe com um conjunto A de parâmetros
         analyst = Analyst(
             name='João',
@@ -114,8 +111,8 @@ class TestAnalyst(unittest.TestCase):
 
     def test_occupation_area_literal_init(self) -> None:
         """
-        Testa se o Analyst.__init__(...) levanta ValueError ao receber
-        um valor inválido para o atributo 'occupation_area'
+        Testa se o `Analyst.__init__()` levanta `ValueError` ao receber
+        um valor inválido para o atributo `occupation_area`.
         """
         with self.assertRaises(ValueError):
             analyst = Analyst(
@@ -132,8 +129,8 @@ class TestAnalyst(unittest.TestCase):
 
     def test_occupation_area_literal_setter(self) -> None:
         """
-        Testa se o Analyst.occupation_area.setter levanta ValueError ao
-        receber um valor inválido
+        Testa se o `Analyst.occupation_area.setter` levanta `ValueError`
+        ao receber um valor inválido.
         """
         analyst = Analyst(
             name='João',

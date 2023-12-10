@@ -51,7 +51,7 @@ class TestDirector(unittest.TestCase):
         erro ao passar datas inconsistentes.
         """
         with self.assertRaises(ValueError):
-            director = Director(
+            Director(
                 name='João',
                 email='joaosilva@gmail.com',
                 cpf='123.456.789-00',
@@ -69,7 +69,7 @@ class TestDirector(unittest.TestCase):
         erro ao passar datas inconsistentes.
         """
         with self.assertRaises(ValueError):
-            director = Director(
+            Director(
                 name='João',
                 email='joaosilva@gmail.com',
                 cpf='123.456.789-00',

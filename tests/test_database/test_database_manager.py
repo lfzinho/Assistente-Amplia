@@ -63,5 +63,15 @@ class TestDatabaseManager(unittest.TestCase):
         self.assertEqual(dbm.get_by_id('test', index), {'test': 'test_updated'})
         dbm.delete('test', index)
 
+    def test_delete(self):
+        """Testa o método delete"""
+        dbm = DatabaseManager.instance()
+        dbm.add('test', {'test': 'test'})
+        index = dbm.get_by_id('test', 'index')['index'] - 1
+        index = str(index)
+        self.assertIsInstance(dbm.get_by_id('test', index), dict)
+        self.assertEqual(dbm.delete('test', index), True)
+        self.assertEqual(dbm.get_by_id('test', index), None)
+
 if __name__ == '__main__':
     unittest.main()

@@ -6,7 +6,7 @@ from src.authentication.authentication import Authentication
 auth_instance = Authentication()
 
 def login_page():
-    """Página de login"""
+    """Página de login."""
     st.title("Entrar")
     email = st.text_input("E-mail:", key="email_login")
     password = st.text_input("Senha:", type="password", key="password_login")
@@ -18,7 +18,7 @@ def login_page():
             st.error("Falha na autenticação. Verifique o e-mail e a senha.")
 
 def register_page():
-    """Página de registro"""
+    """Página de registro."""
     st.title("Registrar")
     email = st.text_input("E-mail:", key="email_register")
     password = st.text_input("Senha:", type="password", key="password_register")

@@ -15,7 +15,7 @@ class BaseError(Exception):
     """Classe base para outras exceções de mensagem padronizada."""
     def __new__(cls, *args, **kwargs) -> 'BaseError':
         """
-        Impede que a classe seja instanciada sem o implementar o método
+        Impede que a classe seja instanciada sem implementar o método
         abstrato, pois a herança de ABC é incompatível com Exception.
         """
         if cls.message == BaseError.message:

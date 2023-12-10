@@ -10,7 +10,7 @@ class TestBeneficiary(unittest.TestCase):
     # def test_constructor(self) -> None:
     #     """
     #     Testa o construtor da classe Beneficiary conferindo se os
-    #     atributos foram setados corretamente.
+    #     atributos foram definidos corretamente.
     #     """
     #     beneficiary = Beneficiary(
     #         transport_cost=10.0,
@@ -23,7 +23,7 @@ class TestBeneficiary(unittest.TestCase):
     # def test_constructor(self) -> None:
     #     """
     #     Testa o construtor da classe Beneficiary conferindo se os
-    #     atributos foram setados corretamente.
+    #     atributos foram definidos corretamente.
     #     """
     #     beneficiary = Beneficiary(
     #         name='João',

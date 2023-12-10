@@ -1,6 +1,6 @@
 import streamlit as st
 
-from pages.manager_pages import AdministratorPage
+from src.interface.manager_pages import AdministratorPage
 
 st.set_page_config(
     page_title="Administrador",

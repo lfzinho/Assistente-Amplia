@@ -9,7 +9,7 @@ class TestBankAccount(unittest.TestCase):
     def test_constructor(self) -> None:
         """
         Testa o construtor da classe BankAccount conferindo se os
-        atributos foram setados corretamente.
+        atributos foram definidos corretamente.
         """
         bank_account = BankAccount('Itaú', '123456', '12345678')
         self.assertIsInstance(bank_account, BankAccount)

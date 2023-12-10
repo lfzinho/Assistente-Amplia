@@ -2,7 +2,6 @@ from datetime import date
 from typing import Literal, Optional, Type
 
 from src.models.Analyst import Analyst
-from src.models.Person import Person
 from src.models.PaymentMethod import PaymentMethod
 
 
@@ -67,8 +66,10 @@ class Director(Analyst):
     ) -> None:
         """Setter da data de promoção do diretor"""
         if office_admission_date < self.admission_date:
-            raise ValueError("""A data de promoção não pode ser anterior
-                à data de admissão""")
+            raise ValueError(
+                "A data de promoção não pode ser anterior "
+                "à data de admissão"
+            )
         self._occupation_area = office_admission_date
 
     @property
@@ -84,6 +85,8 @@ class Director(Analyst):
         """Setter da data de saída do cargo do diretor"""
         if office_exit_date is not None:
             if office_exit_date < self.office_admission_date:
-                raise ValueError("""A data de saída do cargo não pode
-                    ser anterior à data de entrada""")
+                raise ValueError(
+                    "A data de saída do cargo não pode "
+                    "ser anterior à data de entrada"
+                )
         self._occupation_area = office_exit_date

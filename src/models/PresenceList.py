@@ -11,10 +11,7 @@ class PresenceList:
         presence_ids: list[int],
     ) -> None:
         if not isinstance(class_date, date):
-            try:
-                class_date = date.fromisoformat(class_date)
-            except ValueError as e:
-                print(e)
+            class_date = date.fromisoformat(class_date)
         self.class_date = class_date
         if any([not isinstance(presence_id, int) for presence_id in
             presence_ids]):

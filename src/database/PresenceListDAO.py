@@ -22,4 +22,6 @@ from src.models.Teacher import Teacher
 
 sys.path.append(os.path.join(os.path.dirname(__file__), '../..'))
 
-class 
+class PresenceListDAO(DataAccessObject):
+
+    

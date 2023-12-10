@@ -1,6 +1,5 @@
 import unittest
 
-from . import init_path
 from src.models.BankAccount import BankAccount
 from src.models.PaymentMethod import PaymentMethod
 
@@ -36,15 +35,15 @@ class TestBankAccount(unittest.TestCase):
             'Banco: Itaú\nAgência: 123456\nNúmero da conta: 12345678'
         )
 
-    def test_getters(self):
+    def test_getters(self) -> None:
         """Testa se os getters funcionam corretamente."""
         bank_account = BankAccount('Itaú', '123456', '12345678')
         self.assertEqual(bank_account.bank, 'Itaú')
         self.assertEqual(bank_account.agency, '123456')
         self.assertEqual(bank_account.account_number, '12345678')
 
-    def test_setters(self):
-        """Testa se os setters funcionam corretamente"""
+    def test_setters(self) -> None:
+        """Testa se os setters funcionam corretamente."""
         bank_account = BankAccount('Itaú', '123456', '12345678')
         bank_account.bank = 'Bradesco'
         bank_account.agency = '654321'

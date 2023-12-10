@@ -1,13 +1,13 @@
-"""Módulo de testes do módulo src.models.Person.
+"""
+Módulo de testes do módulo src.models.Person.
 
 Os métodos de teste de construtor, getters e setters
 da classe Person estão comentados por se tratar de
-uma classe abstrata. Eles são apenas "resíduos" do TDD
+uma classe abstrata. Eles são apenas "resíduos" do TDD.
 """
 import unittest
 from abc import ABC
 
-from . import init_path
 from src.models.BankAccount import BankAccount
 from src.models.PaymentMethod import PaymentMethod
 from src.models.Pix import Pix

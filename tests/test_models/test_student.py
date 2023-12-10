@@ -1,6 +1,5 @@
 import unittest
 
-from . import init_path
 from src.models.Pix import Pix
 from src.models.Student import Student
 
@@ -102,3 +101,7 @@ class TestStudent(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
+from pathlib import Path
+
+print(Path.cwd())

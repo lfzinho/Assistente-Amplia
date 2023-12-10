@@ -1,7 +1,6 @@
 import unittest
 from datetime import date
 
-from . import init_path
 from src.models.Payment import Payment
 
 

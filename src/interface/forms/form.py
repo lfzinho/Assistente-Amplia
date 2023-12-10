@@ -4,7 +4,7 @@ from typing import Any
 
 import streamlit as st
 
-from src.interface.fields import Field, SelectBoxField
+from .fields import Field, SelectBoxField
 from src.database.database import DatabaseManager
 # Garante que todos os tipos já tenham sido importados para
 # que o eval do método `from_data` funcione corretamente
@@ -29,13 +29,13 @@ class Form(ABC):
         id_field: SelectBoxField = None,
         db_collection: str = None
     ) -> None:
-        self.title: str = title
-        self.description: str = description
-        self.fields: list[Field] = fields
-        self.id_field: SelectBoxField = id_field
-        self.db_collection: str = db_collection
+        self.title = title
+        self.description = description
+        self.fields = fields
+        self.id_field = id_field
+        self.db_collection = db_collection
 
-        self.db_manager: DatabaseManager = DatabaseManager.instance()
+        self.db_manager = DatabaseManager.instance()
 
     @staticmethod
     def is_valid_type(value: Any) -> bool:
@@ -122,19 +122,18 @@ class Form(ABC):
         """
         self.fields.append(field)
 
-    def search_action(self):
-        """
-        Ação a ser executada quando o
-        formulário de busca é enviado.
-        """
-        db_result = self.db_manager.get_by_id(self.db_collection, self.id_field.value)
+    def search_action(self) -> dict[str, Any] | None:
+        """Action to be performed when the search form is submitted."""
+        db_result = self.db_manager.get_by_id(
+            self.db_collection, self.id_field.value
+        )
         if db_result:
             return db_result
         else:
             st.error("ID não encontrado.")
             return None
 
-    def render_search_field(self):
+    def render_search_field(self) -> dict[str, Any] | None:
         """Renders the search field on the page."""
         result = None
         with st.form(key=self.title + " ID"):
@@ -184,7 +183,7 @@ class Form(ABC):
                 form_values[field.label] = field.value
         return form_values
 
-    def get_id_field_value(self) -> None:
+    def get_id_field_value(self) -> str:
         """
         Retorna o valor do campo de ID.
 

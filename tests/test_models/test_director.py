@@ -5,7 +5,7 @@ from src.models.Pix import Pix
 from src.models.Director import Director
 
 class TestDirector(unittest.TestCase):
-    """Classe que testa a classe Director"""
+    """Classe que testa a classe Director."""
     def test_constructor(self) -> None:
         """
         Testa o construtor da classe Director conferindo se os
@@ -48,7 +48,7 @@ class TestDirector(unittest.TestCase):
     def test_constructor_inconsistent_admission(self) -> None:
         """
         Testa o construtor da classe Director conferindo se é levantado
-        erro ao passar datas inconsistentes
+        erro ao passar datas inconsistentes.
         """
         with self.assertRaises(ValueError):
             Director(
@@ -66,7 +66,7 @@ class TestDirector(unittest.TestCase):
     def test_constructor_inconsistent_exit(self) -> None:
         """
         Testa o construtor da classe Director conferindo se é levantado
-        erro ao passar datas inconsistentes
+        erro ao passar datas inconsistentes.
         """
         with self.assertRaises(ValueError):
             Director(

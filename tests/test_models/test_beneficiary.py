@@ -1,7 +1,6 @@
 import unittest
 from abc import ABC
 
-from . import init_path
 from src.models.Beneficiary import Beneficiary
 from src.models.Person import Person
 from src.models.Pix import Pix

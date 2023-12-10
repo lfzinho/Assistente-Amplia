@@ -27,7 +27,7 @@ class TestAuthentication(unittest.TestCase):
         self.assertIsNotNone(auth.uid)
         auth.delete_user(auth.uid)
 
-    def test_get_user(self):
+    def test_get_user_by_email(self):
         """Testa o método get_user."""
         auth = Authentication()
         auth.create_user(self.email, self.password)

@@ -8,7 +8,7 @@ class TestPayment(unittest.TestCase):
     def test_constructor(self) -> None:
         """
         Testa o construtor da classe Payment conferindo se os
-        atributos foram setados corretamente.
+        atributos foram definidos corretamente.
         """
         payment = Payment(
             value=10.0,

@@ -9,7 +9,7 @@ class TestDirector(unittest.TestCase):
     def test_constructor(self) -> None:
         """
         Testa o construtor da classe Director conferindo se os
-        atributos foram setados corretamente.
+        atributos foram definidos corretamente.
         """
         director = Director(
             name='João',
@@ -29,7 +29,7 @@ class TestDirector(unittest.TestCase):
     def test_constructor_nones(self) -> None:
         """
         Testa o construtor da classe Director conferindo se os
-        atributos foram setados corretamente.
+        atributos foram definidos corretamente.
         """
         director = Director(
             name='João',

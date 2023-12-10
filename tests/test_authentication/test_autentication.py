@@ -15,19 +15,19 @@ class TestAuthentication(unittest.TestCase):
         self.email = 'email.test@test.com'
         self.password = 'password123'
 
-    def test_constructor(self):
+    def test_constructor(self) -> None:
         """Testa o construtor da classe Authentication."""
         auth = Authentication()
         self.assertIsNone(auth.uid)
 
-    def test_create_user(self):
+    def test_create_user(self) -> None:
         """Testa o método create_user."""
         auth = Authentication()
         auth.create_user(self.email, self.password)
         self.assertIsNotNone(auth.uid)
         auth.delete_user(auth.uid)
 
-    def test_get_user_by_email(self):
+    def test_get_user_by_email(self) -> None:
         """Testa o método get_user."""
         auth = Authentication()
         auth.create_user(self.email, self.password)
@@ -35,14 +35,14 @@ class TestAuthentication(unittest.TestCase):
         self.assertEqual(user.uid, auth.uid)
         auth.delete_user(auth.uid)
 
-    def test_delete_user(self):
+    def test_delete_user(self) -> None:
         """Testa o método delete_user."""
         auth = Authentication()
         auth.create_user(self.email, self.password)
         auth.delete_user(auth.uid)
         self.assertIsNone(auth.uid)
 
-    def test_authenticate(self):
+    def test_authenticate(self) -> None:
         """Testa o método authenticate."""
         auth = Authentication()
         auth.create_user(self.email, self.password)
@@ -50,7 +50,7 @@ class TestAuthentication(unittest.TestCase):
         auth.delete_user(auth.uid)
         self.assertFalse(auth.authenticate(self.email, self.password))
 
-    def test_update_user_password(self):
+    def test_update_user_password(self) -> None:
         """Testa o método update_user_password."""
         auth = Authentication()
         auth.create_user(self.email, self.password)
@@ -58,7 +58,7 @@ class TestAuthentication(unittest.TestCase):
         self.assertTrue(auth.authenticate(self.email, self.password))
         auth.delete_user(auth.uid)
 
-    def test_update_user_email(self):
+    def test_update_user_email(self) -> None:
         """Testa o método update_user_email."""
         auth = Authentication()
         auth.create_user(self.email, self.password)
@@ -69,7 +69,7 @@ class TestAuthentication(unittest.TestCase):
         auth.delete_user(auth.uid)
 
 
-    def test_get_all_users(self):
+    def test_get_all_users(self) -> None:
         """Testa o método get_all_users."""
         auth = Authentication()
         auth.create_user(self.email, self.password)
@@ -77,7 +77,7 @@ class TestAuthentication(unittest.TestCase):
         self.assertTrue(len(users.users) > 0)
         auth.delete_user(auth.uid)
 
-    def test_authentication_and_database(self):
+    def test_authentication_and_database(self) -> None:
         """
         Testa a integração entre a classe Authentication e a
         classe DatabaseManager.
@@ -85,7 +85,7 @@ class TestAuthentication(unittest.TestCase):
         auth = Authentication()
         db = DatabaseManager.instance()
 
-    def test_get_user_by_uid(self):
+    def test_get_user_by_uid(self) -> None:
         """Testa o método get_user_by_uid."""
         auth = Authentication()
         auth.create_user(self.email, self.password)

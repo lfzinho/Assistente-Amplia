@@ -1,6 +1,5 @@
 import unittest
 
-from . import init_path
 from src.models.Pix import Pix
 from src.models.Teacher import Teacher
 
@@ -9,7 +8,7 @@ class TestTeacher(unittest.TestCase):
     def test_constructor(self) -> None:
         """
         Testa o construtor da classe Teacher conferindo se os
-        atributos foram setados corretamente.
+        atributos foram definidos corretamente.
         """
         teacher = Teacher(
             name='João',

@@ -1,6 +1,5 @@
 import unittest
 
-from . import init_path
 from src.models.Pix import Pix
 from src.models.Student import Student
 
@@ -9,7 +8,7 @@ class TestStudent(unittest.TestCase):
     def test_constructor(self) -> None:
         """
         Testa o construtor da classe Student conferindo se os
-        atributos foram setados corretamente.
+        atributos foram definidos corretamente.
         """
         student = Student(
             name='João',
@@ -102,3 +101,7 @@ class TestStudent(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
+
+from pathlib import Path
+
+print(Path.cwd())

@@ -1,6 +1,5 @@
-from . import _init_path
-from src.interface.form_classes import (CreationForm, UpdateForm, DeletionForm)
-from src.interface.fields import *
+from .base_forms import (CreationForm, UpdateForm, DeletionForm)
+from .fields import SelectBoxField
 from src.database.database import DatabaseManager
 
 AREAS = [
@@ -17,7 +16,9 @@ class AnalystCreationForm(CreationForm):
         self.db_manager = DatabaseManager.instance()
         super().__init__(
             title="Formulário de Criação de Analista",
-            description="Preencha os campos abaixo para criar um novo analista.",
+            description=(
+                "Preencha os campos abaixo para criar um novo analista."
+            ),
             fields=[
                 SelectBoxField(
                     label="ID da Pessoa",
@@ -38,7 +39,9 @@ class AnalystUpdateForm(UpdateForm):
         self.db_manager = DatabaseManager.instance()
         super().__init__(
             title="Formulário de Atualização de Analista",
-            description="Preencha os campos abaixo para atualizar um analista.",
+            description=(
+                "Preencha os campos abaixo para atualizar um analista."
+            ),
             id_field=SelectBoxField(
                 label="ID do Analista",
                 options=self.db_manager.get_all_keys("analyst")

@@ -1,19 +1,15 @@
 import unittest
-from abc import ABC
 from datetime import date
 
-from . import init_path
-from src.models.BankAccount import BankAccount
-from src.models.PaymentMethod import PaymentMethod
 from src.models.Pix import Pix
 from src.models.Director import Director
 
 class TestDirector(unittest.TestCase):
-    """Classe que testa a classe Director"""
+    """Classe que testa a classe Director."""
     def test_constructor(self) -> None:
         """
         Testa o construtor da classe Director conferindo se os
-        atributos foram setados corretamente.
+        atributos foram definidos corretamente.
         """
         director = Director(
             name='João',
@@ -33,7 +29,7 @@ class TestDirector(unittest.TestCase):
     def test_constructor_nones(self) -> None:
         """
         Testa o construtor da classe Director conferindo se os
-        atributos foram setados corretamente.
+        atributos foram definidos corretamente.
         """
         director = Director(
             name='João',
@@ -52,10 +48,10 @@ class TestDirector(unittest.TestCase):
     def test_constructor_inconsistent_admission(self) -> None:
         """
         Testa o construtor da classe Director conferindo se é levantado
-        erro ao passar datas inconsistentes
+        erro ao passar datas inconsistentes.
         """
         with self.assertRaises(ValueError):
-            director = Director(
+            Director(
                 name='João',
                 email='joaosilva@gmail.com',
                 cpf='123.456.789-00',
@@ -70,10 +66,10 @@ class TestDirector(unittest.TestCase):
     def test_constructor_inconsistent_exit(self) -> None:
         """
         Testa o construtor da classe Director conferindo se é levantado
-        erro ao passar datas inconsistentes
+        erro ao passar datas inconsistentes.
         """
         with self.assertRaises(ValueError):
-            director = Director(
+            Director(
                 name='João',
                 email='joaosilva@gmail.com',
                 cpf='123.456.789-00',

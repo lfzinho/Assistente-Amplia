@@ -1,4 +1,4 @@
-import datetime
+from datetime import datetime
 from abc import ABC, abstractmethod
 
 import streamlit as st
@@ -48,7 +48,7 @@ class TextField(Field):
 
 
 class DateField(Field):
-    def __init__(self, label: str, value: datetime.datetime) -> None:
+    def __init__(self, label: str, value: datetime) -> None:
         super().__init__(label, 'date')
         self.value = value
 
@@ -62,7 +62,9 @@ class DateField(Field):
 
 
 class SelectBoxField(Field):
-    def __init__(self, label, options: list[str], value: str = None) -> None:
+    def __init__(
+        self, label: str, options: list[str], value: str | None = None
+    ) -> None:
         super().__init__(label, 'selectbox')
         self.options = options
         self.value = value
@@ -72,7 +74,9 @@ class SelectBoxField(Field):
         self.value = st.selectbox(
             label=self.label,
             options=self.options,
-            index=None if self.value is None else self.options.index(self.value)
+            index=(
+                None if self.value is None else self.options.index(self.value)
+            )
         )
 
 
@@ -88,3 +92,36 @@ class NumberField(Field):
             value=self.value,
             step=0.01
         )
+
+
+class CheckboxSeriesField(Field):
+    def __init__(self,
+                 label: str,
+                 options: list[str],
+                 keys: list[str],
+                 values: list[bool] = None,
+                 main_key: str = None
+    ) -> None:
+        super().__init__(label, 'checkbox')
+        self.options = options
+        self.key = keys
+        self.main_key = main_key
+        if values:
+            self._value = values
+        else:
+            self._value = [False for _ in range(len(options))]
+
+    @property
+    def value(self) -> list[bool]:
+        return [key for key, value in zip(self.key, self._value) if value]
+
+    @value.setter
+    def value(self, values: list[bool]) -> None:
+        self._value = values
+
+    def render(self) -> None:
+        """Renders the checkbox series field on the page."""
+        for i, option in enumerate(self.options):
+            self._value[i] = st.checkbox(label=option,
+                                         value=self._value[i],
+                                         key=self.main_key+self.key[i])

@@ -1,13 +1,12 @@
-import streamlit as st
+from datetime import datetime
 
-from . import _init_path
-from src.interface.form_classes import (CreationForm, UpdateForm, DeletionForm)
-from src.interface.fields import *
+from .base_forms import (CreationForm, UpdateForm, DeletionForm)
+from .fields import DateField, SelectBoxField
 from src.database.database import DatabaseManager
 
 
 class DirectorCreationForm(CreationForm):
-    def __init__(self):
+    def __init__(self) -> None:
         self.db_manager = DatabaseManager.instance()
         super().__init__(
             title="Formulário de Criação de Diretor",
@@ -19,7 +18,7 @@ class DirectorCreationForm(CreationForm):
                 ),
                 DateField(
                     label="Data de Admissão na Direção",
-                    value=datetime.datetime.today()
+                    value=datetime.today()
                 ),
                 DateField(
                     label="Data de Término na Direção",
@@ -31,7 +30,7 @@ class DirectorCreationForm(CreationForm):
 
 
 class DirectorUpdateForm(UpdateForm):
-    def __init__(self):
+    def __init__(self) -> None:
         self.db_manager = DatabaseManager.instance()
         super().__init__(
             title="Formulário de Atualização de Diretor",
@@ -43,7 +42,7 @@ class DirectorUpdateForm(UpdateForm):
             fields=[
                 DateField(
                     label="Data de Admissão na Direção",
-                    value=datetime.datetime.today()
+                    value=datetime.today()
                 ),
                 DateField(
                     label="Data de Término na Direção",
@@ -55,7 +54,7 @@ class DirectorUpdateForm(UpdateForm):
 
 
 class DirectorDeletionForm(DeletionForm):
-    def __init__(self):
+    def __init__(self) -> None:
         self.db_manager = DatabaseManager.instance()
         super().__init__(
             title="Formulário de Remoção de Diretor",

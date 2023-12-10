@@ -1,6 +1,5 @@
 import unittest
 
-from . import init_path
 from src.models.PaymentMethod import PaymentMethod
 
 

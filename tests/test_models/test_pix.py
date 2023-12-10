@@ -1,6 +1,5 @@
 import unittest
 
-from . import init_path
 from src.models.PaymentMethod import PaymentMethod
 from src.models.Pix import Pix
 
@@ -10,7 +9,7 @@ class TestPix(unittest.TestCase):
     def test_constructor(self) -> None:
         """
         Testa o construtor da classe Pix conferindo se os atributos
-        foram setados corretamente.
+        foram definidos corretamente.
         """
         pix = Pix('12345678910', 'cpf')
         self.assertIsInstance(pix, Pix)

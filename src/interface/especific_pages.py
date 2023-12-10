@@ -30,7 +30,6 @@ class PaymentControlPage(Page):
         super().__init__(title, description)
         self.db_manager: DatabaseManager = DatabaseManager.instance()
         self.df = pd.DataFrame(self.db_manager.get_all('payment')).T
-        self.index = st.session_state.get('payment_index', 0)
 
     def _count_payments(self) -> int:
         """Counts the number of payments."""
@@ -44,7 +43,7 @@ class PaymentControlPage(Page):
         """Gets the next pending payment."""
         left_payments = self.df[self.df['Pago'] == False]
         if len(left_payments) == 0:
-            return None
+            return None, None
         # Se houver pagamentos pendentes, puxa os outros dados do banco
         beneficiaries = pd.DataFrame(self.db_manager.get_all('beneficiary')).T
         beneficiaries = beneficiaries.reset_index(names=['ID do Beneficiário'])
@@ -58,7 +57,7 @@ class PaymentControlPage(Page):
             people.set_index('ID da Pessoa'),
             on='ID da Pessoa'
         )
-        return left_payments.iloc[self.index], self.index
+        return left_payments.iloc[0], left_payments.index[0]
 
     def _pay_payment(self, payment: pd.Series, payment_idx: str) -> None:
         """Pays the given payment."""
@@ -152,19 +151,8 @@ class PaymentControlPage(Page):
                 )
             if st.button("Marcar como Pago"):
                 self._pay_payment(next_payment, payment_idx)
-                self.index += 1
-                st.session_state['payment_index'] = self.index
                 st.success("Pagamento marcado como pago! ✅🫡."
                            "Pressione R para atualizar.")
-            if st.button("Ir para o Próximo"):
-                self.index += 1
-                st.session_state['payment_index'] = self.index
-                st.info("Passando para o próximo pagamento."
-                        "Pressione R para atualizar.")
-            if st.button("Recomeçar Pagamentos"):
-                st.session_state['payment_index'] = 0
-                st.info("Reiniciando os pagamentos."
-                        "Pressione R para atualizar.")
 
     def render(self) -> None:
         super().render()

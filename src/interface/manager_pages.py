@@ -123,8 +123,8 @@ class ManagerPage(ABC):
 class PersonPage(ManagerPage):
     def __init__(self) -> None:
         super().__init__(
-            title="Página de Beneficiário",
-            description="Gerencie os beneficiários do sistema.",
+            title="Página de Pessoa",
+            description="Gerencie as pessoas do sistema.",
             creation_form=PersonCreationForm(),
             update_form=PersonUpdateForm(),
             deletion_form=PersonDeletionForm(),

@@ -1,4 +1,4 @@
-from src.model.EventListener import EventListener
+from src.models.EventListener import EventListener
 
 class PaymentEventListener(EventListener):
     """Classe responsável por ouvir eventos de pagamento."""

@@ -1,7 +1,7 @@
 import unittest
 
-from . import init_path
 from src.models.EventListener import EventListener
+
 
 class TestEventListener(unittest.TestCase):
     """Classe responsável por testar a classe EventListener."""

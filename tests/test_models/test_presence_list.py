@@ -3,6 +3,7 @@ from datetime import date
 
 from src.models.PresenceList import PresenceList
 
+
 class TestPresenceList(unittest.TestCase):
 
     def test_constructor(self) -> None:

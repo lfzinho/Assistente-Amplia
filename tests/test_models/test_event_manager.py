@@ -1,6 +1,5 @@
 import unittest
 
-from . import init_path
 from src.models.EventManager import EventManager
 from src.models.PaymentEventListener import PaymentEventListener
 

@@ -4,6 +4,7 @@ from datetime import date
 from src.models.Pix import Pix
 from src.models.Director import Director
 
+
 class TestDirector(unittest.TestCase):
     """Classe que testa a classe Director."""
     def test_constructor(self) -> None:

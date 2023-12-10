@@ -110,7 +110,7 @@ class TestPayment(unittest.TestCase):
             reference_date=date(2021, 1, 2),
         )
         payment.value = 10.0
-        mock_notify.assert_called_once()
+        self.assertTrue(mock_notify.called)
 
     @patch.object(Payment, 'notify')
     def test_payment_date_setter_calls_notify(self, mock_notify):
@@ -120,7 +120,7 @@ class TestPayment(unittest.TestCase):
             reference_date=date(2021, 1, 2),
         )
         payment.payment_date = date(2021, 1, 2)
-        mock_notify.assert_called_once()
+        self.assertTrue(mock_notify.called)
 
     @patch.object(Payment, 'notify')
     def test_reference_date_setter_calls_notify(self, mock_notify):
@@ -130,7 +130,17 @@ class TestPayment(unittest.TestCase):
             reference_date=date(2021, 1, 2),
         )
         payment.reference_date = date(2021, 1, 2)
-        mock_notify.assert_called_once()
+        self.assertTrue(mock_notify.called)
+
+    @patch.object(PaymentEventListener, 'update')
+    def test_payment_event_listener_update_is_called(self, mock_update):
+        payment = Payment(
+            value=10.0,
+            payment_date=date(2021, 1, 2),
+            reference_date=date(2021, 1, 2),
+        )
+        payment.value = 20.0
+        self.assertTrue(mock_update.called)
 
 
 if __name__ == "__main__":

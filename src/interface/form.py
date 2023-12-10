@@ -7,9 +7,19 @@ import streamlit as st
 from . import _init_path
 from src.interface.fields import Field, SelectBoxField
 from src.database.database import DatabaseManager
+from src.models.Administrator import Administrator
+from src.models.Analyst import Analyst
+from src.models.Beneficiary import Beneficiary
+from src.models.Cash import Cash
+from src.models.Director import Director
+from src.models.Payment import Payment
+from src.models.BankAccount import BankAccount
+from src.models.PaymentMethod import PaymentMethod
+from src.models.Pix import Pix
 
 
 class Form(ABC):
+
     def __init__(
         self,
         title: str,
@@ -23,8 +33,44 @@ class Form(ABC):
         self.fields: list[Field] = fields
         self.id_field: SelectBoxField = id_field
         self.db_collection: str = db_collection
-        
+
         self.db_manager: DatabaseManager = DatabaseManager.instance()
+
+    @staticmethod
+    def is_valid_type(value):
+        """Checa se o valor é válido para o firebase"""
+        if value is None:
+            return True
+        return isinstance(value, (list, str, int, float, bool,
+            datetime.date, dict, ))
+
+    @staticmethod
+    def to_data(obj):
+        data = dict()
+        for key, value in obj.__dict__.items():
+            # removes leading underscore
+            key = key.lstrip('_')
+            # if value is date
+            if isinstance(value, datetime.date):
+                data[key] = value.strftime('%Y-%m-%d')
+            elif Form.is_valid_type(value):
+                data[key] = value
+            else:
+                data[key] = Form.to_data(value)
+
+        return data
+
+    @staticmethod
+    def from_data(data):
+        for key, value in data.items():
+            if isinstance(value, dict):
+                data[key] = Form.from_data(value)
+        # gets the class_ attribute while leaving it out of the data
+        # dict
+        class_ = data.pop('class_')
+        obj = eval(f"{class_}(**data)")
+
+        return obj
 
     @abstractmethod
     def submit_action(self) -> None:

@@ -22,16 +22,15 @@
 
 
 class Cash:
-    """Classe que armazena o saldo da instituição."""
-    def __init__(self, saved_amount: float) -> None:
-        """
-        Construtor da classe Cash.
+    """
+    Classe que armazena o saldo da instituição.
 
-        Parâmetros
-        ----------
-        saved_amount: float
-            Saldo da instituição.
-        """
+    Parâmetros
+    ----------
+    saved_amount: float
+        Saldo da instituição.
+    """
+    def __init__(self, saved_amount: float) -> None:
         self.saved_amount = saved_amount
 
     def make_payment(self, amount: float) -> None:

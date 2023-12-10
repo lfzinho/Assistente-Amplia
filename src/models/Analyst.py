@@ -1,8 +1,8 @@
 from datetime import date
-from typing import Literal, Optional, Type
+from typing import ClassVar, Literal, Optional, Type
 
-from src.models.Person import Person
 from src.models.PaymentMethod import PaymentMethod
+from src.models.Person import Person
 
 
 # class Analyst(Person):
@@ -57,9 +57,31 @@ from src.models.PaymentMethod import PaymentMethod
 
 
 class Analyst(Person):
-    """Classe que representa um analista do Amplia"""
+    """
+    Classe que representa um analista do Amplia.
 
-    occupation_areas: tuple[str] = (
+    Parâmetros
+    ----------
+    name : str
+        Nome do analista.
+    email : str
+        Email do analista.
+    cpf : str
+        CPF do analista.
+    address : str
+        Endereço do analista.
+    payment_method : Type[PaymentMethod]
+        Método de pagamento que o analista irá receber reembolsos.
+    birth_date : date
+        Data de nascimento do analista.
+    admission_date : date
+        Data de admissão do analista.
+    occupation_area : str
+        Área de atuação do analista.
+    exit_date : Optional[date], optional
+        Data de saída do analista, by default None.
+    """
+    occupation_areas: ClassVar[tuple[str, ...]] = (
         'Administrativo Financeiro',
         'Recursos Humanos',
         'Pedagógico',
@@ -75,34 +97,12 @@ class Analyst(Person):
         payment_method: Type[PaymentMethod],
         birth_date: date,
         admission_date: date,
-        occupation_area: Literal['Administrativo Financeiro',
-        'Recursos Humanos', 'Pedagógico', 'Marketing'],
+        occupation_area: Literal[
+            'Administrativo Financeiro',
+            'Recursos Humanos', 'Pedagógico', 'Marketing'
+        ],
         exit_date: Optional[date] = None,
     ) -> None:
-        """
-        Construtor da classe Analista.
-
-        Parâmetros
-        ----------
-        name : str
-            Nome do analista.
-        email : str
-            Email do analista.
-        cpf : str
-            CPF do analista.
-        address : str
-            Endereço do analista.
-        payment_method : Type[PaymentMethod]
-            Método de pagamento que o analista irá receber reembolsos.
-        birth_date : date
-            Data de nascimento do analista.
-        admission_date : date
-            Data de admissão do analista.
-        occupation_area : str
-            Área de atuação do analista.
-        exit_date : Optional[date], optional
-            Data de saída do analista, by default None.
-        """
         super().__init__(
             name,
             email,
@@ -117,7 +117,7 @@ class Analyst(Person):
 
     @property
     def occupation_area(self) -> str:
-        """Getter da área de atuação do analista"""
+        """Getter da área de atuação do analista."""
         return self._occupation_area
 
     @occupation_area.setter

@@ -94,6 +94,16 @@ class NumberField(Field):
         )
 
 
+class CheckboxField(Field):
+    def __init__(self, label: str, value: bool) -> None:
+        super().__init__(label, 'checkbox')
+        self.value = value
+
+    def render(self) -> None:
+        """Renders the checkbox field on the page."""
+        self.value = st.checkbox(label=self.label, value=self.value)
+
+
 class CheckboxSeriesField(Field):
     def __init__(self,
                  label: str,

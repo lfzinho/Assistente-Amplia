@@ -4,6 +4,7 @@ import unittest
 from src.authentication.authentication import Authentication
 from src.database.database import DatabaseManager
 
+
 class TestAuthentication(unittest.TestCase):
     """Classe que testa a classe Authentication."""
     def __init__(self, *args, **kwargs):

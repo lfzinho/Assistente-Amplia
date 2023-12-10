@@ -41,5 +41,13 @@ class TestAuthentication(unittest.TestCase):
         auth.delete_user(auth.uid)
         self.assertIsNone(auth.uid)
 
+    def test_authenticate(self):
+        """Testa o método authenticate."""
+        auth = Authentication()
+        auth.create_user(self.email, self.password)
+        self.assertTrue(auth.authenticate(self.email, self.password))
+        auth.delete_user(auth.uid)
+        self.assertFalse(auth.authenticate(self.email, self.password))
+
 if __name__ == '__main__':
     unittest.main()

@@ -49,6 +49,7 @@ class BankAccount(PaymentMethod):
         self._bank = bank
         self._agency = agency
         self._account_number = account_number
+        self.class_ = 'BankAccount'
 
     def get_information(self) -> str:
         """

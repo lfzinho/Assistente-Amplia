@@ -207,6 +207,7 @@ class Payment:
         self._value = value
         self._payment_date = payment_date
         self._reference_date = reference_date
+        self.class_ = 'Payment'
 
     @property
     def value(self) -> float:

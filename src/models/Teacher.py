@@ -34,6 +34,7 @@ class Teacher(Beneficiary):
             exit_date=exit_date
         )
         self.theme = theme
+        self.class_ = 'Teacher'
 
     @property
     def theme(self) -> str:

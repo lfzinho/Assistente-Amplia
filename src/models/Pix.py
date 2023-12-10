@@ -84,6 +84,7 @@ class Pix(PaymentMethod):
         """
         self._key = key
         self._type_ = type_
+        self.class_ = 'Pix'
 
     def get_information(self):
         """

@@ -53,6 +53,7 @@ class Director(Analyst):
         )
         self.office_admission_date = office_admission_date
         self.office_exit_date = office_exit_date
+        self.class_ = 'Director'
 
     @property
     def office_admission_date(self) -> str:

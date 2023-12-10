@@ -41,3 +41,4 @@ class Beneficiary(Person, ABC):
         )
         self.transport_cost = transport_cost
         self.transport_description = transport_description
+        self.class_ = 'Beneficiary'

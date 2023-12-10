@@ -81,5 +81,13 @@ class TestAuthentication(unittest.TestCase):
         auth = Authentication()
         db = DatabaseManager.instance()
 
+    def test_get_user_by_uid(self):
+        """Testa o método get_user_by_uid."""
+        auth = Authentication()
+        auth.create_user(self.email, self.password)
+        user = auth.get_user_by_uid(auth.uid)
+        self.assertEqual(user.uid, auth.uid)
+        auth.delete_user(auth.uid)
+
 if __name__ == '__main__':
     unittest.main()

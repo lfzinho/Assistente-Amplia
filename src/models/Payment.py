@@ -1,6 +1,8 @@
 from datetime import date
 
 from src.models.EventManager import EventManager
+from src.models.PaymentEventListener import PaymentEventListener
+
 
 # class Payment:
 #     """Classe para representar um pagamento"""
@@ -312,6 +314,110 @@ from src.models.EventManager import EventManager
 #         self._payment_date = payment_date
 
 
+# class Payment(EventManager):
+#     """Classe para representar um pagamento"""
+#     def __init__(
+#         self,
+#         value: float,
+#         payment_date: date,
+#         reference_date: date,
+#     ) -> None:
+#         """
+#         Construtor da classe Payment.
+
+#         Parâmetros
+#         ----------
+#         value: float
+#             Valor do pagamento.
+#         payment_date: date
+#             Data do pagamento.
+#         reference_date: date
+#             Data da aula à qual o pagamento se refere.
+#         """
+#         self._value = value
+#         self._payment_date = payment_date
+#         self._reference_date = reference_date
+
+#     @property
+#     def value(self) -> float:
+#         """
+#         Getter para o valor do pagamento.
+
+#         Retorna
+#         -------
+#         float
+#             Valor do pagamento.
+#         """
+#         return self._value
+
+#     @value.setter
+#     def value(self, value: float) -> None:
+#         """
+#         Setter para o valor do pagamento.
+
+#         Parâmetros
+#         ----------
+#         value: float
+#             Valor do pagamento.
+#         """
+#         if value < 0:
+#             raise ValueError("O valor do pagamento não pode ser negativo")
+#         self._value = value
+
+#     @property
+#     def reference_date(self) -> date:
+#         """
+#         Getter para a data da aula à qual o pagamento se refere.
+
+#         Retorna
+#         -------
+#         datetime.date
+#             Data da aula à qual o pagamento se refere.
+#         """
+#         return self._reference_date
+
+#     @reference_date.setter
+#     def reference_date(self, reference_date: date) -> None:
+#         """
+#         Setter para a data da aula à qual o pagamento se refere.
+
+#         Parâmetros
+#         ----------
+#         reference_date: datetime.date
+#             Data da aula à qual o pagamento se refere.
+#         """
+#         self._reference_date = reference_date
+
+#     @property
+#     def payment_date(self) -> date:
+#         """
+#         Getter para a data do pagamento.
+
+#         Retorna
+#         -------
+#         datetime.date
+#             Data do pagamento.
+#         """
+#         return self._payment_date
+
+#     @payment_date.setter
+#     def payment_date(self, payment_date: date) -> None:
+#         """
+#         Setter para a data do pagamento.
+
+#         Parâmetros
+#         ----------
+#         payment_date: datetime.date
+#             Data do pagamento.
+#         """
+#         if payment_date < self.reference_date:
+#             raise ValueError(
+#                 "A data do pagamento não pode ser anterior à data da aula"
+#             )
+#         self._payment_date = payment_date
+
+
+
 class Payment(EventManager):
     """Classe para representar um pagamento"""
     def __init__(
@@ -332,9 +438,12 @@ class Payment(EventManager):
         reference_date: date
             Data da aula à qual o pagamento se refere.
         """
+        super().__init__()
         self._value = value
         self._payment_date = payment_date
         self._reference_date = reference_date
+        # adiciona um listener para o evento de alteração do valor do pagamento
+        self.add_listener(PaymentEventListener())
 
     @property
     def value(self) -> float:

@@ -3,6 +3,7 @@ from datetime import date
 
 from src.models.EventManager import EventManager
 from src.models.Payment import Payment
+from src.models.PaymentEventListener import PaymentEventListener
 
 
 class TestPayment(unittest.TestCase):
@@ -87,6 +88,18 @@ class TestPayment(unittest.TestCase):
         EventManager.
         """
         self.assertTrue(issubclass(Payment, EventManager))
+
+    def test_if_payment_event_listener_is_added_on_constructor(self) -> None:
+        """
+        Testa se um listener do tipo PaymentEventListener é adicionado
+        no construtor da classe Payment.
+        """
+        payment = Payment(
+            value=10.0,
+            payment_date=date(2021, 1, 2),
+            reference_date=date(2021, 1, 2),
+        )
+        self.assertTrue(any(isinstance(listener, PaymentEventListener) for listener in payment.listeners))
 
 
 if __name__ == "__main__":

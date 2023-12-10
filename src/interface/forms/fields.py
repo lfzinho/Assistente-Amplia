@@ -92,3 +92,18 @@ class NumberField(Field):
             value=self.value,
             step=0.01
         )
+
+
+class CheckboxSeriesField(Field):
+    def __init__(self, label: str, options: list[str], value: list[bool]) -> None:
+        super().__init__(label, 'checkbox')
+        self.options = options
+        if value:
+            self.value = value
+        else:
+            self.value = [False for _ in range(len(options))]
+
+    def render(self) -> None:
+        """Renders the checkbox series field on the page."""
+        for i, option in enumerate(self.options):
+            self.value[i] = st.checkbox(label=option, value=self.value[i])

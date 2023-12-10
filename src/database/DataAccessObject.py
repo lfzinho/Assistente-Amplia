@@ -166,7 +166,7 @@ class DataAccessObject():
         doc_dict = self.dbm.get_by_id(self.collection, id_value)
         return self.from_data(**doc_dict)
 
-    def add_data(self, data):
+    def add(self, data):
         """
         Adiciona um documento ao banco de dados.
 
@@ -183,23 +183,6 @@ class DataAccessObject():
             ID do documento adicionado.
         """
         return self.dbm.add(self.collection, data)
-
-    def add_obj(self, obj):
-        """
-        Adiciona um objeto ao banco de dados.
-
-        Parameters
-        ----------
-        obj : Any
-            Objeto a serem adicionados.
-
-        Returns
-        -------
-        str
-            ID do documento adicionado.
-        """
-        data = self.to_data(obj)
-        return self.add_data(self.collection, data)
 
     def update(self, id_value, data):
         """
@@ -238,4 +221,18 @@ class DataAccessObject():
         return self.dbm.update(self.collection, id_value, data)
 
     def delete(self, id_value):
+        """
+        Deleta um documento do banco de dados.
+
+        Parameters
+        ----------
+        id_value : str
+            ID do documento a ser deletado.
+
+        Returns
+        -------
+        bool
+            True se o documento foi deletado com sucesso,
+            False caso contrário.
+        """
         return self.dbm.delete(self.collection, id_value)

@@ -58,7 +58,7 @@ class PaymentUpdateForm(UpdateForm):
         )
 
 
-class StudentDeletionForm(DeletionForm):
+class PaymentDeletionForm(DeletionForm):
     def __init__(self) -> None:
         self.db_manager = DatabaseManager.instance()
         super().__init__(

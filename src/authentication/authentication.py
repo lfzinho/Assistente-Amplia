@@ -1,9 +1,8 @@
-
-
-from typing import Any
-import requests
 import json
+import requests
+from typing import Any
 
+import firebase_admin
 from firebase_admin import auth
 
 from src.database.database import DatabaseManager

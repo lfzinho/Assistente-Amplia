@@ -1,8 +1,8 @@
 from datetime import datetime
 
-from src.database.database import DatabaseManager
 from .base_forms import (CreationForm, UpdateForm, DeletionForm)
 from .fields import DateField, SelectBoxField
+from src.database.database import DatabaseManager
 
 
 class DirectorCreationForm(CreationForm):

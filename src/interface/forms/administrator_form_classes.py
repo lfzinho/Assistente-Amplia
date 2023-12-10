@@ -1,6 +1,6 @@
-from src.database.database import DatabaseManager
 from .base_forms import (CreationForm, UpdateForm, DeletionForm)
 from .fields import SelectBoxField
+from src.database.database import DatabaseManager
 
 
 class AdministratorCreationForm(CreationForm):

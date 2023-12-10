@@ -210,3 +210,27 @@ class AdministratorPage(ManagerPage):
             deletion_form=AdministratorDeletionForm(),
             db_collection="administrator"
         )
+
+
+class PresenceListPage(ManagerPage):
+    def __init__(self) -> None:
+        super().__init__(
+            title="Página de Lista de Presença",
+            description="Gerencie as listas de presença do sistema.",
+            creation_form=PresenceListCreationForm(),
+            update_form=PresenceListUpdateForm(),
+            deletion_form=PresenceListDeletionForm(),
+            db_collection="presence_list"
+        )
+
+
+class PaymentPage(ManagerPage):
+    def __init__(self) -> None:
+        super().__init__(
+            title="Página de Pagamento",
+            description="Gerencie os pagamentos do sistema.",
+            creation_form=PaymentCreationForm(),
+            update_form=PaymentUpdateForm(),
+            deletion_form=PaymentDeletionForm(),
+            db_collection="payment"
+        )

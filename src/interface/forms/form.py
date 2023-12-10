@@ -6,6 +6,7 @@ import streamlit as st
 
 from .fields import Field, SelectBoxField
 from src.database.database import DatabaseManager
+from src.exceptions.interface import NoIdError
 # Garante que todos os tipos já tenham sido importados para
 # que o eval do método `from_data` funcione corretamente
 from src.models.Administrator import Administrator
@@ -26,8 +27,8 @@ class Form(ABC):
         title: str,
         description: str,
         fields: list[Field],
-        id_field: SelectBoxField = None,
-        db_collection: str = None
+        id_field: SelectBoxField | None = None,
+        db_collection: str | None = None
     ) -> None:
         self.title = title
         self.description = description
@@ -194,10 +195,10 @@ class Form(ABC):
 
         Raises
         ------
-        TODO
+        NoIdError
+            Se o formulário não tiver um campo de ID.
         """
-        # TODO implementar erro customizado
-        if self.id_field:
-            return self.id_field.value
+        if self.id_field is None:
+            raise NoIdError()
         else:
-            return None
+            return self.id_field.value

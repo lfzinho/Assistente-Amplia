@@ -19,5 +19,12 @@ class TestAuthentication(unittest.TestCase):
         auth = Authentication()
         self.assertIsNone(auth.uid)
 
+    def test_create_user(self):
+        """Testa o método create_user."""
+        auth = Authentication()
+        auth.create_user(self.email, self.password)
+        self.assertIsNotNone(auth.uid)
+        auth.delete_user(auth.uid)
+
 if __name__ == '__main__':
     unittest.main()

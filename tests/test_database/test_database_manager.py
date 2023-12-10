@@ -34,5 +34,14 @@ class TestDatabaseManager(unittest.TestCase):
         self.assertIsInstance(dbm.get_all('test'), dict)
         dbm.delete('test', index)
 
+    def test_get_all_keys(self):
+        """Testa o método get_all_keys"""
+        dbm = DatabaseManager.instance()
+        dbm.add('test', {'test': 'test'})
+        index = dbm.get_by_id('test', 'index')['index'] - 1
+        index = str(index)
+        self.assertIsInstance(dbm.get_all_keys('test'), list)
+        dbm.delete('test', index)
+
 if __name__ == '__main__':
     unittest.main()

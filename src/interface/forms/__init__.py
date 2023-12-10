@@ -6,3 +6,5 @@ from .director_form_classes import *
 from .person_form_classes import *
 from .student_form_classes import *
 from .teacher_form_classes import *
+from .presence_list_form_classes import *
+from .payment_form_classes import *

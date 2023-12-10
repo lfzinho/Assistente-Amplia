@@ -1,6 +1,5 @@
 import unittest
 
-from . import init_path
 from src.models.Pix import Pix
 from src.models.Teacher import Teacher
 

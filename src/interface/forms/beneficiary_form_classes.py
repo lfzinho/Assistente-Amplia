@@ -1,9 +1,6 @@
-import streamlit as st
-
-from . import _init_path
-from src.interface.form_classes import (CreationForm, UpdateForm, DeletionForm)
-from src.interface.fields import *
 from src.database.database import DatabaseManager
+from .base_forms import (CreationForm, UpdateForm, DeletionForm)
+from .fields import NumberField, SelectBoxField, TextField
 
 
 class BeneficiaryCreationForm(CreationForm):
@@ -11,7 +8,9 @@ class BeneficiaryCreationForm(CreationForm):
         self.db_manager = DatabaseManager.instance()
         super().__init__(
             title="Formulário de Criação de Beneficiário",
-            description="Preencha os campos abaixo para criar um novo beneficiário.",
+            description=(
+                "Preencha os campos abaixo para criar um novo beneficiário."
+            ),
             fields=[
                 SelectBoxField(
                     label="ID da Pessoa",
@@ -29,7 +28,9 @@ class BeneficiaryUpdateForm(UpdateForm):
         self.db_manager = DatabaseManager.instance()
         super().__init__(
             title="Formulário de Atualização de Beneficiário",
-            description="Preencha os campos abaixo para atualizar um beneficiário.",
+            description=(
+                "Preencha os campos abaixo para atualizar um beneficiário."
+            ),
             id_field=SelectBoxField(
                 label="ID do Beneficiário",
                 options=self.db_manager.get_all_keys("beneficiary")

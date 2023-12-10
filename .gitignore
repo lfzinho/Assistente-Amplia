@@ -2,3 +2,5 @@
 .venv
 serviceAccountKey.json
 __pycache__
+
+ignore_me.ipynb

@@ -1,7 +1,12 @@
 from datetime import datetime
 
 from .base_forms import (CreationForm, UpdateForm, DeletionForm)
-from .fields import DateField, NumberField, SelectBoxField, TextField
+from .fields import (
+    CheckboxField,
+    DateField,
+    NumberField,
+    SelectBoxField,
+)
 from src.database.database import DatabaseManager
 
 
@@ -23,6 +28,7 @@ class PaymentCreationForm(CreationForm):
                     options=self.db_manager.get_all_keys("administrator")
                 ),
                 NumberField(label="Valor", value=0.0),
+                CheckboxField(label="Pago", value=False),
                 DateField(label="Data do Pagamento", value=datetime.now()),
                 DateField(label="Data de Referência", value=datetime.now()),
             ],
@@ -52,6 +58,7 @@ class PaymentUpdateForm(UpdateForm):
                     options=self.db_manager.get_all_keys("administrator")
                 ),
                 NumberField(label="Valor", value=0.0),
+                CheckboxField(label="Pago", value=False),
                 DateField(label="Data do Pagamento", value=datetime.now()),
                 DateField(label="Data de Referência", value=datetime.now()),
             ],

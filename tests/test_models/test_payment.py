@@ -1,6 +1,7 @@
 import unittest
 from datetime import date
 
+from src.models.EventManager import EventManager
 from src.models.Payment import Payment
 
 
@@ -79,6 +80,13 @@ class TestPayment(unittest.TestCase):
         with self.assertRaises(ValueError):
             payment.value = -1.0
         self.assertEqual(payment.value, 10.0)
+
+    def test_is_event_manager_subclass(self):
+        """
+        Testa se a classe Payment é subclasse da classe
+        EventManager.
+        """
+        self.assertTrue(issubclass(Payment, EventManager))
 
 
 if __name__ == "__main__":

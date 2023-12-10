@@ -9,4 +9,4 @@ class PaymentEventListener(EventListener):
     def update(self, event) -> None:
         """Método responsável por atualizar o estado do
         objeto PaymentEventListener."""
-        print(f"PaymentEventListener: {event}")
+        self.event = event

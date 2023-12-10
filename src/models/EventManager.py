@@ -21,3 +21,8 @@ class EventManager:
     def remove_listener(self, listener: EventListener) -> None:
         """Método responsável por remover um listener."""
         self.listeners.remove(listener)
+
+    def notify(self, event: str) -> None:
+        """Método responsável por notificar os listeners."""
+        for listener in self.listeners:
+            listener.update(event)

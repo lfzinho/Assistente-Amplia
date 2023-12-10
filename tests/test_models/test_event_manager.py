@@ -48,5 +48,14 @@ class TestEventManager(unittest.TestCase):
         event_manager.notify('payment')
         self.assertEqual(payment_event_listener.event, 'payment')
 
+    def test_notify_without_listeners(self) -> None:
+        """
+        Testa o método notify da classe EventManager conferindo se os
+        atributos foram setados corretamente.
+        """
+        event_manager = EventManager()
+        event_manager.notify('payment')
+        self.assertEqual(event_manager.listeners, [])
+
 if __name__ == '__main__':
     unittest.main()

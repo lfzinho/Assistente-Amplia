@@ -3,14 +3,15 @@ from pathlib import Path
 
 import streamlit as st
 
-from src.authentication.authentication import Authentication
-
-auth_instance = Authentication()
-
 # Adiciona a pasta raiz ao path
 path = str(Path(__file__).parent.parent.parent)
 if path not in sys.path:
     sys.path.append(path)
+
+from src.authentication.authentication import Authentication
+
+auth_instance = Authentication()
+
 
 
 def login_page() -> None:

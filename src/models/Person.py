@@ -72,7 +72,6 @@ class Person(ABC):
         self._birth_date = birth_date
         self._admission_date = admission_date
         self._exit_date = exit_date
-        self.class_ = 'Person'
 
     @property
     def name(self) -> str:

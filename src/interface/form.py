@@ -4,9 +4,10 @@ from typing import Any
 
 import streamlit as st
 
-from . import _init_path
 from src.interface.fields import Field, SelectBoxField
 from src.database.database import DatabaseManager
+# Garante que todos os tipos já tenham sido importados para
+# que o eval do método `from_data` funcione corretamente
 from src.models.Administrator import Administrator
 from src.models.Analyst import Analyst
 from src.models.Beneficiary import Beneficiary
@@ -37,23 +38,43 @@ class Form(ABC):
         self.db_manager: DatabaseManager = DatabaseManager.instance()
 
     @staticmethod
-    def is_valid_type(value):
-        """Checa se o valor é válido para o firebase"""
+    def is_valid_type(value: Any) -> bool:
+        """
+        Checa se o valor é de um tipo válido para serialização JSON,
+        que é o tipo de dado que o banco de dados aceita.
+
+        Parâmetros
+        ----------
+        value : Any
+            O valor a ser checado.
+
+        Retorna
+        -------
+        bool
+            True se o valor é de um tipo válido.
+        """
         if value is None:
             return True
         return isinstance(value, (list, str, int, float, bool,
             datetime.date, dict, ))
 
-    @staticmethod
-    def to_data(obj):
-        data = dict()
-        for key, value in obj.__dict__.items():
-            # removes leading underscore
+    def to_data(self) -> dict[str, Any]:
+        """
+        Serializa o objeto para um dicionário.
+
+        Retorna
+        -------
+        dict[str, Any]
+            Mapeamento de nomes de atributos para valores.
+        """
+        data = {'class_name': self.__class__.__name__}
+        for key, value in self.__dict__.items():
+            # Remove o underscore do início do nome do atributo, para
+            # que o atributo seja definido por meio do setter
             key = key.lstrip('_')
-            # if value is date
             if isinstance(value, datetime.date):
                 data[key] = value.strftime('%Y-%m-%d')
-            elif Form.is_valid_type(value):
+            elif self.is_valid_type(value):
                 data[key] = value
             else:
                 data[key] = Form.to_data(value)
@@ -61,28 +82,51 @@ class Form(ABC):
         return data
 
     @staticmethod
-    def from_data(data):
+    def from_data(data: dict[str, Any]) -> 'Form':
+        """
+        Deserializa um dicionário para um objeto.
+
+        Parâmetros
+        ----------
+        data : dict[str, Any]
+            Mapeamento de nomes de atributos para valores.
+
+        Retorna
+        -------
+        Form
+            O objeto deserializado.
+        """
         for key, value in data.items():
             if isinstance(value, dict):
                 data[key] = Form.from_data(value)
-        # gets the class_ attribute while leaving it out of the data
-        # dict
-        class_ = data.pop('class_')
-        obj = eval(f"{class_}(**data)")
+        # Obtém o atributo class_name enquanto
+        # o deixa de fora do dicionário de dados
+        class_name = data.pop('class_name')
+        obj = eval(class_name)(**data)
 
         return obj
 
     @abstractmethod
     def submit_action(self) -> None:
-        """Action to be performed when the form is submitted."""
+        """Ação a ser executada quando o formulário é enviado."""
         pass
 
     def append_field(self, field: Field) -> None:
-        """Appends a field to the form."""
+        """
+        Adiciona um campo ao formulário.
+
+        Parâmetros
+        ----------
+        field : Field
+            O campo a ser adicionado.
+        """
         self.fields.append(field)
 
     def search_action(self):
-        """Action to be performed when the search form is submitted."""
+        """
+        Ação a ser executada quando o
+        formulário de busca é enviado.
+        """
         db_result = self.db_manager.get_by_id(self.db_collection, self.id_field.value)
         if db_result:
             return db_result
@@ -118,7 +162,14 @@ class Form(ABC):
                 self.submit_action()
 
     def get_form_values(self) -> dict[str, Any]:
-        """Returns the values of the form in a dictionary."""
+        """
+        Converte os valores do formulário para um dicionário.
+
+        Retorna
+        -------
+        dict[str, Any]
+            Mapeamento de nomes de atributos para valores.
+        """
         form_values = {}
         for field in self.fields:
             # Se o campo for do tipo data, converte o valor para
@@ -127,14 +178,25 @@ class Form(ABC):
             if field.type == 'date':
                 form_values[field.label] = datetime.datetime.combine(
                     field.value,
-                    datetime.datetime.min.time()
+                    datetime.time.min
                 )
             else:
                 form_values[field.label] = field.value
         return form_values
 
     def get_id_field_value(self) -> None:
-        """Returns the value of the ID field."""
+        """
+        Retorna o valor do campo de ID.
+
+        Retorna
+        -------
+        str
+            O valor do campo de ID.
+
+        Raises
+        ------
+        TODO
+        """
         # TODO implementar erro customizado
         if self.id_field:
             return self.id_field.value

@@ -65,7 +65,6 @@ class Student(Beneficiary):
             exit_date=exit_date
         )
         self.financial_manager = financial_manager
-        self.class_ = 'Student'
 
     @property
     def financial_manager(self) -> str:

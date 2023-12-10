@@ -55,4 +55,3 @@ class Cash:
         if amount > self.saved_amount:
             raise ValueError("A quantia não pode ser maior que o saldo.")
         self.saved_amount -= amount
-        self.class_ = 'Cash'

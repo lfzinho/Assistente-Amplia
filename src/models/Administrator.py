@@ -39,4 +39,3 @@ class Administrator(Director):
             occupation_area,
             exit_date,
         )
-        self.class_ = 'Administrator'

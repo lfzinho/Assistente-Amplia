@@ -114,7 +114,6 @@ class Analyst(Person):
             exit_date,
         )
         self.occupation_area = occupation_area
-        self.class_ = 'Analyst'
 
     @property
     def occupation_area(self) -> str:

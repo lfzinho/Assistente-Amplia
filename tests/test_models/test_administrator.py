@@ -1,5 +1,4 @@
 import unittest
-from abc import ABC
 from datetime import date
 
 from src.models.Pix import Pix
@@ -7,11 +6,11 @@ from src.models.Administrator import Administrator
 
 
 class TestAdministrator(unittest.TestCase):
-    """Classe que testa a classe Administrator"""
+    """Classe que testa a classe Administrator."""
     def test_constructor(self) -> None:
         """
         Testa o construtor da classe Administrator conferindo se os
-        atributos foram setados corretamente.
+        atributos foram definidos corretamente.
         """
         director = Administrator(
             name='João',
@@ -27,6 +26,7 @@ class TestAdministrator(unittest.TestCase):
             exit_date=date(year=2022, month=1, day=1),
         )
         self.assertIsInstance(director, Administrator)
+
 
 if __name__ == '__main__':
     unittest.main()

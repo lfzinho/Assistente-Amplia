@@ -18,3 +18,6 @@ class EventManager:
         """Método responsável por adicionar um listener."""
         self.listeners.append(listener)
 
+    def remove_listener(self, listener: EventListener) -> None:
+        """Método responsável por remover um listener."""
+        self.listeners.remove(listener)

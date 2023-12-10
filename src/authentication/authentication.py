@@ -81,13 +81,13 @@ import json
 #         else:
 #             return False
 
-db = DatabaseManager.instance()
 
 class Authentication():
     """Classe para gerenciar a autenticação do usuário"""
     def __init__(self):
         self.auth = auth
         self.uid = None
+        self.db = DatabaseManager.instance()
 
     def create_user(self, email: str, password: str) -> Any:
         """Cria um usuário no banco de dados"""

@@ -66,7 +66,9 @@ PIX_TYPES = ['cpf', 'cnpj', 'email', 'celular', 'aleatorio']
 
 class Pix(PaymentMethod):
     """Classe que representa um método de pagamento Pix."""
-    def __init__(self, key: str, type_: Literal['cpf', 'cnpj', 'email', 'celular']) -> None:
+    def __init__(
+        self, key: str, type_: Literal['cpf', 'cnpj', 'email', 'celular']
+    ) -> None:
         """
         Construtor da classe Pix.
 
@@ -85,7 +87,7 @@ class Pix(PaymentMethod):
         self._key = key
         self._type_ = type_
 
-    def get_information(self):
+    def get_information(self) -> str:
         """
         Retorna uma string com as informações do Pix.
 
@@ -97,7 +99,7 @@ class Pix(PaymentMethod):
         return f'Chave: {self.key}\nTipo: {self.type_}'
 
     @property
-    def key(self):
+    def key(self) -> str:
         """
         Getter do tipo da chave Pix.
 
@@ -109,7 +111,7 @@ class Pix(PaymentMethod):
         return self._key
 
     @key.setter
-    def key(self, key):
+    def key(self, key: str) -> None:
         """
         Parâmetros
         ----------
@@ -124,7 +126,7 @@ class Pix(PaymentMethod):
         self._key = key
 
     @property
-    def type_(self):
+    def type_(self) -> str:
         """
         Getter da Chave Pix.
 
@@ -136,7 +138,7 @@ class Pix(PaymentMethod):
         return self._type_
 
     @type_.setter
-    def type_(self, type_):
+    def type_(self, type_: str) -> None:
         """
         Setter da Chave Pix.
 
@@ -150,4 +152,3 @@ class Pix(PaymentMethod):
                 f'Tipo inválido. Escolha entre: {PIX_TYPES}'
             )
         self._type_ = type_
-

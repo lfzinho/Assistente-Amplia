@@ -17,8 +17,8 @@ class TestCash(unittest.TestCase):
 
     def test_make_payment_return_4(self) -> None:
         """
-        Testa o método make_payment da classe Cash conferindo se
-        ele retorna 4.0 ao inserir um amount de 6.0 em um saldo de 10.0.
+        Testa o método make_payment da classe Cash conferindo se ele
+        retorna 4.0 ao inserir um amount de 6.0 em um saldo de 10.0.
         """
         cash = Cash(
             saved_amount=10.0

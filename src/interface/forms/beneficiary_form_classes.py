@@ -23,6 +23,8 @@ class BeneficiaryCreationForm(CreationForm):
         )
 
 
+
+
 class BeneficiaryUpdateForm(UpdateForm):
     def __init__(self) -> None:
         self.db_manager = DatabaseManager.instance()

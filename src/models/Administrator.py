@@ -12,6 +12,7 @@ from src.models.PaymentMethod import PaymentMethod
 #         super().__init__(name, email, cpf, address, payment_method,
 #         birth_date, admission_date, occupation_area, exit_date)
 
+
 class Administrator(Director):
     def __init__(
         self,
@@ -22,10 +23,12 @@ class Administrator(Director):
         payment_method: Type[PaymentMethod],
         birth_date: date,
         admission_date: date,
-        occupation_area: Literal['Administrativo Financeiro',
-        'Recursos Humanos', 'Pedagógico', 'Marketing'],
+        occupation_area: Literal[
+            'Administrativo Financeiro',
+            'Recursos Humanos', 'Pedagógico', 'Marketing'
+        ],
         office_admission_date: date,
-        office_exit_date: Optional[date]=None,
+        office_exit_date: Optional[date] = None,
         exit_date: Optional[date] = None,
     ) -> None:
         super().__init__(

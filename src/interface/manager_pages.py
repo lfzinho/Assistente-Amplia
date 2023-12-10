@@ -4,7 +4,7 @@ import pandas as pd
 import streamlit as st
 
 from forms import *
-
+from src.authentication.authentication import Authentication
 
 # class ManagerPage(ABC):
 #     def __init__(
@@ -77,6 +77,7 @@ class ManagerPage(ABC):
         self.deletion_form = deletion_form
         self.db_collection = db_collection
         self.db_manager = DatabaseManager.instance()
+        self.auth = Authentication()
 
     def show_table(self) -> None:
         """Shows the table of the managed elements on the page."""
@@ -114,10 +115,17 @@ class ManagerPage(ABC):
 
     def render(self) -> None:
         """Renders the page in the usual organization."""
-        st.title(self.title)
-        st.write(self.description)
-        self.show_table()
-        self.show_form_tabs()
+        if (
+            "uid" in st.session_state
+            and self.auth.get_user_by_uid(st.session_state["uid"]) is not None
+        ):
+            st.title(self.title)
+            st.write(self.description)
+            self.show_table()
+            self.show_form_tabs()
+        else:
+            st.warning("Você precisa estar autenticado "
+                       "para acessar esta página.")
 
 
 class PersonPage(ManagerPage):

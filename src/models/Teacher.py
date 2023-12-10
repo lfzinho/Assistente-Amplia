@@ -6,7 +6,34 @@ from src.models.PaymentMethod import PaymentMethod
 
 
 class Teacher(Beneficiary):
-    """Classe que representa um professor."""
+    """
+    Classe que representa um professor.
+
+    Parâmetros
+    ----------
+    name : str
+        Nome do professor.
+    email : str
+        Email do professor.
+    cpf : str
+        CPF do professor.
+    address : str
+        Endereço do professor.
+    payment_method : Type[PaymentMethod]
+        Método de pagamento do professor.
+    birth_date : date
+        Data de nascimento do professor.
+    admission_date : date
+        Data de admissão do professor.
+    transport_cost : float
+        Custo do transporte do professor.
+    transport_description : str
+        Descrição do transporte do professor.
+    theme : str
+        Tema do professor.
+    exit_date : Optional[date], optional
+        Data de saída do professor.
+    """
     def __init__(
         self,
         name: str,

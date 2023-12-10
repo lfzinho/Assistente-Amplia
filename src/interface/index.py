@@ -3,8 +3,9 @@ from pathlib import Path
 
 import streamlit as st
 
-# Adiciona src/ ao path
-sys.path.append(str(Path(__file__).parent.parent))
+path = str(Path(__file__).parent.parent.parent)
+if path not in sys.path:
+    sys.path.append(path)
 
 st.set_page_config(
     page_title="Assistente Amplia",

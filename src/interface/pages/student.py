@@ -1,6 +1,6 @@
 import streamlit as st
 
-from pages.manager_pages import StudentPage
+from src.interface.manager_pages import StudentPage
 
 st.set_page_config(
     page_title="Estudante",

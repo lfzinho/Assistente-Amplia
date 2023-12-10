@@ -12,86 +12,77 @@ class TestAuthentication(unittest.TestCase):
     """Classe que testa a classe Authentication."""
     def __init__(self, *args, **kwargs):
         super(TestAuthentication, self).__init__(*args, **kwargs)
+        self.auth = Authentication()
         self.email = 'email.test@test.com'
         self.password = 'password123'
 
     def test_constructor(self) -> None:
         """Testa o construtor da classe Authentication."""
-        auth = Authentication()
-        self.assertIsNone(auth.uid)
+        self.assertIsNone(self.auth.uid)
 
     def test_create_user(self) -> None:
         """Testa o método create_user."""
-        auth = Authentication()
-        auth.create_user(self.email, self.password)
-        self.assertIsNotNone(auth.uid)
-        auth.delete_user(auth.uid)
+        self.auth.create_user(self.email, self.password)
+        self.assertIsNotNone(self.auth.uid)
+        self.auth.delete_user(self.auth.uid)
 
     def test_get_user_by_email(self) -> None:
         """Testa o método get_user."""
-        auth = Authentication()
-        auth.create_user(self.email, self.password)
-        user = auth.get_user_by_email(self.email)
-        self.assertEqual(user.uid, auth.uid)
-        auth.delete_user(auth.uid)
+        self.auth.create_user(self.email, self.password)
+        user = self.auth.get_user_by_email(self.email)
+        self.assertEqual(user.uid, self.auth.uid)
+        self.auth.delete_user(self.auth.uid)
 
     def test_delete_user(self) -> None:
         """Testa o método delete_user."""
-        auth = Authentication()
-        auth.create_user(self.email, self.password)
-        auth.delete_user(auth.uid)
-        self.assertIsNone(auth.uid)
+        self.auth.create_user(self.email, self.password)
+        self.auth.delete_user(self.auth.uid)
+        self.assertIsNone(self.auth.uid)
 
     def test_authenticate(self) -> None:
         """Testa o método authenticate."""
-        auth = Authentication()
-        auth.create_user(self.email, self.password)
-        self.assertTrue(auth.authenticate(self.email, self.password))
-        auth.delete_user(auth.uid)
-        self.assertFalse(auth.authenticate(self.email, self.password))
+        self.auth.create_user(self.email, self.password)
+        self.assertTrue(self.auth.authenticate(self.email, self.password))
+        self.auth.delete_user(self.auth.uid)
+        self.assertFalse(self.auth.authenticate(self.email, self.password))
 
     def test_update_user_password(self) -> None:
         """Testa o método update_user_password."""
-        auth = Authentication()
-        auth.create_user(self.email, self.password)
-        auth.update_user_password(auth.uid, self.password)
-        self.assertTrue(auth.authenticate(self.email, self.password))
-        auth.delete_user(auth.uid)
+        self.auth.create_user(self.email, self.password)
+        self.auth.update_user_password(self.auth.uid, self.password)
+        self.assertTrue(self.auth.authenticate(self.email, self.password))
+        self.auth.delete_user(self.auth.uid)
 
     def test_update_user_email(self) -> None:
         """Testa o método update_user_email."""
-        auth = Authentication()
-        auth.create_user(self.email, self.password)
-        uid = auth.uid
+        self.auth.create_user(self.email, self.password)
+        uid = self.auth.uid
         new_email = 'new'+ self.email
-        auth.update_user_email(auth.uid, new_email)
-        self.assertEqual(uid, auth.get_user_by_email(new_email).uid)
-        auth.delete_user(auth.uid)
+        self.auth.update_user_email(self.auth.uid, new_email)
+        self.assertEqual(uid, self.auth.get_user_by_email(new_email).uid)
+        self.auth.delete_user(self.auth.uid)
 
 
     def test_get_all_users(self) -> None:
         """Testa o método get_all_users."""
-        auth = Authentication()
-        auth.create_user(self.email, self.password)
-        users = auth.get_all_users()
+        self.auth.create_user(self.email, self.password)
+        users = self.auth.get_all_users()
         self.assertTrue(len(users.users) > 0)
-        auth.delete_user(auth.uid)
+        self.auth.delete_user(self.auth.uid)
 
     def test_authentication_and_database(self) -> None:
         """
         Testa a integração entre a classe Authentication e a
         classe DatabaseManager.
         """
-        auth = Authentication()
         db = DatabaseManager.instance()
 
     def test_get_user_by_uid(self) -> None:
         """Testa o método get_user_by_uid."""
-        auth = Authentication()
-        auth.create_user(self.email, self.password)
-        user = auth.get_user_by_uid(auth.uid)
-        self.assertEqual(user.uid, auth.uid)
-        auth.delete_user(auth.uid)
+        self.auth.create_user(self.email, self.password)
+        user = self.auth.get_user_by_uid(self.auth.uid)
+        self.assertEqual(user.uid, self.auth.uid)
+        self.auth.delete_user(self.auth.uid)
 
 if __name__ == '__main__':
     unittest.main()

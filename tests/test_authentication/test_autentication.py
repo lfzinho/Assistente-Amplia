@@ -64,5 +64,13 @@ class TestAuthentication(unittest.TestCase):
         new_email = 'new'+ self.email
         auth.update_user_email(auth.uid, new_email)
 
+    def test_get_all_users(self):
+        """Testa o método get_all_users."""
+        auth = Authentication()
+        auth.create_user(self.email, self.password)
+        users = auth.get_all_users()
+        self.assertTrue(len(users.users) > 0)
+        auth.delete_user(auth.uid)
+
 if __name__ == '__main__':
     unittest.main()

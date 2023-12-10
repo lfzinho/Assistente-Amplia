@@ -1,5 +1,6 @@
 import unittest
 from datetime import date
+from unittest.mock import patch
 
 from src.models.EventManager import EventManager
 from src.models.Payment import Payment
@@ -100,6 +101,36 @@ class TestPayment(unittest.TestCase):
             reference_date=date(2021, 1, 2),
         )
         self.assertTrue(any(isinstance(listener, PaymentEventListener) for listener in payment.listeners))
+
+    @patch.object(Payment, 'notify')
+    def test_value_setter_calls_notify(self, mock_notify):
+        payment = Payment(
+            value=10.0,
+            payment_date=date(2021, 1, 2),
+            reference_date=date(2021, 1, 2),
+        )
+        payment.value = 10.0
+        mock_notify.assert_called_once()
+
+    @patch.object(Payment, 'notify')
+    def test_payment_date_setter_calls_notify(self, mock_notify):
+        payment = Payment(
+            value=10.0,
+            payment_date=date(2021, 1, 2),
+            reference_date=date(2021, 1, 2),
+        )
+        payment.payment_date = date(2021, 1, 2)
+        mock_notify.assert_called_once()
+
+    @patch.object(Payment, 'notify')
+    def test_reference_date_setter_calls_notify(self, mock_notify):
+        payment = Payment(
+            value=10.0,
+            payment_date=date(2021, 1, 2),
+            reference_date=date(2021, 1, 2),
+        )
+        payment.reference_date = date(2021, 1, 2)
+        mock_notify.assert_called_once()
 
 
 if __name__ == "__main__":

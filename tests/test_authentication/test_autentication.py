@@ -57,5 +57,12 @@ class TestAuthentication(unittest.TestCase):
         self.assertTrue(auth.authenticate(self.email, self.password))
         auth.delete_user(auth.uid)
 
+    def test_update_user_email(self):
+        """Testa o método update_user_email."""
+        auth = Authentication()
+        auth.create_user(self.email, self.password)
+        new_email = 'new'+ self.email
+        auth.update_user_email(auth.uid, new_email)
+
 if __name__ == '__main__':
     unittest.main()

@@ -34,12 +34,31 @@ class PresenceList:
 
     @property
     def class_date(self) -> date:
-        """Getter da data da aula."""
+        """
+        Getter da data da aula.
+
+        Exemplos
+        --------
+        >>> from datetime import date
+        >>> pl = PresenceList(date(2021, 1, 1), [1, 2, 3])
+        >>> pl.class_date
+        datetime.date(2021, 1, 1)
+        """
         return self._class_date
 
     @class_date.setter
     def class_date(self, class_date: date) -> None:
-        """Setter da data da aula"""
+        """
+        Setter da data da aula.
+
+        Exemplos
+        --------
+        >>> from datetime import date
+        >>> pl = PresenceList(date(2021, 1, 1), [1, 2, 3])
+        >>> pl.class_date = date(2021, 1, 2)
+        >>> pl.class_date
+        datetime.date(2021, 1, 2)
+        """
         if not isinstance(class_date, date):
             # date.fromisoformat simultaneamente converte o tipo errado
             # e levanta ValueError se o input for inválido
@@ -48,12 +67,31 @@ class PresenceList:
 
     @property
     def presence_ids(self) -> list[int]:
-        """Getter dos ids dos beneficiários presentes."""
+        """
+        Getter dos ids dos beneficiários presentes.
+
+        Exemplos
+        --------
+        >>> from datetime import date
+        >>> pl = PresenceList(date(2021, 1, 1), [1, 2, 3])
+        >>> pl.presence_ids
+        [1, 2, 3]
+        """
         return self._presence_ids
 
     @presence_ids.setter
     def presence_ids(self, presence_ids: list[int]) -> None:
-        """Setter dos ids dos beneficiários presentes."""
+        """
+        Setter dos ids dos beneficiários presentes.
+
+        Exemplos
+        --------
+        >>> from datetime import date
+        >>> pl = PresenceList(date(2021, 1, 1), [1, 2, 3])
+        >>> pl.presence_ids = [4, 5, 6]
+        >>> pl.presence_ids
+        [4, 5, 6]
+        """
         # Checa se todos os ids são inteiros
         if any([not isinstance(presence_id, int) for presence_id in
             presence_ids]):

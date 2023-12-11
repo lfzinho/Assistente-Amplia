@@ -313,7 +313,7 @@ from src.models.EventManager import EventManager
 
 
 class Payment(EventManager):
-    """Classe para representar um pagamento"""
+    """Classe para representar um pagamento."""
     def __init__(
         self,
         value: float,

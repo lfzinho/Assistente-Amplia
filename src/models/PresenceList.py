@@ -37,6 +37,8 @@ class PresenceList:
         """
         Getter da data da aula.
 
+        Exemplos
+        --------
         >>> from datetime import date
         >>> pl = PresenceList(date(2021, 1, 1), [1, 2, 3])
         >>> pl.class_date
@@ -49,6 +51,8 @@ class PresenceList:
         """
         Setter da data da aula.
 
+        Exemplos
+        --------
         >>> from datetime import date
         >>> pl = PresenceList(date(2021, 1, 1), [1, 2, 3])
         >>> pl.class_date = date(2021, 1, 2)
@@ -66,6 +70,8 @@ class PresenceList:
         """
         Getter dos ids dos beneficiários presentes.
 
+        Exemplos
+        --------
         >>> from datetime import date
         >>> pl = PresenceList(date(2021, 1, 1), [1, 2, 3])
         >>> pl.presence_ids
@@ -78,6 +84,8 @@ class PresenceList:
         """
         Setter dos ids dos beneficiários presentes.
 
+        Exemplos
+        --------
         >>> from datetime import date
         >>> pl = PresenceList(date(2021, 1, 1), [1, 2, 3])
         >>> pl.presence_ids = [4, 5, 6]

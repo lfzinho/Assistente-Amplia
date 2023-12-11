@@ -1,16 +1,15 @@
 import pandas as pd
 
-from src.database.database import DatabaseManager
+from src.database.DAOFactory import DAOFactory
 from .base_forms import (CreationForm, UpdateForm, DeletionForm)
 from .fields import CheckboxSeriesField, DateField, SelectBoxField
 
 
 class PresenceListCreationForm(CreationForm):
     def __init__(self) -> None:
-        self.db_manager = DatabaseManager.instance()
-        beneficiaries = self.db_manager.get_all("beneficiary")
+        beneficiaries = DAOFactory.get_dao("beneficiary").get_all()
         df_ben = pd.DataFrame(beneficiaries).T
-        people = self.db_manager.get_all("person")
+        people = DAOFactory.get_dao("person").get_all()
         df_people = pd.DataFrame(people).T
         df_people = df_people.reset_index(names=["ID da Pessoa"])
         df = pd.merge(df_ben, df_people, on="ID da Pessoa")
@@ -36,10 +35,9 @@ class PresenceListCreationForm(CreationForm):
 
 class PresenceListUpdateForm(UpdateForm):
     def __init__(self) -> None:
-        self.db_manager = DatabaseManager.instance()
-        beneficiaries = self.db_manager.get_all("beneficiary")
+        beneficiaries = DAOFactory.get_dao("beneficiary").get_all()
         df_ben = pd.DataFrame(beneficiaries).T
-        people = self.db_manager.get_all("person")
+        people = DAOFactory.get_dao("person").get_all()
         df_people = pd.DataFrame(people).T
         df_people = df_people.reset_index(names=["ID da Pessoa"])
         df = pd.merge(df_ben, df_people, on="ID da Pessoa")
@@ -52,7 +50,7 @@ class PresenceListUpdateForm(UpdateForm):
             ),
             id_field=SelectBoxField(
                 label="ID da Lista de Presença",
-                options=self.db_manager.get_all_keys("beneficiary")
+                options=DAOFactory.get_dao("beneficiary").get_all()
             ),
             fields=[
                 DateField(label="Data da Aula", value=None),
@@ -69,13 +67,12 @@ class PresenceListUpdateForm(UpdateForm):
 
 class PresenceListDeletionForm(DeletionForm):
     def __init__(self) -> None:
-        self.db_manager = DatabaseManager.instance()
         super().__init__(
             title="Formulário de Remoção de Lista de Presença",
             description="Selecione o ID da lista de presença que deseja remover.",
             id_field=SelectBoxField(
                 label="ID da Lista de Presença",
-                options=self.db_manager.get_all_keys("presence_list")
+                options=DAOFactory.get_dao("presence_list").get_all()
             ),
             db_collection="presence_list"
         )

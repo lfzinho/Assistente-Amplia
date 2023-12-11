@@ -1,11 +1,10 @@
 from .base_forms import (CreationForm, UpdateForm, DeletionForm)
 from .fields import SelectBoxField, TextField
-from src.database.database import DatabaseManager
+from src.database.DAOFactory import DAOFactory
 
 
 class StudentCreationForm(CreationForm):
     def __init__(self) -> None:
-        self.db_manager = DatabaseManager.instance()
         super().__init__(
             title="Formulário de Criação de Estudante",
             description=(
@@ -14,7 +13,7 @@ class StudentCreationForm(CreationForm):
             fields=[
                 SelectBoxField(
                     label="ID do Beneficiário",
-                    options=self.db_manager.get_all_keys("beneficiary")
+                    options=DAOFactory.get_dao("beneficiary").get_all()
                 ),
                 TextField(label="Responsável Financeiro", value=""),
             ],
@@ -24,7 +23,6 @@ class StudentCreationForm(CreationForm):
 
 class StudentUpdateForm(UpdateForm):
     def __init__(self) -> None:
-        self.db_manager = DatabaseManager.instance()
         super().__init__(
             title="Formulário de Atualização de Estudante",
             description=(
@@ -32,7 +30,7 @@ class StudentUpdateForm(UpdateForm):
             ),
             id_field=SelectBoxField(
                 label="ID do Beneficiário",
-                options=self.db_manager.get_all_keys("beneficiary")
+                options=DAOFactory.get_dao("beneficiary").get_all()
             ),
             fields=[
                 TextField(label="Responsável Financeiro", value=""),
@@ -43,13 +41,12 @@ class StudentUpdateForm(UpdateForm):
 
 class StudentDeletionForm(DeletionForm):
     def __init__(self) -> None:
-        self.db_manager = DatabaseManager.instance()
         super().__init__(
             title="Formulário de Remoção de Estudante",
             description="Selecione o ID do estudante que deseja remover.",
             id_field=SelectBoxField(
                 label="ID do Estudante",
-                options=self.db_manager.get_all_keys("student")
+                options=DAOFactory.get_dao("student").get_all()
             ),
             db_collection='student'
         )

@@ -5,6 +5,7 @@ import streamlit as st
 
 from forms import *
 from src.authentication.authentication import Authentication
+from src.database.DAOFactory import DAOFactory
 
 # class ManagerPage(ABC):
 #     def __init__(
@@ -75,14 +76,13 @@ class ManagerPage(ABC):
         self.creation_form = creation_form
         self.update_form = update_form
         self.deletion_form = deletion_form
-        self.db_collection = db_collection
-        self.db_manager = DatabaseManager.instance()
+        self.dao = DAOFactory.get_dao(db_collection)
         self.auth = Authentication()
 
     def show_table(self) -> None:
         """Shows the table of the managed elements on the page."""
         st.subheader('Tabela de Elementos')
-        query = self.db_manager.get_all(self.db_collection)
+        query = self.dao.get_all()
         if query == {}:
             st.write('Ainda não há nenhum elemento cadastrado.')
         else:

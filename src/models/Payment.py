@@ -673,8 +673,12 @@ class Payment(EventManager):
 
     def notify(self, event: str) -> None:
         """Método responsável por notificar os listeners."""
+        dct = {
+            "ID Pagamento": self.id_payment,
+            "Atualizacao": event,
+        }
         for listener in self.listeners:
-            listener.update(event)
+            listener.update(dct)
 
     @property
     def id_payment(self) -> str:

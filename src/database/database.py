@@ -435,7 +435,11 @@ class DatabaseManager:
             True se o documento foi atualizado com sucesso,
             False caso contrário.
         """
-        return self.db.collection(collection).document(id).update(data)
+        print(f"DatabaseManager.update data: {data}")
+        return self.db.collection(collection).document(id).update(
+            {f"`{key}`": value for key, value in data.items() \
+            if value!='' and value!=None}
+        )
 
     def delete(self, collection: str, id: str) -> bool:
         """

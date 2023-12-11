@@ -160,7 +160,7 @@ class DataAccessObject():
         Any
             Objeto com os dados do documento."""
         doc_dict = self.dbm.get_by_id(self.collection, id_value)
-        return self.from_data(**doc_dict)
+        return self.from_data(doc_dict)
 
     def add(self, data: dict[str, Any]) -> str:
         """
@@ -195,20 +195,11 @@ class DataAccessObject():
             True se o documento foi atualizado com sucesso,
             False caso contrário.
         """
-        obj = self.get_obj_by_id(id_value)
+        obj = self.get_by_id(id_value)
 
-        for key, value in data:
+        for key, value in data.items():
             if value is not None:
-                obj.__setattr__(key, value)
-        # TODO change 'for' above to this:
-        # try:
-        #     for key, value in data:
-        #         if value is not None:
-        #             obj.__setattr__(key, value)
-        # except ValueError:
-        #     return False
-
-        data = self.to_data(obj)
+                obj[key] = value
 
         self.dbm.update(self.collection, id_value, data)
 

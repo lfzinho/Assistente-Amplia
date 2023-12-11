@@ -173,8 +173,6 @@ class DataAccessObject():
 
         Parameters
         ----------
-        collection : str
-            Nome da coleção do banco de dados.
         data : dict
             Dados a serem adicionados.
 
@@ -191,8 +189,6 @@ class DataAccessObject():
 
         Parameters
         ----------
-        collection : str
-            Nome da coleção do banco de dados.
         id : str
             ID do documento a ser atualizado.
         data : dict[str, Any]

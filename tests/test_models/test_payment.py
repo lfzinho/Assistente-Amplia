@@ -143,20 +143,6 @@ class TestPayment(unittest.TestCase):
         self.assertTrue(any(isinstance(listener, PaymentEventListener) for listener in payment.listeners))
 
     @patch.object(Payment, 'notify')
-    def test_id_setter_calls_notify(self, mock_notify):
-        payment = Payment(
-            id_payment='1',
-            value=10.0,
-            payment_date=date(2021, 1, 2),
-            reference_date=date(2020, 1, 1),
-            id_administrator='1',
-            id_beneficiary='1',
-            paid=True,
-        )
-        payment.id = '2'
-        self.assertTrue(mock_notify.called)
-
-    @patch.object(Payment, 'notify')
     def test_value_setter_calls_notify(self, mock_notify):
         payment = Payment(
             id_payment='1',

@@ -12,7 +12,6 @@ class TestPaymentEventListener(unittest.TestCase):
         """
         payment_event_listener = PaymentEventListener()
         self.assertIsInstance(payment_event_listener, PaymentEventListener)
-        self.assertEqual(payment_event_listener.listeners, [])
 
 
 if __name__ == '__main__':

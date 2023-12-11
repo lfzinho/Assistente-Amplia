@@ -125,6 +125,18 @@ class PaymentDAO(DataAccessObject):
         paid_payment['Data de Referência'] = datetime.fromtimestamp(
             int(paid_payment['Data de Referência'].timestamp())
         )
+        # Instancia o objeto pagamento
+        paid_payment_obj = Payment(
+            payment_idx,
+            paid_payment['Valor'],
+            paid_payment['Data do Pagamento'],
+            paid_payment['Data de Referência'],
+            paid_payment['ID do Administrador'],
+            paid_payment['ID do Beneficiário'],
+            paid_payment['Pago'],
+        )
+        # Atualiza o pagamento no objeto
+        payment.paid = True
         # Atualiza o pagamento no banco
         self.update(str(payment_idx), {'Pago': True})
 

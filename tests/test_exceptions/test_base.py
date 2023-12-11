@@ -1,10 +1,11 @@
 import unittest
+from typing import Union
 
 from src.exceptions.base import BaseError
 
 
 class TestBaseError(unittest.TestCase):
-    def create_derived_error(self, msg: str | None = None) -> BaseError:
+    def create_derived_error(self, msg: Union[str, None] = None) -> BaseError:
         """Cria uma exceção derivada de BaseError para testes."""
         if msg:
             class Error(BaseError):

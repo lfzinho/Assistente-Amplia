@@ -1,6 +1,6 @@
 from datetime import datetime
 
-from src.database.database import DatabaseManager
+from src.database.DAOFactory import DAOFactory
 from .base_forms import (CreationForm, UpdateForm, DeletionForm)
 from .fields import DateField, SelectBoxField, TextField
 
@@ -27,13 +27,12 @@ class PersonCreationForm(CreationForm):
 
 class PersonUpdateForm(UpdateForm):
     def __init__(self) -> None:
-        self.db_manager = DatabaseManager.instance()
         super().__init__(
             title="Formulário de Atualização de Pessoa",
             description="Preencha os campos abaixo para atualizar uma pessoa.",
             id_field=SelectBoxField(
                 label="ID da Pessoa",
-                options=self.db_manager.get_all_keys("person")
+                options=DAOFactory.get_dao("person").get_all_keys(),
             ),
             fields=[
                 TextField(label="Nome", value=""),
@@ -50,13 +49,12 @@ class PersonUpdateForm(UpdateForm):
 
 class PersonDeletionForm(DeletionForm):
     def __init__(self) -> None:
-        self.db_manager = DatabaseManager.instance()
         super().__init__(
             title="Formulário de Remoção de Pessoa",
             description="Selecione o ID da pessoa que deseja remover.",
             id_field=SelectBoxField(
                 label="ID da Pessoa",
-                options=self.db_manager.get_all_keys("person")
+                options=DAOFactory,
             ),
             db_collection='person'
         )

@@ -1,6 +1,6 @@
 from .base_forms import (CreationForm, UpdateForm, DeletionForm)
 from .fields import SelectBoxField
-from src.database.database import DatabaseManager
+from src.database.DAOFactory import DAOFactory
 
 AREAS = [
     "Administrativo-Financeiro",
@@ -13,7 +13,6 @@ AREAS = [
 
 class AnalystCreationForm(CreationForm):
     def __init__(self) -> None:
-        self.db_manager = DatabaseManager.instance()
         super().__init__(
             title="Formulário de Criação de Analista",
             description=(
@@ -22,7 +21,7 @@ class AnalystCreationForm(CreationForm):
             fields=[
                 SelectBoxField(
                     label="ID da Pessoa",
-                    options=self.db_manager.get_all_keys("person")
+                    options=DAOFactory.get_dao("person").get_all_keys()
                 ),
                 SelectBoxField(
                     label="Área do Analista",
@@ -36,7 +35,6 @@ class AnalystCreationForm(CreationForm):
 
 class AnalystUpdateForm(UpdateForm):
     def __init__(self) -> None:
-        self.db_manager = DatabaseManager.instance()
         super().__init__(
             title="Formulário de Atualização de Analista",
             description=(
@@ -44,7 +42,7 @@ class AnalystUpdateForm(UpdateForm):
             ),
             id_field=SelectBoxField(
                 label="ID do Analista",
-                options=self.db_manager.get_all_keys("analyst")
+                options=DAOFactory.get_dao("analyst").get_all_keys()
             ),
             fields=[
                 SelectBoxField(
@@ -59,13 +57,12 @@ class AnalystUpdateForm(UpdateForm):
 
 class AnalystDeletionForm(DeletionForm):
     def __init__(self) -> None:
-        self.db_manager = DatabaseManager.instance()
         super().__init__(
             title="Formulário de Remoção de Analista",
             description="Selecione o ID do analista que deseja remover.",
             id_field=SelectBoxField(
                 label="ID do Analista",
-                options=self.db_manager.get_all_keys("analyst")
+                options=DAOFactory.get_dao("analyst").get_all_keys()
             ),
             db_collection="analyst"
         )

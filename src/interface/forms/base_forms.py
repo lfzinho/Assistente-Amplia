@@ -1,3 +1,5 @@
+from enum import Enum
+
 import streamlit as st
 
 from .form import Form
@@ -62,3 +64,30 @@ class DeletionForm(Form):
             st.success("Deletado com sucesso.")
         else:
             st.error("Falha ao deletar.")
+
+
+class FormType(Enum):
+    CREATION = 0
+    UPDATE = 1
+    DELETION = 2
+
+
+class FormFactory:
+    @staticmethod
+    def create_form(
+        type: FormType,
+        title: str,
+        description: str,
+        id_field: SelectBoxField,
+        fields: list,
+        db_collection: str
+    ) -> Form:
+        if type == FormType.CREATION:
+            return CreationForm(title, description, fields, db_collection)
+        elif type == FormType.UPDATE:
+            return UpdateForm(
+                title, description, id_field, fields, db_collection
+            )
+        elif type == FormType.DELETION:
+            return DeletionForm(title, description, id_field, db_collection)
+        raise ValueError("Tipo de formulário inválido.")

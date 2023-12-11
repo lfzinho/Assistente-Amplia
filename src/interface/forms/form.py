@@ -15,8 +15,8 @@ class Form(ABC):
         title: str,
         description: str,
         fields: list[Field],
-        id_field: SelectBoxField | None = None,
-        db_collection: str | None = None
+        id_field: SelectBoxField,
+        db_collection: str
     ) -> None:
         self.title = title
         self.description = description
@@ -47,13 +47,13 @@ class Form(ABC):
         if db_result:
             return db_result
         else:
-            st.error("ID não encontrado.")
+            st.error('ID não encontrado.')
             return None
 
     def render_search_field(self) -> dict[str, Any] | None:
         """Renders the search field on the page."""
         result = None
-        with st.form(key=self.title + " ID"):
+        with st.form(key=self.title + ' ID'):
             self.id_field.render()
             if st.form_submit_button(label='Buscar'):
                 result = self.search_action()
@@ -117,5 +117,4 @@ class Form(ABC):
         if self.id_field is None:
             raise NoIdError()
         else:
-            print(f"ID ENCONTRADO: {self.id_field.value}")
             return self.id_field.value

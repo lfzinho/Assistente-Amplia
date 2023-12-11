@@ -314,38 +314,38 @@ from google.cloud.firestore import Client
 #         return self.db.collection(collection).document(id).delete()
 
 
-class DatabaseManager():
+class DatabaseManager:
     """Singleton para gerenciar o banco de dados."""
     _instance = None
 
     def __init__(self) -> None:
         if DatabaseManager._instance is not None:
-            raise RuntimeError("This class is a singleton!")
+            raise RuntimeError("Esta classe é um singleton já instanciado!")
         else:
             cred = credentials.Certificate("serviceAccountKey.json")
             firebase_admin.initialize_app(cred)
             self.db: Client = firestore.client()
-            DatabaseManager._instance = self
+            self._instance = self
 
-    @staticmethod
-    def instance() -> "DatabaseManager":
+    @classmethod
+    def instance(cls) -> "DatabaseManager":
         """Retorna a instância do singleton."""
-        if not DatabaseManager._instance:
-            DatabaseManager._instance = DatabaseManager()
-        return DatabaseManager._instance
+        if not cls._instance:
+            cls._instance = DatabaseManager()
+        return cls._instance
 
-    def get_all(self, collection: str) -> dict[str, Any]:
+    def get_all(self, collection: str) -> dict[str, dict[str, Any]]:
         """
         Retorna todos os documentos de uma coleção.
 
-        Parameters
+        Parâmetros
         ----------
         collection : str
             Nome da coleção do banco de dados.
 
         Returns
         -------
-        dict
+        dict[str, dict[str, Any]]
             Dicionário com os documentos.
         """
         docs = self.db.collection(collection).get()
@@ -368,7 +368,7 @@ class DatabaseManager():
         docs = self.db.collection(collection).list_documents()
         return [doc.id for doc in docs if doc.id != "index"]
 
-    def get_by_id(self, collection: str, id: str) -> Any:
+    def get_by_id(self, collection: str, id: str) -> dict[str, Any]:
         """
         Retorna um documento do banco de dados.
 
@@ -381,8 +381,9 @@ class DatabaseManager():
 
         Returns
         -------
-        dict
-            Dicionário com os dados do documento."""
+        dict[str, Any]
+            Dicionário com os dados do documento.
+        """
         doc = self.db.collection(collection).document(id).get()
         return doc.to_dict()
 
@@ -390,19 +391,19 @@ class DatabaseManager():
         """
         Adiciona um documento ao banco de dados.
 
-        Parameters
+        Parâmetros
         ----------
         collection : str
             Nome da coleção do banco de dados.
         data : dict
             Dados a serem adicionados.
 
-        Returns
+        Retorna
         -------
         str
             ID do documento adicionado.
         """
-        # get index counter
+        # Obtém o contador de índice
         index_query = self.db.collection(collection).document("index").get()
         if index_query.exists:
             index = index_query.to_dict()["index"]
@@ -412,10 +413,10 @@ class DatabaseManager():
             index = 0
             self.db.collection(collection).document("index")\
                                           .set({"index": 1})
-        # add document
+        # Adiciona o documento
         return self.db.collection(collection).document(str(index)).set(data)
 
-    def update(self, collection: str, id: str, data: dict[str, Any]) -> None:
+    def update(self, collection: str, id: str, data: dict[str, Any]) -> bool:
         """
         Atualiza um documento do banco de dados.
 

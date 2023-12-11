@@ -1,11 +1,10 @@
 from .base_forms import (CreationForm, UpdateForm, DeletionForm)
 from .fields import NumberField, SelectBoxField, TextField
-from src.database.database import DatabaseManager
+from src.database.DAOFactory import DAOFactory
 
 
 class BeneficiaryCreationForm(CreationForm):
     def __init__(self) -> None:
-        self.db_manager = DatabaseManager.instance()
         super().__init__(
             title="Formulário de Criação de Beneficiário",
             description=(
@@ -14,7 +13,7 @@ class BeneficiaryCreationForm(CreationForm):
             fields=[
                 SelectBoxField(
                     label="ID da Pessoa",
-                    options=self.db_manager.get_all_keys("person")
+                    options=DAOFactory.get_dao("person").get_all_keys()
                 ),
                 NumberField(label="Custo do Transporte", value=0.0),
                 TextField(label="Descrição do Transporte", value=""),
@@ -27,7 +26,6 @@ class BeneficiaryCreationForm(CreationForm):
 
 class BeneficiaryUpdateForm(UpdateForm):
     def __init__(self) -> None:
-        self.db_manager = DatabaseManager.instance()
         super().__init__(
             title="Formulário de Atualização de Beneficiário",
             description=(
@@ -35,7 +33,7 @@ class BeneficiaryUpdateForm(UpdateForm):
             ),
             id_field=SelectBoxField(
                 label="ID do Beneficiário",
-                options=self.db_manager.get_all_keys("beneficiary")
+                options=DAOFactory.get_dao("person").get_all_keys()
             ),
             fields=[
                 NumberField(label="Custo do Transporte", value=0.0),
@@ -47,13 +45,12 @@ class BeneficiaryUpdateForm(UpdateForm):
 
 class BeneficiaryDeletionForm(DeletionForm):
     def __init__(self) -> None:
-        self.db_manager = DatabaseManager.instance()
         super().__init__(
             title="Formulário de Remoção de beneficiário",
             description="Selecione o ID do beneficiário que deseja remover.",
             id_field=SelectBoxField(
                 label="ID do Beneficiário",
-                options=self.db_manager.get_all_keys("beneficiary")
+                options=DAOFactory.get_dao("person").get_all_keys()
             ),
             db_collection="beneficiary"
         )

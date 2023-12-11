@@ -7,12 +7,11 @@ from .fields import (
     NumberField,
     SelectBoxField,
 )
-from src.database.database import DatabaseManager
+from src.database.DAOFactory import DAOFactory
 
 
 class PaymentCreationForm(CreationForm):
     def __init__(self) -> None:
-        self.db_manager = DatabaseManager.instance()
         super().__init__(
             title="Formulário de Criação de Pagamento",
             description=(
@@ -21,11 +20,11 @@ class PaymentCreationForm(CreationForm):
             fields=[
                 SelectBoxField(
                     label="ID do Beneficiário",
-                    options=self.db_manager.get_all_keys("beneficiary")
+                    options=DAOFactory.get_dao("beneficiary").get_all_keys()
                 ),
                 SelectBoxField(
                     label="ID do Administrador",
-                    options=self.db_manager.get_all_keys("administrator")
+                    options=DAOFactory.get_dao("administrator").get_all_keys()
                 ),
                 NumberField(label="Valor", value=0.0),
                 CheckboxField(label="Pago", value=False),
@@ -38,7 +37,6 @@ class PaymentCreationForm(CreationForm):
 
 class PaymentUpdateForm(UpdateForm):
     def __init__(self) -> None:
-        self.db_manager = DatabaseManager.instance()
         super().__init__(
             title="Formulário de Atualização de Pagamento",
             description=(
@@ -46,16 +44,16 @@ class PaymentUpdateForm(UpdateForm):
             ),
             id_field=SelectBoxField(
                 label="ID do Pagamento",
-                options=self.db_manager.get_all_keys("payment")
+                options=DAOFactory.get_dao("payment").get_all_keys()
             ),
             fields=[
                 SelectBoxField(
                     label="ID do Beneficiário",
-                    options=self.db_manager.get_all_keys("beneficiary")
+                    options=DAOFactory.get_dao("beneficiary").get_all_keys()
                 ),
                 SelectBoxField(
                     label="ID do Administrador",
-                    options=self.db_manager.get_all_keys("administrator")
+                    options=DAOFactory.get_dao("administrator").get_all_keys()
                 ),
                 NumberField(label="Valor", value=0.0),
                 CheckboxField(label="Pago", value=False),
@@ -68,13 +66,12 @@ class PaymentUpdateForm(UpdateForm):
 
 class PaymentDeletionForm(DeletionForm):
     def __init__(self) -> None:
-        self.db_manager = DatabaseManager.instance()
         super().__init__(
             title="Formulário de Remoção de Pagamento",
             description="Selecione o ID do pagamento que deseja remover.",
             id_field=SelectBoxField(
                 label="ID do Pagamento",
-                options=self.db_manager.get_all_keys("pagamento")
+                options=DAOFactory.get_dao("payment").get_all_keys()
             ),
-            db_collection='pagamento'
+            db_collection='payment'
         )

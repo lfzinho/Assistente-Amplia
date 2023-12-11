@@ -5,20 +5,8 @@ from typing import Any
 import streamlit as st
 
 from .fields import Field, SelectBoxField
-from src.database.database import DatabaseManager
+from src.database.DAOFactory import DAOFactory
 from src.exceptions.interface import NoIdError
-# Garante que todos os tipos já tenham sido importados para
-# que o eval do método `from_data` funcione corretamente
-from src.models.Administrator import Administrator
-from src.models.Analyst import Analyst
-from src.models.Beneficiary import Beneficiary
-from src.models.Cash import Cash
-from src.models.Director import Director
-from src.models.Payment import Payment
-from src.models.BankAccount import BankAccount
-from src.models.PaymentMethod import PaymentMethod
-from src.models.Pix import Pix
-
 
 class Form(ABC):
 
@@ -34,78 +22,8 @@ class Form(ABC):
         self.description = description
         self.fields = fields
         self.id_field = id_field
-        self.db_collection = db_collection
 
-        self.db_manager = DatabaseManager.instance()
-
-    @staticmethod
-    def is_valid_type(value: Any) -> bool:
-        """
-        Checa se o valor é de um tipo válido para serialização JSON,
-        que é o tipo de dado que o banco de dados aceita.
-
-        Parâmetros
-        ----------
-        value : Any
-            O valor a ser checado.
-
-        Retorna
-        -------
-        bool
-            True se o valor é de um tipo válido.
-        """
-        if value is None:
-            return True
-        return isinstance(value, (list, str, int, float, bool,
-            datetime.date, dict, ))
-
-    def to_data(self) -> dict[str, Any]:
-        """
-        Serializa o objeto para um dicionário.
-
-        Retorna
-        -------
-        dict[str, Any]
-            Mapeamento de nomes de atributos para valores.
-        """
-        data = {'class_name': self.__class__.__name__}
-        for key, value in self.__dict__.items():
-            # Remove o underscore do início do nome do atributo, para
-            # que o atributo seja definido por meio do setter
-            key = key.lstrip('_')
-            if isinstance(value, datetime.date):
-                data[key] = value.strftime('%Y-%m-%d')
-            elif self.is_valid_type(value):
-                data[key] = value
-            else:
-                data[key] = Form.to_data(value)
-
-        return data
-
-    @staticmethod
-    def from_data(data: dict[str, Any]) -> 'Form':
-        """
-        Deserializa um dicionário para um objeto.
-
-        Parâmetros
-        ----------
-        data : dict[str, Any]
-            Mapeamento de nomes de atributos para valores.
-
-        Retorna
-        -------
-        Form
-            O objeto deserializado.
-        """
-        for key, value in data.items():
-            if isinstance(value, dict):
-                data[key] = Form.from_data(value)
-        # Obtém o atributo class_name enquanto
-        # o deixa de fora do dicionário de dados
-        class_name = data.pop('class_name')
-        obj = eval(class_name)(**data)
-
-        return obj
+        self.dao = DAOFactory.get_dao(db_collection)
 
     @abstractmethod
     def submit_action(self) -> None:
@@ -125,9 +43,7 @@ class Form(ABC):
 
     def search_action(self) -> dict[str, Any] | None:
         """Action to be performed when the search form is submitted."""
-        db_result = self.db_manager.get_by_id(
-            self.db_collection, self.id_field.value
-        )
+        db_result = self.dao.get_by_id(self.id_field.value)
         if db_result:
             return db_result
         else:

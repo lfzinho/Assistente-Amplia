@@ -11,16 +11,6 @@ from firebase_admin import credentials, firestore
 # Payment, Pix, Student, Teacher
 
 from src.database.database import DatabaseManager
-from src.models.Analyst import Analyst
-from src.models.Administrator import Administrator
-from src.models.BankAccount import BankAccount
-from src.models.Beneficiary import Beneficiary
-from src.models.Cash import Cash
-from src.models.Director import Director
-from src.models.Payment import Payment
-from src.models.Pix import Pix
-from src.models.Student import Student
-from src.models.Teacher import Teacher
 
 
 sys.path.append(os.path.join(os.path.dirname(__file__), '../..'))
@@ -111,6 +101,8 @@ class DataAccessObject():
         """
         return self.dbm.get_all(self.collection)
 
+    get_all=get_all_data
+
     def get_all_obj(self):
         """
         Coleta todas as ocorrências de uma coleção do banco de dados.
@@ -151,6 +143,8 @@ class DataAccessObject():
             Dicionário com os dados do documento."""
         return self.dbm.get_by_id(self.collection, id_value)
 
+    get_by_id=get_data_by_id
+
     def get_obj_by_id(self, id_value):
         """
         Retorna um objeto do banco de dados.
@@ -173,8 +167,6 @@ class DataAccessObject():
 
         Parameters
         ----------
-        collection : str
-            Nome da coleção do banco de dados.
         data : dict
             Dados a serem adicionados.
 
@@ -191,8 +183,6 @@ class DataAccessObject():
 
         Parameters
         ----------
-        collection : str
-            Nome da coleção do banco de dados.
         id : str
             ID do documento a ser atualizado.
         data : dict[str, Any]
@@ -237,25 +227,3 @@ class DataAccessObject():
             False caso contrário.
         """
         return self.dbm.delete(self.collection, id_value)
-
-
-class DAOFactory:
-
-    @staticmethod
-    def get_dao(collection: str) -> DataAccessObject:
-        """
-        Retorna um DAO para a coleção especificada.
-
-        Parâmetros
-        ----------
-        collection : str
-            Nome da coleção do banco de dados.
-
-        Retorna
-        -------
-        DataAccessObject
-            DAO para a coleção especificada.
-        """
-        if collection == 'payment':
-            return PaymentDAO()
-        return DataAccessObject(collection)

@@ -117,5 +117,4 @@ class Form(ABC):
         if self.id_field is None:
             raise NoIdError()
         else:
-            print(f"ID ENCONTRADO: {self.id_field.value}")
             return self.id_field.value

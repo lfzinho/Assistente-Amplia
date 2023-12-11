@@ -237,25 +237,3 @@ class DataAccessObject():
             False caso contrário.
         """
         return self.dbm.delete(self.collection, id_value)
-
-
-class DAOFactory:
-
-    @staticmethod
-    def get_dao(collection: str) -> DataAccessObject:
-        """
-        Retorna um DAO para a coleção especificada.
-
-        Parâmetros
-        ----------
-        collection : str
-            Nome da coleção do banco de dados.
-
-        Retorna
-        -------
-        DataAccessObject
-            DAO para a coleção especificada.
-        """
-        if collection == 'payment':
-            return PaymentDAO()
-        return DataAccessObject(collection)

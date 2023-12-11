@@ -660,6 +660,7 @@ class Payment(EventManager):
         reference_date: date
             Data da aula à qual o pagamento se refere.
         """
+        self.modified = False
         super().__init__()
         self._id_payment = id_payment
         self._value = value
@@ -670,6 +671,7 @@ class Payment(EventManager):
         self._paid = paid
         # adiciona um listener para o evento de alteração do valor do pagamento
         self.add_listener(PaymentEventListener())
+        self.modified = True
 
     def notify(self, event: str) -> None:
         """Método responsável por notificar os listeners."""
@@ -677,8 +679,9 @@ class Payment(EventManager):
             "ID Pagamento": self.id_payment,
             "Atualizacao": event,
         }
-        for listener in self.listeners:
-            listener.update(dct)
+        if self.modified:
+            for listener in self.listeners:
+                listener.update(dct)
 
     @property
     def id_payment(self) -> str:

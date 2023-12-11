@@ -134,7 +134,8 @@ class DataAccessObject():
             Dicionário com os dados do documento."""
         return self.dbm.get_by_id(self.collection, id_value)
 
-    get_by_id=get_data_by_id
+    def get_by_id(self, id_value):
+        return self.get_data_by_id(id_value)
 
     def get_obj_by_id(self, id_value):
         """

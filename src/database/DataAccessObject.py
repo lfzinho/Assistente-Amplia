@@ -27,11 +27,12 @@ sys.path.append(os.path.join(os.path.dirname(__file__), '../..'))
 
 
 class DataAccessObject():
-
-    def __init__(self, collection, class_):
+    """
+    Classe para comunicação da interface com o database manager
+    """
+    def __init__(self, collection: str):
         self.dbm = DatabaseManager.instance()
         self.collection = collection
-        self.class_ = class_
 
     @staticmethod
     def is_valid_type(value: Any) -> bool:
@@ -236,3 +237,25 @@ class DataAccessObject():
             False caso contrário.
         """
         return self.dbm.delete(self.collection, id_value)
+
+
+class DAOFactory:
+
+    @staticmethod
+    def get_dao(collection: str) -> DataAccessObject:
+        """
+        Retorna um DAO para a coleção especificada.
+
+        Parâmetros
+        ----------
+        collection : str
+            Nome da coleção do banco de dados.
+
+        Retorna
+        -------
+        DataAccessObject
+            DAO para a coleção especificada.
+        """
+        if collection == 'payment':
+            return PaymentDAO()
+        return DataAccessObject(collection)

@@ -29,25 +29,33 @@ def login_page() -> None:
 
 def register_page() -> None:
     """Página de registro."""
-    st.title('Registrar')
-    email = st.text_input('E-mail:', key='email_register')
-    password = st.text_input(
-        'Senha:', type='password', key='password_register'
-    )
-    password_repeat = st.text_input(
-        'Repetir senha:', type='password', key='password_register_repeat'
-    )
+    if (
+        'uid' in st.session_state
+        and auth_instance.get_user_by_uid(st.session_state['uid']) is not None
+    ):
+        # Se o usuário já estiver autenticado,
+        # tem acesso à página de registro
+        st.title('Registrar')
+        email = st.text_input('E-mail:', key='email_register')
+        password = st.text_input(
+            'Senha:', type='password', key='password_register'
+        )
+        password_repeat = st.text_input(
+            'Repetir senha:', type='password', key='password_register_repeat'
+        )
 
-    if st.button('Registrar'):
-        if password != password_repeat:
-            st.error('As senhas não coincidem.')
-            return
-        try:
-            uid = auth_instance.create_user(email, password)
-            st.success(f'Usuário criado com sucesso!')
-            st.session_state['uid'] = uid
-        except Exception as e:
-            st.error(f'Erro ao criar usuário: {e}')
+        if st.button('Registrar'):
+            if password != password_repeat:
+                st.error('As senhas não coincidem.')
+                return
+            try:
+                uid = auth_instance.create_user(email, password)
+                st.success(f'Usuário criado com sucesso!')
+            except Exception as e:
+                st.error(f'Erro ao criar usuário: {e}')
+    else:
+        # Se o usuário não estiver autenticado
+        st.warning('Você precisa estar autenticado para acessar esta página.')
 
 
 def main():

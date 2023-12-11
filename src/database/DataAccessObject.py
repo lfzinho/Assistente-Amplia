@@ -5,16 +5,6 @@ from typing import Any
 # Payment, Pix, Student, Teacher
 
 from src.database.database import DatabaseManager
-from src.models.Analyst import Analyst
-from src.models.Administrator import Administrator
-from src.models.BankAccount import BankAccount
-from src.models.Beneficiary import Beneficiary
-from src.models.Cash import Cash
-from src.models.Director import Director
-from src.models.Payment import Payment
-from src.models.Pix import Pix
-from src.models.Student import Student
-from src.models.Teacher import Teacher
 
 
 class DataAccessObject():
@@ -160,7 +150,7 @@ class DataAccessObject():
         Any
             Objeto com os dados do documento."""
         doc_dict = self.dbm.get_by_id(self.collection, id_value)
-        return self.from_data(**doc_dict)
+        return self.from_data(doc_dict)
 
     def add(self, data: dict[str, Any]) -> str:
         """

@@ -185,20 +185,11 @@ class DataAccessObject():
             True se o documento foi atualizado com sucesso,
             False caso contrário.
         """
-        obj = self.get_obj_by_id(id_value)
+        obj = self.get_by_id(id_value)
 
-        for key, value in data:
+        for key, value in data.items():
             if value is not None:
-                obj.__setattr__(key, value)
-        # TODO change 'for' above to this:
-        # try:
-        #     for key, value in data:
-        #         if value is not None:
-        #             obj.__setattr__(key, value)
-        # except ValueError:
-        #     return False
-
-        data = self.to_data(obj)
+                obj[key] = value
 
         self.dbm.update(self.collection, id_value, data)
 

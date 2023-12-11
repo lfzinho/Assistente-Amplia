@@ -115,6 +115,6 @@ class Form(ABC):
             Se o formulário não tiver um campo de ID.
         """
         if self.id_field is None:
-            raise NoIdError()
+            raise NoIdError('O formulário não possui um campo de ID.')
         else:
             return self.id_field.value

@@ -178,3 +178,46 @@ class PaymentControlPage(Page):
         self.show_metrics()
         self.show_next_payment()
         self.show_csv_uploader()
+
+
+class MenuPage(Page):
+    def __init__(self) -> None:
+        title = "Menu"
+        description = "Página para navegação."
+        super().__init__(title, description)
+
+    def render(self) -> None:
+        super().render()
+        st.write("Selecione uma página no menu lateral ou no menu abaixo.")
+        st.markdown(
+            """
+            ## Sobre
+            O Assistente de Pagamentos Amplia é uma ferramenta
+            desenvolvida para ajudar na organização e controle
+            financeiro da entidade estudantil Amplia FGV.
+
+            ## Ações
+            - **[Controle de Pagamentos](payment_control)**: página para
+            ver os pagamentos pendentes, marcar pagamentos como pagos e
+            outras funções relacionadas.
+            ---
+            - **[Página de Pessoa](person)**: página para adicionar,
+            modificar e remover pessoas do sistema.
+            - **[Página de Beneficiário](beneficiary)**: página para
+            adicionar, modificar e remover beneficiários do sistema.
+            - **[Página de Administrador](administrator)**: página para
+            adicionar, modificar e remover administradores do sistema.
+            - **[Página de Pagamento](payment)**: página para adicionar,
+            modificar e remover pagamentos do sistema.
+            - **[Página de Analista](analyst)**: página para adicionar,
+            modificar e remover analistas do sistema.
+            - **[Página de Diretor](director)**: página para adicionar,
+            modificar e remover diretores do sistema.
+            - **[Página de Estudante](student)**: página para adicionar,
+            modificar e remover estudantes do sistema.
+            - **[Página de Lista de presença](presence_list)**: página para
+            adicionar, modificar e remover listas de presença do sistema.
+            - **[Página de Professor](teacher)**: página para adicionar,
+            modificar e remover professores do sistema.
+            """
+        )

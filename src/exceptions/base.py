@@ -1,5 +1,5 @@
 # from abc import ABC, abstractmethod
-
+from typing import Union
 
 # class BaseError(ABC, Exception):
 #     def __init__(self, msg: str | None = None) -> None:
@@ -24,7 +24,7 @@ class BaseError(Exception):
             )
         return super().__new__(cls)
 
-    def __init__(self, msg: str | None = None, *args) -> None:
+    def __init__(self, msg: Union[str, None] = None, *args) -> None:
         """
         Inicializa a exceção com a mensagem passada, se houver, ou
         com a mensagem padrão da classe.

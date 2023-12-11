@@ -5,21 +5,8 @@ from typing import Any
 import streamlit as st
 
 from .fields import Field, SelectBoxField
-from src.database.DataAccessObject import DataAccessObject
 from src.database.DAOFactory import DAOFactory
 from src.exceptions.interface import NoIdError
-# Garante que todos os tipos já tenham sido importados para
-# que o eval do método `from_data` funcione corretamente
-from src.models.Administrator import Administrator
-from src.models.Analyst import Analyst
-from src.models.Beneficiary import Beneficiary
-from src.models.Cash import Cash
-from src.models.Director import Director
-from src.models.Payment import Payment
-from src.models.BankAccount import BankAccount
-from src.models.PaymentMethod import PaymentMethod
-from src.models.Pix import Pix
-
 
 class Form(ABC):
 

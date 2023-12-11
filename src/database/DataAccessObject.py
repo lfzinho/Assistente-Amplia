@@ -199,13 +199,6 @@ class DataAccessObject():
         for key, value in data:
             if value is not None:
                 obj.__setattr__(key, value)
-        # TODO change 'for' above to this:
-        # try:
-        #     for key, value in data:
-        #         if value is not None:
-        #             obj.__setattr__(key, value)
-        # except ValueError:
-        #     return False
 
         data = self.to_data(obj)
 

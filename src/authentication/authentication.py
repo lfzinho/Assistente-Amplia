@@ -2,7 +2,6 @@ import json
 import requests
 from typing import Any
 
-import firebase_admin
 from firebase_admin import auth
 
 from src.database.database import DatabaseManager
@@ -76,42 +75,41 @@ from src.database.database import DatabaseManager
 #             return False
 
 
-class Authentication():
+class Authentication:
     """Classe para gerenciar a autenticação do usuário."""
     def __init__(self):
-        self.auth = auth
-        self.uid = None
+        self.uid: str = None
         self.db = DatabaseManager.instance()
 
     def create_user(self, email: str, password: str) -> Any:
         """Cria um usuário no banco de dados."""
-        self.uid = self.auth.create_user(email=email, password=password).uid
+        self.uid = auth.create_user(email=email, password=password).uid
         return self.uid
 
     def get_user_by_uid(self, uid: str) -> str:
         """Retorna um usuário do banco de dados."""
-        return self.auth.get_user(uid)
+        return auth.get_user(uid)
 
     def get_user_by_email(self, email: str) -> str:
         """Retorna um usuário do banco de dados."""
-        return self.auth.get_user_by_email(email)
+        return auth.get_user_by_email(email)
 
     def update_user_password(self, uid: str, password: str) -> None:
         """Atualiza a senha de um usuário no banco de dados."""
-        self.auth.update_user(uid, password=password)
+        auth.update_user(uid, password=password)
 
     def update_user_email(self, uid: str, email: str) -> None:
         """Atualiza o email de um usuário no banco de dados."""
-        self.auth.update_user(uid, email=email)
+        auth.update_user(uid, email=email)
 
     def delete_user(self, uid: str) -> None:
         """Deleta um usuário do banco de dados."""
-        self.auth.delete_user(uid)
+        auth.delete_user(uid)
         self.uid = None
 
     def get_all_users(self):
         """Retorna todos os usuários do banco de dados."""
-        return self.auth.list_users()
+        return auth.list_users()
 
     def authenticate(self, email: str, password: str) -> bool:
         """Autentica um usuário no banco de dados."""
@@ -130,7 +128,7 @@ class Authentication():
             data=payload
         )
 
-        if response.status_code == 200:
+        if response.ok:
             data = response.json()
             self.uid = data.get("localId")
             return True

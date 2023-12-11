@@ -1,24 +1,25 @@
-import sys
-import os
-from abc import ABC, abstractmethod
 from datetime import date
 from typing import Any
-
-import firebase_admin
-from firebase_admin import credentials, firestore
 
 # Administrator, Analyst, BankAccount, Beneficiary, Cash, Director,
 # Payment, Pix, Student, Teacher
 
 from src.database.database import DatabaseManager
-
-
-sys.path.append(os.path.join(os.path.dirname(__file__), '../..'))
+from src.models.Analyst import Analyst
+from src.models.Administrator import Administrator
+from src.models.BankAccount import BankAccount
+from src.models.Beneficiary import Beneficiary
+from src.models.Cash import Cash
+from src.models.Director import Director
+from src.models.Payment import Payment
+from src.models.Pix import Pix
+from src.models.Student import Student
+from src.models.Teacher import Teacher
 
 
 class DataAccessObject():
     """
-    Classe para comunicação da interface com o database manager
+    Classe para comunicação da interface com o database manager.
     """
     def __init__(self, collection: str):
         self.dbm = DatabaseManager.instance()
@@ -161,29 +162,29 @@ class DataAccessObject():
         doc_dict = self.dbm.get_by_id(self.collection, id_value)
         return self.from_data(**doc_dict)
 
-    def add(self, data):
+    def add(self, data: dict[str, Any]) -> str:
         """
         Adiciona um documento ao banco de dados.
 
-        Parameters
+        Parâmetros
         ----------
-        data : dict
+        data : dict[str, Any]
             Dados a serem adicionados.
 
-        Returns
+        Retorna
         -------
         str
             ID do documento adicionado.
         """
         return self.dbm.add(self.collection, data)
 
-    def update(self, id_value, data):
+    def update(self, id_value: str, data: dict[str, Any]) -> None:
         """
         Atualiza um documento do banco de dados.
 
         Parameters
         ----------
-        id : str
+        id_value : str
             ID do documento a ser atualizado.
         data : dict[str, Any]
             Dados a serem atualizados.
@@ -209,9 +210,9 @@ class DataAccessObject():
 
         data = self.to_data(obj)
 
-        return self.dbm.update(self.collection, id_value, data)
+        self.dbm.update(self.collection, id_value, data)
 
-    def delete(self, id_value):
+    def delete(self, id_value: str) -> bool:
         """
         Deleta um documento do banco de dados.
 

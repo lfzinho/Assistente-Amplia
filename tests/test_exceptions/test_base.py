@@ -49,3 +49,7 @@ class TestBaseError(unittest.TestCase):
         def raise_error() -> None:
             raise Error()
         self.assertRaises(Error, raise_error)
+
+
+if __name__ == '__main__':
+    unittest.main()

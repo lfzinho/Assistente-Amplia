@@ -29,7 +29,7 @@ from src.models.PaymentMethod import PaymentMethod
 
 
 class Person(ABC):
-    """Classe que representa uma pessoa"""
+    """Classe que representa uma pessoa."""
     @abstractmethod
     def __init__(
         self,

@@ -101,7 +101,3 @@ class TestStudent(unittest.TestCase):
 
 if __name__ == '__main__':
     unittest.main()
-
-from pathlib import Path
-
-print(Path.cwd())

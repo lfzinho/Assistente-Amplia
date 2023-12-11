@@ -91,7 +91,7 @@ class Form(ABC):
             # Se o campo for do tipo data, converte o valor para
             # datetime.datetime, para que o banco de dados possa
             # armazenar corretamente
-            if field.type == 'date':
+            if field.type == 'date' and field.value is not None:
                 form_values[field.label] = datetime.datetime.combine(
                     field.value,
                     datetime.time.min
@@ -117,4 +117,5 @@ class Form(ABC):
         if self.id_field is None:
             raise NoIdError()
         else:
+            print(f"ID ENCONTRADO: {self.id_field.value}")
             return self.id_field.value

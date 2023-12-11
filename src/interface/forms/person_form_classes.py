@@ -54,7 +54,7 @@ class PersonDeletionForm(DeletionForm):
             description="Selecione o ID da pessoa que deseja remover.",
             id_field=SelectBoxField(
                 label="ID da Pessoa",
-                options=DAOFactory,
+                options=DAOFactory.get_dao("person").get_all_keys(),
             ),
             db_collection='person'
         )
